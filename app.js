@@ -134,7 +134,7 @@
           else if (prevST === prevUpper) trend = d.close > upper ? 1 : -1;
           else trend = d.close < lower ? -1 : 1;
           const stv = trend === 1 ? lower : upper;
-          if (trend === 1) r.up = stv; else r.dn = stv;
+          if (stv > 0) { if (trend === 1) r.up = stv; else r.dn = stv; }
           r.trend = trend;
           prevUpper = upper; prevLower = lower; prevST = stv;
         }
@@ -274,6 +274,26 @@
   const LOG_FLOOR = 1e-12;
   const toReal = (v) => Math.log10(Math.max(v, LOG_FLOOR));
   const toValue = (r) => Math.pow(10, r);
+  // Range from the visible candles only: indicator lines and drawings never stretch the price axis
+  function visiblePriceBounds(chart, paneId) {
+    if (paneId !== 'candle_pane') return null;
+    const vr = chart.getVisibleRange(), list = chart.getDataList();
+    let lo = Infinity, hi = -Infinity;
+    for (let i = Math.max(0, vr.realFrom); i < Math.min(list.length, vr.realTo); i++) { const d = list[i]; if (d) { if (d.low < lo) lo = d.low; if (d.high > hi) hi = d.high; } }
+    return isFinite(lo) && isFinite(hi) ? [lo, hi] : null;
+  }
+  kc.registerYAxis({
+    name: 'pricesafe',
+    createRange: ({ chart, paneId, defaultRange }) => {
+      const b = visiblePriceBounds(chart, paneId);
+      if (!b) return defaultRange;
+      let [lo, hi] = b;
+      const pad = (hi - lo) * 0.08 || Math.abs(hi) * 0.02 || 1;
+      lo -= pad; hi += pad;
+      const range = hi - lo;
+      return { from: lo, to: hi, range, realFrom: lo, realTo: hi, realRange: range, displayFrom: lo, displayTo: hi, displayRange: range };
+    },
+  });
   kc.registerYAxis({
     name: 'logsafe',
     minSpan: () => 0.0001,
@@ -281,9 +301,15 @@
     realValueToDisplayValue: toValue,
     displayValueToRealValue: toReal,
     realValueToValue: toValue,
-    createRange: ({ defaultRange }) => {
-      const { from, to, range } = defaultRange;
-      const realFrom = toReal(from), realTo = toReal(to);
+    createRange: ({ chart, paneId, defaultRange }) => {
+      const b = visiblePriceBounds(chart, paneId);
+      let from = defaultRange.from, to = defaultRange.to;
+      if (b) {
+        let realLo = toReal(b[0]), realHi = toReal(b[1]);
+        const pad = (realHi - realLo) * 0.08 || 0.05;
+        from = toValue(realLo - pad); to = toValue(realHi + pad);
+      }
+      const realFrom = toReal(from), realTo = toReal(to), range = to - from;
       return { from, to, range, realFrom, realTo, realRange: realTo - realFrom, displayFrom: from, displayTo: to, displayRange: range };
     },
     createTicks: ({ range, bounding, defaultTicks }) => {
@@ -346,7 +372,7 @@
       },
     });
     $$('#ctype button').forEach((b) => b.classList.toggle('on', b.dataset.ct === ct));
-    chart.overrideYAxis({ paneId: 'candle_pane', name: st.log && canLog() ? 'logsafe' : 'normal' });
+    chart.overrideYAxis({ paneId: 'candle_pane', name: st.log && canLog() ? 'logsafe' : 'pricesafe' });
     $('#logbtn').disabled = !canLog(); $('#logbtn').title = canLog() ? 'Logarithmic price scale' : 'Log scale needs all-positive values';
     $('#logbtn').classList.toggle('on', st.log);
     // indicators
