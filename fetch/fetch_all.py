@@ -189,7 +189,7 @@ def prepend_deep(spec, bars):
     """Extend a series backwards with an older feed (spec['deep'] = (source, key)) for dates before its first bar."""
     dsrc, dkey = spec["deep"]
     try:
-        fn = {"fred": S.fred, "stooq": S.stooq, "yahoo": S.yahoo, "ecb": S.ecb, "dbnomics": S.dbnomics}[dsrc]
+        fn = {"fred": S.fred, "stooq": S.stooq, "yahoo": S.yahoo, "ecb": S.ecb, "dbnomics": S.dbnomics, "pinksheet": S.worldbank_pinksheet}[dsrc]
         rows = fn(dkey)
         first = bars[0][0]
         if len(rows[0]) == 2 and spec["kind"] == "ohlc":

@@ -325,6 +325,41 @@ def cointrader_history(symbol, start=1546300800):
     return rows
 
 
+# ---------------------------------------------------------------- World Bank "Pink Sheet" (monthly commodity prices since 1960)
+PINK_SHEET_URL = "https://thedocs.worldbank.org/en/doc/5d903e848db1d1b83e0ec8f744e55570-0350012021/related/CMO-Historical-Data-Monthly.xlsx"
+
+
+def worldbank_pinksheet(commodity):
+    """Monthly price of one Pink Sheet commodity (e.g. 'Gold', 'Crude oil, WTI', 'Silver') as (date, value) rows."""
+    import openpyxl  # noqa: PLC0415
+    r = _get(PINK_SHEET_URL, headers={"Accept": "*/*"}, retries=1, timeout=90)
+    wb = openpyxl.load_workbook(io.BytesIO(r.content), read_only=True, data_only=True)
+    ws = wb["Monthly Prices"] if "Monthly Prices" in wb.sheetnames else wb[wb.sheetnames[0]]
+    rows_iter = ws.iter_rows(values_only=True)
+    col = None
+    for row in rows_iter:
+        cells = [str(c).strip() if c is not None else "" for c in row]
+        for i, c in enumerate(cells):
+            if c.lower() == commodity.lower():
+                col = i
+                break
+        if col is not None:
+            break
+    if col is None:
+        raise SourceError(f"pink sheet: column {commodity!r} not found")
+    out = []
+    for row in rows_iter:
+        if not row or row[0] is None:
+            continue
+        m = re.match(r"^(\d{4})M(\d{2})$", str(row[0]).strip())
+        if not m:
+            continue
+        v = _num(row[col]) if col < len(row) else None
+        if v is not None:
+            out.append((f"{m.group(1)}-{m.group(2)}-01", v))
+    return _clean_value_rows(out)
+
+
 # ---------------------------------------------------------------- manual CSV
 def manual(key, manual_dir):
     p = manual_dir / f"{key}.csv"
