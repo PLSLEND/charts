@@ -1,51 +1,11 @@
 {
- "updated": "2026-09-24T16:27:48+00:00",
+ "updated": "2026-09-24T16:36:55+00:00",
  "series": {},
  "crypto": {
-  "PLS": {
-   "ok": true,
-   "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
-   "name": "DAI / WPLS",
-   "n_day": 1228,
-   "n_4h": 2000,
-   "secs": 37.7
-  },
-  "PLSX": {
-   "ok": true,
-   "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
-   "name": "PLSX / WPLS",
-   "n_day": 1228,
-   "n_4h": 2000,
-   "secs": 75.0
-  },
-  "pHEX": {
-   "ok": true,
-   "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
-   "name": "HEX / WPLS",
-   "n_day": 1212,
-   "n_4h": 2000,
-   "secs": 49.3
-  },
-  "INC": {
-   "ok": true,
-   "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
-   "name": "INC / PLSX",
-   "n_day": 1228,
-   "n_4h": 1999,
-   "secs": 71.0
-  },
-  "pDAI": {
-   "ok": true,
-   "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
-   "name": "DAI / WPLS",
-   "n_day": 1212,
-   "n_4h": 2000,
-   "secs": 91.8
-  },
   "PLSETH": {
    "ok": false,
    "errors": [
-    "no pool found for WPLS on pulsechain; candidates: WPLS / PLSX (901052$); WPLS / DAI 0.25% (44340$); USDC / WPLS (868666$); DAI / WPLS (906179$); PLSX / WPLS (2256023$); DAI / WPLS (798671$)"
+    "no pool found for WPLS on pulsechain; candidates: WPLS / PLSX (898468$); WPLS / DAI 0.25% (44498$); USDC / WPLS (867229$); DAI / WPLS (905746$); PLSX / WPLS (2247452$); DAI / WPLS (793099$)"
    ]
   }
  }
