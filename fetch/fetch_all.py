@@ -46,7 +46,7 @@ SOURCE_LABEL = {
     "fred_yoy": "FRED (St. Louis Fed), YoY % computed",
     "yahoo": "Yahoo Finance", "yahoo_inv": "Yahoo Finance (inverted)", "stooq": "Stooq",
     "ecb": "ECB Data Portal", "bbk": "Deutsche Bundesbank", "dbnomics": "DBnomics", "manual": "manual CSV",
-    "pboc": "People's Bank of China (scraped)", "geckoterminal": "GeckoTerminal",
+    "pboc": "People's Bank of China (scraped)", "geckoterminal": "GeckoTerminal", "coingecko": "CoinGecko",
 }
 SOURCE_URL = {
     "fred": "https://fred.stlouisfed.org/series/{k}", "fred_inv": "https://fred.stlouisfed.org/series/{k}",
@@ -54,7 +54,7 @@ SOURCE_URL = {
     "yahoo": "https://finance.yahoo.com/quote/{k}", "yahoo_inv": "https://finance.yahoo.com/quote/{k}",
     "stooq": "https://stooq.com/q/d/?s={k}", "ecb": "https://data.ecb.europa.eu/data/datasets/{k}",
     "bbk": "https://www.bundesbank.de/en/statistics", "dbnomics": "https://db.nomics.world/{k}",
-    "manual": "", "pboc": "http://www.pbc.gov.cn/en/3688247/index.html",
+    "manual": "", "pboc": "http://www.pbc.gov.cn/en/3688247/index.html", "coingecko": "https://www.coingecko.com/en/coins/{k}",
 }
 
 
@@ -152,6 +152,8 @@ def fetch_one(spec):
                 rows = S.manual(key, MANUAL_DIR)
             elif src == "pboc":
                 rows = S.pboc(key)
+            elif src == "coingecko":
+                rows = S.coingecko(key)
             else:
                 raise S.SourceError(f"unknown source {src}")
             kind = spec["kind"]
@@ -377,17 +379,34 @@ def main():
             t0 = time.time()
             try:
                 res = pools["resolved"].get(cid)
-                if spec.get("pool"):
-                    res = dict(pool=spec["pool"], name=spec["name"], base_symbol=spec.get("search", ""), quote_symbol="")
+                if spec.get("pool") and (not res or res.get("pool") != spec["pool"].lower() or "side" not in res):
+                    info = S.gt_pool_info(spec["network"], spec["pool"].lower())
+                    want = (spec.get("token") or "").lower()
+                    info["side"] = "quote" if want and info.get("quote_token") == want else "base"
+                    res = info
+                    pools["resolved"][cid] = res
                 if not res or not res.get("pool"):
                     res, cands = S.gt_search_pool(spec["network"], spec["search"], spec.get("quotes", []), spec.get("token"))
                     pools["candidates"][cid] = [dict(name=n, pool=a, reserve_usd=round(r), base_token=b) for n, a, r, b in cands][:12]
                     if not res:
                         raise S.SourceError(f"no pool found for {spec['search']} on {spec['network']}; candidates: "
                                             + "; ".join(f"{n} ({round(r)}$)" for n, a, r, b in cands[:6]))
+                    res["side"] = "base"
                     pools["resolved"][cid] = res
-                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=8)
-                h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=2)
+                side = res.get("side", "base")
+                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=8, token=side)
+                h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=2, token=side)
+                # deeper daily history from CoinGecko (closes only) for the days before GeckoTerminal's window
+                if spec.get("cg") and day:
+                    try:
+                        first = day[0][0]
+                        deep = [(int(datetime.fromisoformat(d).replace(tzinfo=timezone.utc).timestamp()), v, v, v, v, 0.0)
+                                for d, v in S.coingecko(spec["cg"]) if int(datetime.fromisoformat(d).replace(tzinfo=timezone.utc).timestamp()) < first]
+                        if deep:
+                            day = deep + day
+                            log(f"     + {cid}: {len(deep)} earlier daily closes from CoinGecko ({spec['cg']})")
+                    except Exception as e:  # noqa: BLE001
+                        log(f"     ~ {cid}: CoinGecko history unavailable: {str(e)[:120]}")
                 for tf, rows in (("day", day), ("4h", h4)):
                     bars = [[t * 1000, sig(o), sig(h), sig(l), sig(c), sig(v, 6)] for t, o, h, l, c, v in rows]
                     dump_json(CRYPTO_DIR / f"{cid}_{tf}.json", {"id": cid, "tf": tf, "pool": res["pool"], "network": spec["network"],
@@ -395,8 +414,9 @@ def main():
                 closes = [r[4] for r in day] or [1]
                 last = datetime.fromtimestamp(day[-1][0], timezone.utc).date().isoformat() if day else None
                 crypto_manifest.append(dict(
-                    id=cid, name=spec["name"], group="PulseChain & HEX", network=spec["network"], pool=res["pool"],
+                    id=cid, name=spec["name"], group="PulseChain & HEX", network=spec["network"], pool=res["pool"], side=side,
                     pool_name=res.get("name", ""), base_symbol=res.get("base_symbol", ""), quote_symbol=res.get("quote_symbol", ""),
+                    deep_history=("CoinGecko daily closes before " + datetime.fromtimestamp(first / 1, timezone.utc).date().isoformat()) if spec.get("cg") and day and day[0][5] == 0.0 else "",
                     precision=auto_precision(closes), last=last, n_day=len(day), n_4h=len(h4),
                     source="GeckoTerminal", source_url=f"https://www.geckoterminal.com/{spec['network']}/pools/{res['pool']}",
                 ))

@@ -11,12 +11,12 @@
   const DAY = 86400000;
 
   const C = {
-    up: '#26d07c', down: '#ff5c7a', pink: '#ff3fd1', violet: '#8a4dff', blue: '#3fa9ff', accent: '#a86bff',
+    up: '#f4f2fa', down: '#3fa9ff', trendUp: '#a86bff', trendDown: '#ff3fd1', pink: '#ff3fd1', violet: '#8a4dff', blue: '#3fa9ff', accent: '#a86bff',
     text: '#e8e5f2', muted: '#8f8aa8', dim: '#5e5975', grid: '#1c1929', line: '#262238', panel: '#13111d', bg: '#0b0a12', warn: '#ffb347',
   };
   const FIB_LEVELS = [
-    [0, '#8f8aa8'], [0.382, '#ffb347'], [0.5, '#26d07c'], [0.618, '#2ec4b6'], [1, '#8f8aa8'],
-    [1.382, '#3fa9ff'], [1.618, '#8a4dff'], [2, '#a86bff'], [2.618, '#ff5c7a'], [3.618, '#ff3fd1'], [4.236, '#ff8ac2'],
+    [0, '#8f8aa8'], [0.382, '#ffb347'], [0.5, '#f4f2fa'], [0.618, '#2ec4b6'], [1, '#8f8aa8'],
+    [1.382, '#3fa9ff'], [1.618, '#8a4dff'], [2, '#a86bff'], [2.618, '#ff8ac2'], [3.618, '#ff3fd1'], [4.236, '#ffb347'],
   ];
   const TF_PERIOD = { '4h': { type: 'hour', span: 4 }, D: { type: 'day', span: 1 }, W: { type: 'week', span: 1 }, M: { type: 'month', span: 1 } };
   const FREQ_TFS = { '4h': ['4h', 'D', 'W', 'M'], D: ['D', 'W', 'M'], W: ['W', 'M'], M: ['M'], Q: ['M'] };
@@ -25,7 +25,7 @@
   // ------------------------------------------------------------------ state
   const st = {
     manifest: null, symbols: new Map(), current: null, tf: 'D', native: null, // native: KLineData[] at the series' own frequency
-    chartType: null, log: false, ind: { st: true, rsi: false, macd: false }, magnet: false, tool: 'cursor',
+    chartType: null, log: false, ind: { st: true, rsi: false, macd: false }, stp: [10, 2.8], magnet: false, tool: 'cursor',
     drawingId: null, selectedId: null, suppress: false, cache: new Map(), custom: [], pools: [],
   };
   const pref = (k, d) => { try { const v = localStorage.getItem(LS + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
@@ -91,7 +91,7 @@
     },
     indicator: {
       lines: [{ color: C.accent, size: 1.5 }, { color: C.blue, size: 1 }, { color: C.pink, size: 1 }, { color: C.warn, size: 1 }, { color: C.up, size: 1 }],
-      bars: [{ upColor: 'rgba(38,208,124,0.7)', downColor: 'rgba(255,92,122,0.7)', noChangeColor: C.muted }],
+      bars: [{ upColor: 'rgba(244,242,250,0.7)', downColor: 'rgba(63,169,255,0.7)', noChangeColor: C.muted }],
       tooltip: { title: { color: C.muted }, legend: { color: C.text } },
       lastValueMark: { show: false },
     },
@@ -114,8 +114,8 @@
   kc.registerIndicator({
     name: 'SUPERTREND', shortName: 'SuperTrend', series: 'price', precision: 2, calcParams: [10, 2.8], shouldOhlc: true,
     figures: [
-      { key: 'up', title: 'Up: ', type: 'line', styles: () => ({ color: C.up, size: 2 }) },
-      { key: 'dn', title: 'Down: ', type: 'line', styles: () => ({ color: C.down, size: 2 }) },
+      { key: 'up', title: 'Up: ', type: 'line', styles: () => ({ color: C.trendUp, size: 2 }) },
+      { key: 'dn', title: 'Down: ', type: 'line', styles: () => ({ color: C.trendDown, size: 2 }) },
     ],
     calc: (list, ind) => {
       const [len, mult] = ind.calcParams;
@@ -173,7 +173,7 @@
         styles: ({ data }) => {
           const p = data.prev && data.prev.hist, c = data.current && data.current.hist;
           const rising = p === undefined || p === null || c >= p;
-          const color = c >= 0 ? (rising ? 'rgba(38,208,124,0.85)' : 'rgba(38,208,124,0.4)') : (rising ? 'rgba(255,92,122,0.4)' : 'rgba(255,92,122,0.85)');
+          const color = c >= 0 ? (rising ? 'rgba(244,242,250,0.85)' : 'rgba(244,242,250,0.4)') : (rising ? 'rgba(63,169,255,0.45)' : 'rgba(63,169,255,0.9)');
           return { style: 'fill', color, borderColor: color };
         },
       },
@@ -210,12 +210,12 @@
       const bs = chart.getBarSpace().bar || 1;
       const bars = Math.round(Math.abs(c1.x - c0.x) / bs);
       const days = Math.round(Math.abs((p1.timestamp || 0) - (p0.timestamp || 0)) / DAY);
-      const up = dv >= 0, col = up ? C.up : C.down;
+      const up = dv >= 0, col = up ? C.trendUp : C.trendDown;
       const prec = (chart.getSymbol() || {}).pricePrecision ?? 2;
       const x = Math.min(c0.x, c1.x), y = Math.min(c0.y, c1.y), w = Math.abs(c1.x - c0.x), h = Math.abs(c1.y - c0.y);
       const tx = x + w / 2, ty = up ? y - 6 : y + h + 6, bl = up ? 'bottom' : 'top', dir = up ? -1 : 1;
       return [
-        { type: 'rect', attrs: { x, y, width: w, height: h }, styles: { style: 'stroke_fill', color: up ? 'rgba(38,208,124,0.10)' : 'rgba(255,92,122,0.10)', borderColor: col, borderSize: 1 } },
+        { type: 'rect', attrs: { x, y, width: w, height: h }, styles: { style: 'stroke_fill', color: up ? 'rgba(168,107,255,0.12)' : 'rgba(255,63,209,0.12)', borderColor: col, borderSize: 1 } },
         { type: 'text', ignoreEvent: true, attrs: { x: tx, y: ty, text: `${dv >= 0 ? '+' : ''}${fmtNum(dv, prec)}  (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`, align: 'center', baseline: bl }, styles: textStyle(col) },
         { type: 'text', ignoreEvent: true, attrs: { x: tx, y: ty + dir * 22, text: `${bars} bars · ${days} days`, align: 'center', baseline: bl }, styles: textStyle('rgba(19,17,29,0.9)') },
       ];
@@ -245,6 +245,49 @@
   });
   const PERSISTED = new Set(['segment', 'rayLine', 'horizontalStraightLine', 'priceRuler', 'fibExtension']);
 
+  // ------------------------------------------------------------------ log axis (the built-in one mislabels prices < 1)
+  const LOG_FLOOR = 1e-12;
+  const toReal = (v) => Math.log10(Math.max(v, LOG_FLOOR));
+  const toValue = (r) => Math.pow(10, r);
+  kc.registerYAxis({
+    name: 'logsafe',
+    minSpan: () => 0.0001,
+    valueToRealValue: toReal,
+    realValueToDisplayValue: toValue,
+    displayValueToRealValue: toReal,
+    realValueToValue: toValue,
+    createRange: ({ defaultRange }) => {
+      const { from, to, range } = defaultRange;
+      const realFrom = toReal(from), realTo = toReal(to);
+      return { from, to, range, realFrom, realTo, realRange: realTo - realFrom, displayFrom: from, displayTo: to, displayRange: range };
+    },
+    createTicks: ({ range, bounding, defaultTicks }) => {
+      const { realFrom, realTo, realRange } = range;
+      if (!(realRange > 0) || !isFinite(realRange)) return defaultTicks;
+      const prec = (st.current && st.current.precision) || 2;
+      const mant = realRange > 4 ? [1] : realRange > 1.6 ? [1, 2, 5] : realRange > 0.6 ? [1, 1.5, 2, 3, 5, 7] : null;
+      const ticks = [];
+      if (mant) {
+        for (let e = Math.floor(realFrom) - 1; e <= Math.ceil(realTo); e++) {
+          for (const m of mant) {
+            const v = m * Math.pow(10, e), r = toReal(v);
+            if (r < realFrom || r > realTo) continue;
+            ticks.push({ coord: bounding.height - ((r - realFrom) / realRange) * bounding.height, value: v, text: fmtNum(v, prec) });
+          }
+        }
+      } else {
+        const lo = toValue(realFrom), hi = toValue(realTo), n = 8;
+        const raw = (hi - lo) / n, mag = Math.pow(10, Math.floor(Math.log10(raw)));
+        const step = [1, 2, 2.5, 5, 10].map((x) => x * mag).find((x) => x >= raw) || raw;
+        for (let v = Math.ceil(lo / step) * step; v <= hi; v += step) {
+          const r = toReal(v);
+          ticks.push({ coord: bounding.height - ((r - realFrom) / realRange) * bounding.height, value: v, text: fmtNum(v, prec) });
+        }
+      }
+      return ticks.length ? ticks : defaultTicks;
+    },
+  });
+
   // ------------------------------------------------------------------ chart
   const chart = kc.init('chart', {
     timezone: 'UTC', locale: 'en-US', styles: STYLES, decimalFold: { threshold: 12 },
@@ -264,6 +307,7 @@
   window.addEventListener('resize', () => chart.resize());
   window.PLSLENDCharts = { chart, state: st, version: '0.1.0' };
 
+  function canLog() { return !!(st.native && st.native.length && st.native.every((d) => d.low > 0)); }
   function applyPanes() {
     const s = st.current;
     if (!s) return;
@@ -277,13 +321,15 @@
       },
     });
     $$('#ctype button').forEach((b) => b.classList.toggle('on', b.dataset.ct === ct));
-    chart.overrideYAxis({ paneId: 'candle_pane', name: st.log ? 'logarithm' : 'normal' });
+    chart.overrideYAxis({ paneId: 'candle_pane', name: st.log && canLog() ? 'logsafe' : 'normal' });
+    $('#logbtn').disabled = !canLog(); $('#logbtn').title = canLog() ? 'Logarithmic price scale' : 'Log scale needs all-positive values';
     $('#logbtn').classList.toggle('on', st.log);
     // indicators
     const have = (n) => chart.getIndicators({ name: n }).length > 0;
-    if (st.ind.st && !have('SUPERTREND')) chart.createIndicator({ name: 'SUPERTREND', paneId: 'candle_pane', precision: s.precision }, true);
+    if (st.ind.st && !have('SUPERTREND')) chart.createIndicator({ name: 'SUPERTREND', paneId: 'candle_pane', precision: s.precision, calcParams: st.stp.slice() }, true);
     if (!st.ind.st && have('SUPERTREND')) chart.removeIndicator({ name: 'SUPERTREND' });
-    if (have('SUPERTREND')) chart.overrideIndicator({ name: 'SUPERTREND', precision: s.precision });
+    if (have('SUPERTREND')) chart.overrideIndicator({ name: 'SUPERTREND', precision: s.precision, calcParams: st.stp.slice() });
+    $('#stparams').classList.toggle('show', st.ind.st); $('#stLen').value = st.stp[0]; $('#stMult').value = st.stp[1];
     if (st.ind.rsi && !have('RSI_TV')) { chart.createIndicator({ name: 'RSI_TV', paneId: 'pane_rsi' }); chart.setPaneOptions({ id: 'pane_rsi', height: 110, minHeight: 60 }); }
     if (!st.ind.rsi && have('RSI_TV')) chart.removeIndicator({ paneId: 'pane_rsi' });
     if (st.ind.macd && !have('MACD_TV')) { chart.createIndicator({ name: 'MACD_TV', paneId: 'pane_macd', precision: Math.min(s.precision + 2, 10) }); chart.setPaneOptions({ id: 'pane_macd', height: 120, minHeight: 60 }); }
@@ -386,12 +432,12 @@
     cacheSet(k, data);
     return data;
   }
-  async function gtOhlcv(network, pool, tf, pages, before) {
+  async function gtOhlcv(network, pool, tf, pages, before, side) {
     // GeckoTerminal public API: ~6 months per daily page, 1000 bars per 4h page; 401 = end of the free window
     const path = tf === '4h' ? 'hour?aggregate=4' : 'day?aggregate=1';
     const rows = [];
     for (let p = 0; p < pages; p++) {
-      const url = `${GT}/networks/${network}/pools/${pool}/ohlcv/${path}&limit=1000&currency=usd&token=base${before ? '&before_timestamp=' + before : ''}`;
+      const url = `${GT}/networks/${network}/pools/${pool}/ohlcv/${path}&limit=1000&currency=usd&token=${side || 'base'}${before ? '&before_timestamp=' + before : ''}`;
       const r = await fetch(url, { headers: { Accept: 'application/json;version=20230302' } });
       if (r.status === 401) break;
       if (r.status === 429) { await new Promise((res) => setTimeout(res, 2500)); p--; continue; }
@@ -422,7 +468,7 @@
       try { cached = barsToKline((await fetchJSON(`${DATA}crypto/${s.id}_${want}.json?v=${encodeURIComponent(st.manifest.updated || '')}`)).bars); } catch (e) { cached = []; }
     }
     let live = [];
-    try { live = await gtOhlcv(s.network, s.pool, want, cached.length ? 1 : (want === '4h' ? 3 : 8)); } catch (e) { live = []; }
+    try { live = await gtOhlcv(s.network, s.pool, want, cached.length ? 1 : (want === '4h' ? 3 : 8), null, s.side); } catch (e) { live = []; }
     s.live = live.length > 0;
     const data = mergeBars(cached, live);
     if (!data.length) throw new Error('no candles from GeckoTerminal' + (s.userPool ? '' : ' or cache'));
@@ -563,10 +609,14 @@
       const r = await fetch(`${GT}/networks/${network}/pools/${addr}`, { headers: { Accept: 'application/json;version=20230302' } });
       if (!r.ok) throw new Error('pool not found on GeckoTerminal');
       const a = (await r.json()).data.attributes;
-      const base = (a.name || '').split(' / ')[0].trim() || 'POOL';
-      let id = base.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10) || 'POOL';
+      const STABLES = ['DAI', 'USDC', 'USDT', 'PDAI', 'PUSDC', 'PUSDT', 'USDL', 'PXDC', 'HEXDC', 'WETH', 'WPLS'];
+      const [baseSym, quoteSym] = (a.name || '').split(' / ').map((x) => (x || '').split(' ')[0].trim());
+      const side = STABLES.includes((baseSym || '').toUpperCase()) && quoteSym && !STABLES.includes(quoteSym.toUpperCase()) ? 'quote' : 'base';
+      const sym = side === 'quote' ? quoteSym : baseSym;
+      let id = (sym || 'POOL').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10) || 'POOL';
       if (st.symbols.has(id)) id = `${id}_${addr.slice(2, 6)}`;
-      const p = { id, name: `${a.name} (${network})`, network, pool: addr, precision: autoPrecision([+a.base_token_price_usd || 1]) };
+      const price = side === 'quote' ? +a.quote_token_price_usd : +a.base_token_price_usd;
+      const p = { id, name: `${a.name} (${network})`, network, pool: addr, side, precision: autoPrecision([price || 1]) };
       st.pools.push(p); setPref('pools', st.pools);
       buildSymbols(); renderList(); $('#pAddr').value = ''; selectSymbol(id, '4h');
     } catch (e) { toast(e.message, 4000); } finally { loading(false); }
@@ -585,6 +635,10 @@
   $('#logbtn').addEventListener('click', () => { st.log = !st.log; setPref('log', st.log); applyPanes(); });
   for (const [btn, key] of [['#ind-st', 'st'], ['#ind-rsi', 'rsi'], ['#ind-macd', 'macd']]) $(btn).addEventListener('click', () => { st.ind[key] = !st.ind[key]; setPref('ind', st.ind); applyPanes(); });
   $$('#toolbar [data-tool]').forEach((b) => b.addEventListener('click', () => setTool(b.dataset.tool === st.tool && b.dataset.tool !== 'cursor' ? 'cursor' : b.dataset.tool)));
+  for (const id of ['#stLen', '#stMult']) $(id).addEventListener('change', () => {
+    const len = Math.max(2, Math.round(+$('#stLen').value || 10)), mult = Math.max(0.1, +$('#stMult').value || 2.8);
+    st.stp = [len, +mult.toFixed(2)]; setPref('stp', st.stp); applyPanes();
+  });
   $('#magnet').addEventListener('click', () => { st.magnet = !st.magnet; $('#magnet').classList.toggle('on', st.magnet); setPref('magnet', st.magnet); });
   $('#delsel').addEventListener('click', deleteSelected);
   $('#delall').addEventListener('click', deleteAll);
@@ -614,7 +668,7 @@
   // ------------------------------------------------------------------ boot
   (async function boot() {
     st.chartType = pref('chartType', null); st.log = pref('log', false); st.ind = { ...st.ind, ...pref('ind', {}) }; st.magnet = pref('magnet', false);
-    st.custom = pref('custom', []); st.pools = pref('pools', []);
+    st.custom = pref('custom', []); st.pools = pref('pools', []); st.stp = pref('stp', [10, 2.8]);
     $('#magnet').classList.toggle('on', st.magnet);
     setTool('cursor');
     loading(true);

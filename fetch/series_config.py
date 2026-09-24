@@ -129,8 +129,12 @@ SERIES = [
          tv="—", sources=[("yahoo", "EURUSD=X"), ("stooq", "eurusd"), ("fred", "DEXUSEU")]),
     dict(id="DXY", name="US Dollar Index", group="FX", freq="D", kind="ohlc", units="index",
          tv="—", sources=[("yahoo", "DX-Y.NYB"), ("stooq", "dx.f")]),
-    dict(id="GOLD", name="Gold (front-month future)", group="Indices & commodities", freq="D", kind="ohlc", units="USD/oz",
-         tv="—", sources=[("yahoo", "GC=F"), ("stooq", "gc.f")]),
+    dict(id="GOLD", name="Gold spot (XAU/USD)", group="Indices & commodities", freq="D", kind="ohlc", units="USD/oz",
+         tv="—", sources=[("stooq", "xauusd"), ("yahoo", "GC=F", "Gold (front-month future)"), ("fred", "GOLDPMGBD228NLBM", "Gold, LBMA PM fix")]),
+    dict(id="BTC", name="Bitcoin (BTC/USD)", group="Crypto majors", freq="D", kind="ohlc", units="USD",
+         tv="—", sources=[("yahoo", "BTC-USD"), ("coingecko", "bitcoin")]),
+    dict(id="ETH", name="Ethereum (ETH/USD)", group="Crypto majors", freq="D", kind="ohlc", units="USD",
+         tv="—", sources=[("yahoo", "ETH-USD"), ("coingecko", "ethereum")]),
 ]
 
 # Constructed series. expr uses series ids; ops: + - * /.  Components are aligned on the
@@ -156,16 +160,16 @@ RATIOS = [
 # (symbol + preferred quote tokens); the highest-liquidity matching pool wins.
 CRYPTO = [
     dict(id="PLS", name="PulseChain — PLS (WPLS/DAI)", network="pulsechain", search="WPLS", quotes=["DAI", "USDC", "USDT", "WETH", "pDAI"],
-         token="0xa1077a294dde1b09bb078844df40758a5d0f9a27", pool="0xe56043671df55de5cdf8459710433c10324de0ae"),
+         token="0xa1077a294dde1b09bb078844df40758a5d0f9a27", pool="0xe56043671df55de5cdf8459710433c10324de0ae", cg="pulsechain"),
     dict(id="PLSX", name="PulseX — PLSX", network="pulsechain", search="PLSX", quotes=["WPLS", "DAI", "USDC"],
-         token="0x95b303987a60c71504d99aa1b13b4da07b0790ab"),
+         token="0x95b303987a60c71504d99aa1b13b4da07b0790ab", cg="pulsex"),
     dict(id="pHEX", name="HEX on PulseChain (pHEX)", network="pulsechain", search="HEX", quotes=["WPLS", "DAI", "USDC"],
-         token="0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"),
+         token="0x2b591e99afe9f32eaa6214f7b7629768c40eeb39", cg="hex-pulsechain"),
     dict(id="eHEX", name="HEX on Ethereum (eHEX)", network="eth", search="HEX", quotes=["USDC", "WETH", "USDT", "DAI"],
-         token="0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"),
+         token="0x2b591e99afe9f32eaa6214f7b7629768c40eeb39", cg="hex"),
     dict(id="INC", name="Incentive — INC", network="pulsechain", search="INC", quotes=["WPLS", "DAI", "PLSX"],
-         token="0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"),
-    dict(id="LOAN", name="Liquid Loans — LOAN", network="pulsechain", search="LOAN", quotes=["WPLS", "DAI", "USDL"]),
+         token="0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d", cg="incentive"),
+    dict(id="LOAN", name="Liquid Loans — LOAN", network="pulsechain", search="LOAN", quotes=["WPLS", "DAI", "USDL"], cg="liquid-loans"),
     dict(id="USDL", name="Liquid Loans — USDL", network="pulsechain", search="USDL", quotes=["WPLS", "DAI", "USDC"]),
     dict(id="EARN", name="POWERCITY EARN — EARN", network="pulsechain", search="EARN", quotes=["WPLS", "DAI", "PLSX"]),
     dict(id="PXDC", name="POWERCITY EARN — PXDC", network="pulsechain", search="PXDC", quotes=["WPLS", "DAI", "USDC", "PLSX"]),
@@ -175,6 +179,6 @@ CRYPTO = [
 ]
 
 GROUP_ORDER = [
-    "PulseChain & HEX", "US rates & credit", "Central banks & money", "Inflation & activity",
+    "PulseChain & HEX", "Crypto majors", "US rates & credit", "Central banks & money", "Inflation & activity",
     "Europe rates", "Indices & commodities", "FX", "Ratios & spreads",
 ]

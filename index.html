@@ -12,7 +12,7 @@
   --bg:#0b0a12; --panel:#13111d; --panel2:#1a1727; --line:#262238; --line2:#332e4a;
   --text:#e8e5f2; --muted:#8f8aa8; --dim:#5e5975;
   --pink:#ff3fd1; --violet:#8a4dff; --blue:#3fa9ff; --accent:#a86bff;
-  --up:#26d07c; --down:#ff5c7a; --warn:#ffb347;
+  --up:#f4f2fa; --down:#3fa9ff; --warn:#ffb347;
   --grad:linear-gradient(90deg,var(--pink),var(--violet),var(--blue));
   --radius:8px; --sidebar:268px; --topbar:46px; --toolbar:40px;
 }
@@ -73,6 +73,8 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
 .tb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .tb.danger:hover{color:var(--down);border-color:var(--down)}
 .sep{width:1px;height:22px;background:var(--line2);margin:0 3px;flex:none}
+.params{display:none;gap:3px;flex:none}.params.show{display:inline-flex}
+.params input{width:52px;padding:3px 5px;border:1px solid var(--line2);border-radius:5px;background:var(--bg);color:var(--text);font-size:12px}
 #chartwrap{flex:1;min-height:0;position:relative;background:var(--bg)}
 #chart{position:absolute;inset:0}
 #overlaymsg{position:absolute;left:50%;top:12px;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--muted);pointer-events:none;opacity:0;transition:opacity .2s;z-index:5;white-space:nowrap}
@@ -132,9 +134,9 @@ a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
         <button data-ct="candle" title="Candles"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3v4M7 17v4M17 5v3M17 15v4"/><rect x="4.5" y="7" width="5" height="10" rx="1"/><rect x="14.5" y="8" width="5" height="7" rx="1"/></svg></button>
         <button data-ct="area" title="Line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-6 4 3 4-6 5 4"/></svg></button>
       </div>
-      <button class="tb" id="logbtn" title="Logarithmic scale">log</button>
+      <button class="tb" id="logbtn" title="Logarithmic price scale">log</button>
       <span class="sep"></span>
-      <button class="tb" id="ind-st" title="SuperTrend (ATR 10, factor 2.8)">SuperTrend</button>
+      <button class="tb" id="ind-st" title="SuperTrend (ATR length, factor)">SuperTrend</button><span id="stparams" class="params" title="SuperTrend: ATR length · factor"><input id="stLen" type="number" min="2" max="100" step="1" value="10"><input id="stMult" type="number" min="0.5" max="10" step="0.1" value="2.8"></span>
       <button class="tb" id="ind-rsi" title="RSI 14">RSI</button>
       <button class="tb" id="ind-macd" title="MACD 12 / 26 / 9">MACD</button>
       <span class="sep"></span>

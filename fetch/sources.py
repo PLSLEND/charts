@@ -304,6 +304,30 @@ def dbnomics_search(query, limit=12):
     return out
 
 
+# ---------------------------------------------------------------- CoinGecko (public, daily closes since listing)
+_cg_last = [0.0]
+
+
+def coingecko(coin_id):
+    """Daily close history (value rows) from the public CoinGecko API; ~10-30 req/min without a key."""
+    wait = 7.0 - (time.time() - _cg_last[0])
+    if wait > 0:
+        time.sleep(wait)
+    r = _get(f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart",
+             params={"vs_currency": "usd", "days": "max"},
+             headers={"Accept": "application/json"}, retries=1, sleep=15)
+    _cg_last[0] = time.time()
+    try:
+        prices = r.json()["prices"]
+    except Exception as e:  # noqa: BLE001
+        raise SourceError(f"coingecko bad json for {coin_id}: {e}")
+    rows = {}
+    for t, p in prices:
+        d = datetime.fromtimestamp(t / 1000, timezone.utc).date().isoformat()
+        rows[d] = float(p)  # last point per day wins
+    return _clean_value_rows(list(rows.items()))
+
+
 # ---------------------------------------------------------------- manual CSV
 def manual(key, manual_dir):
     p = manual_dir / f"{key}.csv"
@@ -389,6 +413,22 @@ def _gt_get(path, params=None):
             raise GTHistoryLimit(f"{path} -> 401 (beyond the public API history window)")
         raise SourceError(f"{path} -> HTTP {r.status_code}: {r.text[:120]!r}")
     raise SourceError(f"{path} -> rate limited (429) repeatedly")
+
+
+def gt_pool_info(network, pool):
+    """name, base/quote symbols and token addresses of a pool."""
+    js = _gt_get(f"/networks/{network}/pools/{pool}")
+    p = js.get("data", {})
+    a = p.get("attributes", {})
+    rel = p.get("relationships", {})
+    base_id = (rel.get("base_token", {}).get("data") or {}).get("id", "")
+    quote_id = (rel.get("quote_token", {}).get("data") or {}).get("id", "")
+    name = a.get("name", "")
+    base_sym, _, quote_sym = name.partition(" / ")
+    return dict(pool=pool, name=name, base_symbol=base_sym.strip(), quote_symbol=quote_sym.split(" ")[0].strip(),
+                base_token=base_id.split("_", 1)[1].lower() if "_" in base_id else "",
+                quote_token=quote_id.split("_", 1)[1].lower() if "_" in quote_id else "",
+                reserve_usd=float(a.get("reserve_in_usd") or 0), price_usd=_num(a.get("base_token_price_usd")))
 
 
 def gt_search_pool(network, symbol, quotes, token=None):
