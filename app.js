@@ -344,6 +344,22 @@
     timezone: 'UTC', locale: 'en-US', styles: STYLES, decimalFold: { threshold: 12 },
     formatter: { formatDate: ({ timestamp, type }) => fmtDate(timestamp, st.tf === '4h' ? '4h' : (type === 'xAxis' && st.tf === 'M' ? 'M' : 'D')) },
   });
+  // Live updates while the page is open: on-chain pairs poll GeckoTerminal every 60 s for the newest candles,
+  // everything else checks every 5 min whether the data job has published a fresh file.
+  let liveTimer = null;
+  function pushFresh(callback, freshNative) {
+    if (!freshNative.length || !st.current) return;
+    const last = st.native.length ? st.native[st.native.length - 1].timestamp : 0;
+    const changed = freshNative.some((b) => b.timestamp >= last);
+    st.native = mergeBars(st.native, freshNative);
+    if (!changed) return;
+    const view = st.tf === '4h' ? st.native : aggregate(st.native, st.tf);
+    const shown = chart.getDataList();
+    const lastShown = shown.length ? shown[shown.length - 1].timestamp : 0;
+    for (const bar of view) if (bar.timestamp >= lastShown) callback(bar);
+    updateHeader(chart.getDataList());
+    cacheSet((st.current.crypto ? `crypto:${st.current.id}:${st.tf === '4h' ? '4h' : 'day'}` : 'series:' + st.current.id), st.native);
+  }
   chart.setDataLoader({
     getBars: ({ type, period, callback }) => {
       if (type !== 'init' || !st.native) { callback([], false); return; }
@@ -354,6 +370,31 @@
       restoreDrawings();
       updateHeader(data);
     },
+    subscribeBar: ({ callback }) => {
+      clearInterval(liveTimer);
+      const s = st.current;
+      if (!s) return;
+      if (s.crypto) {
+        liveTimer = setInterval(async () => {
+          if (document.hidden || st.current !== s) return;
+          try { pushFresh(callback, await gtOhlcv(s.network, s.pool, st.tf === '4h' ? '4h' : 'day', 1, null, s.side, s.currency)); s.live = true; } catch (e) { /* next tick */ }
+        }, 60000);
+      } else if (!s.custom) {
+        liveTimer = setInterval(async () => {
+          if (document.hidden || st.current !== s) return;
+          try {
+            const m = await fetchJSON(DATA + 'manifest.json?t=' + Date.now());
+            if (m.updated === st.manifest.updated) return;
+            st.manifest = m;
+            const meta = (m.series || []).find((x) => x.id === s.id);
+            if (meta) Object.assign(s, meta);
+            pushFresh(callback, barsToKline((await fetchJSON(DATA + s.file + '?v=' + encodeURIComponent(m.updated))).bars));
+            $('#status .disc').textContent = `data refreshed ${m.updated.slice(0, 16).replace('T', ' ')} UTC · not financial advice · prices may be delayed`;
+          } catch (e) { /* next tick */ }
+        }, 5 * 60000);
+      }
+    },
+    unsubscribeBar: () => { clearInterval(liveTimer); liveTimer = null; },
   });
   window.addEventListener('resize', () => chart.resize());
   window.PLSLENDCharts = { chart, state: st, version: '0.1.0' };

@@ -2,8 +2,9 @@ name: Update data
 
 on:
   schedule:
-    - cron: '20 22 * * *'   # 22:20 UTC, after the US close
-    - cron: '20 6 * * *'    # 06:20 UTC, European morning
+    - cron: '20 22 * * *'   # full run, 22:20 UTC, after the US close
+    - cron: '20 6 * * *'    # full run, 06:20 UTC, European morning
+    - cron: '50 */2 * * *'  # quick run every 2 hours: market quotes + newest on-chain candles
   workflow_dispatch:
     inputs:
       only:
@@ -12,6 +13,10 @@ on:
         default: ''
       no_crypto:
         description: 'Skip GeckoTerminal pairs'
+        type: boolean
+        default: false
+      quick:
+        description: 'Quick run (market quotes + newest candles only)'
         type: boolean
         default: false
 
@@ -38,6 +43,7 @@ jobs:
         run: |
           ARGS="${{ github.event.inputs.only }}"
           if [ "${{ github.event.inputs.no_crypto }}" = "true" ]; then ARGS="$ARGS --no-crypto"; fi
+          if [ "${{ github.event.inputs.quick }}" = "true" ] || [ "${{ github.event.schedule }}" = "50 */2 * * *" ]; then ARGS="$ARGS --quick"; fi
           python fetch/fetch_all.py $ARGS
       - name: Commit data
         run: |

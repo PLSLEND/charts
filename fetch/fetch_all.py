@@ -40,6 +40,7 @@ NOW = datetime.now(timezone.utc)
 ONLY = set(a for a in sys.argv[1:] if not a.startswith("--"))
 SKIP_CRYPTO = "--no-crypto" in sys.argv
 SKIP_MACRO = "--no-macro" in sys.argv
+QUICK = "--quick" in sys.argv  # frequent light run: market quotes + newest on-chain candles only
 
 SOURCE_LABEL = {
     "fred": "FRED (St. Louis Fed)", "fred_inv": "FRED (St. Louis Fed)", "fred_pct": "FRED (St. Louis Fed), MoM % computed",
@@ -321,6 +322,9 @@ def main():
     if not SKIP_MACRO:
         log(f"== macro / TradFi series ({len(SERIES)}) ==")
         todo = [spec for spec in SERIES if not ONLY or spec["id"] in ONLY]
+        if QUICK and not ONLY:
+            todo = [spec for spec in todo if spec["sources"][0][0] in ("yahoo", "stooq")]
+            log(f"   quick mode: {len(todo)} market series")
         t_all = time.time()
         with ThreadPoolExecutor(max_workers=6) as pool:
             results = list(pool.map(lambda sp: (sp, time.time(), fetch_one(sp)), todo))
@@ -421,11 +425,14 @@ def main():
                     pools["resolved"][cid] = res
                 side = res.get("side", "base")
                 currency = spec.get("currency", "usd")
-                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=8, token=side, currency=currency)
-                h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=2, token=side, currency=currency)
+                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=1 if QUICK else 8, token=side, currency=currency)
+                h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=1 if QUICK else 2, token=side, currency=currency)
                 # deeper daily history (before GeckoTerminal's window) from an alternative feed, when configured
                 deep_note = ""
-                if spec.get("deep") and day:
+                if QUICK:
+                    prev_meta = next((c for c in (load_json(DATA / "manifest.json") or {}).get("crypto", []) if c["id"] == cid), None)
+                    deep_note = (prev_meta or {}).get("deep_history", "")
+                if spec.get("deep") and day and not QUICK:
                     dsrc, dkey = spec["deep"]
                     try:
                         first = day[0][0]
@@ -444,6 +451,16 @@ def main():
                         log(f"     ~ {cid}: deep history unavailable: {str(e)[:120]}")
                 for tf, rows in (("day", day), ("4h", h4)):
                     bars = [[t * 1000, sig(o), sig(h), sig(l), sig(c), sig(v, 6)] for t, o, h, l, c, v in rows]
+                    prev = load_json(CRYPTO_DIR / f"{cid}_{tf}.json")
+                    if prev and prev.get("bars") and prev.get("pool") == res["pool"]:
+                        merged = {b[0]: b for b in prev["bars"]}
+                        for b in bars:
+                            merged[b[0]] = b
+                        bars = [merged[t] for t in sorted(merged)]
+                        if tf == "day":
+                            day = [(b[0] // 1000, b[1], b[2], b[3], b[4], b[5]) for b in bars]
+                        else:
+                            h4 = [(b[0] // 1000, b[1], b[2], b[3], b[4], b[5]) for b in bars]
                     dump_json(CRYPTO_DIR / f"{cid}_{tf}.json", {"id": cid, "tf": tf, "pool": res["pool"], "network": spec["network"],
                                                                  "updated": NOW.isoformat(timespec="seconds"), "bars": bars})
                 closes = [r[4] for r in day] or [1]
@@ -476,14 +493,14 @@ def main():
         old_manifest = load_json(DATA / "manifest.json") or {}
         crypto_manifest = old_manifest.get("crypto", [])
 
-    if ONLY or SKIP_MACRO:
+    if ONLY or SKIP_MACRO or QUICK:
         # partial run: merge into the existing manifest instead of replacing it
         old_manifest = load_json(DATA / "manifest.json") or {}
         merged = {m["id"]: m for m in old_manifest.get("series", [])}
         for m in manifest_series:
             merged[m["id"]] = m
         manifest_series = list(merged.values())
-        if ONLY and not SKIP_CRYPTO:
+        if (ONLY or QUICK) and not SKIP_CRYPTO:
             mergedc = {m["id"]: m for m in old_manifest.get("crypto", [])}
             for m in crypto_manifest:
                 mergedc[m["id"]] = m
