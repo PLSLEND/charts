@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T18:56:02+00:00",
+ "updated": "2026-09-24T20:55:09+00:00",
  "series": {
   "SPX": {
    "ok": true,
@@ -7,7 +7,7 @@
    "last": "2026-09-24",
    "n": 24799,
    "errors": [],
-   "secs": 2.4
+   "secs": 2.9
   },
   "NDX": {
    "ok": true,
@@ -15,7 +15,7 @@
    "last": "2026-09-24",
    "n": 10324,
    "errors": [],
-   "secs": 2.4
+   "secs": 3.0
   },
   "RTY": {
    "ok": true,
@@ -23,7 +23,7 @@
    "last": "2026-09-24",
    "n": 9833,
    "errors": [],
-   "secs": 2.4
+   "secs": 3.0
   },
   "DAX": {
    "ok": true,
@@ -31,7 +31,7 @@
    "last": "2026-09-24",
    "n": 9795,
    "errors": [],
-   "secs": 2.5
+   "secs": 3.0
   },
   "NKY": {
    "ok": true,
@@ -39,7 +39,7 @@
    "last": "2026-09-24",
    "n": 15172,
    "errors": [],
-   "secs": 2.5
+   "secs": 3.1
   },
   "HSI": {
    "ok": true,
@@ -47,7 +47,7 @@
    "last": "2026-09-24",
    "n": 9805,
    "errors": [],
-   "secs": 2.5
+   "secs": 3.1
   },
   "USOIL": {
    "ok": true,
@@ -55,7 +55,7 @@
    "last": "2026-09-24",
    "n": 6550,
    "errors": [],
-   "secs": 2.3
+   "secs": 2.5
   },
   "GSG": {
    "ok": true,
@@ -63,7 +63,7 @@
    "last": "2026-09-24",
    "n": 5075,
    "errors": [],
-   "secs": 2.0
+   "secs": 2.4
   },
   "QQQ": {
    "ok": true,
@@ -71,7 +71,7 @@
    "last": "2026-09-24",
    "n": 6929,
    "errors": [],
-   "secs": 2.1
+   "secs": 2.4
   },
   "CQQQ": {
    "ok": true,
@@ -79,7 +79,7 @@
    "last": "2026-09-24",
    "n": 4193,
    "errors": [],
-   "secs": 1.9
+   "secs": 2.4
   },
   "JPYUSD": {
    "ok": true,
@@ -87,7 +87,7 @@
    "last": "2026-09-24",
    "n": 7754,
    "errors": [],
-   "secs": 1.9
+   "secs": 2.2
   },
   "CNYUSD": {
    "ok": true,
@@ -95,7 +95,7 @@
    "last": "2026-09-24",
    "n": 6322,
    "errors": [],
-   "secs": 1.8
+   "secs": 2.0
   },
   "EURUSD": {
    "ok": true,
@@ -103,7 +103,7 @@
    "last": "2026-09-24",
    "n": 5920,
    "errors": [],
-   "secs": 1.7
+   "secs": 2.0
   },
   "DXY": {
    "ok": true,
@@ -111,7 +111,7 @@
    "last": "2026-09-24",
    "n": 14149,
    "errors": [],
-   "secs": 1.6
+   "secs": 2.0
   },
   "GOLD": {
    "ok": true,
@@ -119,7 +119,7 @@
    "last": "2026-09-24",
    "n": 7030,
    "errors": [],
-   "secs": 1.5
+   "secs": 1.9
   },
   "BTC": {
    "ok": true,
@@ -127,7 +127,7 @@
    "last": "2026-09-24",
    "n": 4391,
    "errors": [],
-   "secs": 1.5
+   "secs": 1.8
   },
   "ETH": {
    "ok": true,
@@ -135,7 +135,7 @@
    "last": "2026-09-24",
    "n": 3242,
    "errors": [],
-   "secs": 1.4
+   "secs": 1.7
   },
   "MSPUS_USCPIM": {
    "ok": true,
@@ -186,24 +186,24 @@
    "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
    "name": "DAI / WPLS",
    "n_day": 1228,
-   "n_4h": 2000,
-   "secs": 4.3
+   "n_4h": 2001,
+   "secs": 27.0
   },
   "PLSX": {
    "ok": true,
    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
    "name": "PLSX / WPLS",
    "n_day": 1228,
-   "n_4h": 2000,
-   "secs": 6.5
+   "n_4h": 2001,
+   "secs": 58.0
   },
   "pHEX": {
    "ok": true,
    "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
    "name": "HEX / WPLS",
    "n_day": 1212,
-   "n_4h": 2000,
-   "secs": 67.4
+   "n_4h": 2001,
+   "secs": 32.6
   },
   "eHEX": {
    "ok": true,
@@ -211,55 +211,55 @@
    "name": "HEX / WETH",
    "n_day": 2474,
    "n_4h": 2001,
-   "secs": 8.7
+   "secs": 38.9
   },
   "INC": {
    "ok": true,
    "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
    "name": "INC / PLSX",
    "n_day": 1228,
-   "n_4h": 1999,
-   "secs": 33.4
+   "n_4h": 2000,
+   "secs": 27.1
   },
   "pDAI": {
    "ok": true,
    "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
    "name": "DAI / WPLS",
    "n_day": 1212,
-   "n_4h": 2000,
-   "secs": 30.4
+   "n_4h": 2001,
+   "secs": 35.6
   },
   "PLSETH": {
    "ok": true,
    "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
    "name": "WETH / WPLS",
    "n_day": 1228,
-   "n_4h": 2000,
-   "secs": 11.9
+   "n_4h": 2001,
+   "secs": 32.1
   },
   "LOAN": {
    "ok": true,
    "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
    "name": "LOAN / WPLS",
    "n_day": 365,
-   "n_4h": 2001,
-   "secs": 26.7
+   "n_4h": 2002,
+   "secs": 58.7
   },
   "USDL": {
    "ok": true,
    "pool": "0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e",
    "name": "USDL / DAI 0.05%",
    "n_day": 183,
-   "n_4h": 1001,
-   "secs": 27.2
+   "n_4h": 1002,
+   "secs": 65.1
   },
   "EARN": {
    "ok": true,
    "pool": "0xed77cbbb80e5a5c3a1fe664419d6f690766b5913",
    "name": "EARN / PLSX",
    "n_day": 184,
-   "n_4h": 966,
-   "secs": 28.2
+   "n_4h": 967,
+   "secs": 28.4
   },
   "PXDC": {
    "ok": true,
@@ -267,23 +267,23 @@
    "name": "PXDC / DAI 1%",
    "n_day": 183,
    "n_4h": 535,
-   "secs": 34.7
+   "secs": 61.8
   },
   "FLEX": {
    "ok": true,
    "pool": "0x476d63ab94b4e86614df0c3d5a27e9e22631d062",
    "name": "FLEX / HEX",
    "n_day": 185,
-   "n_4h": 1002,
-   "secs": 33.5
+   "n_4h": 1003,
+   "secs": 28.2
   },
   "HEXDC": {
    "ok": true,
    "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
    "name": "HEXDC / HEX",
    "n_day": 365,
-   "n_4h": 2001,
-   "secs": 12.3
+   "n_4h": 2002,
+   "secs": 108.3
   },
   "PRINT": {
    "ok": true,
@@ -291,7 +291,7 @@
    "name": "PRINT / INC",
    "n_day": 365,
    "n_4h": 1000,
-   "secs": 26.5
+   "secs": 19.7
   }
  }
 }
