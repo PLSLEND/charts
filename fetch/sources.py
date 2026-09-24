@@ -304,28 +304,25 @@ def dbnomics_search(query, limit=12):
     return out
 
 
-# ---------------------------------------------------------------- CoinGecko (public, daily closes since listing)
-_cg_last = [0.0]
-
-
-def coingecko(coin_id):
-    """Daily close history (value rows) from the public CoinGecko API; ~10-30 req/min without a key."""
-    wait = 7.0 - (time.time() - _cg_last[0])
-    if wait > 0:
-        time.sleep(wait)
-    r = _get(f"https://api.coingecko.com/api/v3/coins/{coin_id}/market_chart",
-             params={"vs_currency": "usd", "days": "max"},
-             headers={"Accept": "application/json"}, retries=1, sleep=15)
-    _cg_last[0] = time.time()
+# ---------------------------------------------------------------- CoinTrader.Pro (UDF feed behind hexchart.com, CoinMarketCap data)
+def cointrader_history(symbol, start=1546300800):
+    """Daily OHLCV rows (unix seconds) from the TradingView-UDF style feed used by hexchart.com."""
+    r = _get("https://charts.cointrader.pro/api/history",
+             params={"symbol": symbol, "resolution": "1D", "from": str(start), "to": str(int(time.time()) + 86400)},
+             headers={"Accept": "application/json", "Referer": "https://charts.cointrader.pro/charts.html"}, retries=1)
     try:
-        prices = r.json()["prices"]
-    except Exception as e:  # noqa: BLE001
-        raise SourceError(f"coingecko bad json for {coin_id}: {e}")
-    rows = {}
-    for t, p in prices:
-        d = datetime.fromtimestamp(t / 1000, timezone.utc).date().isoformat()
-        rows[d] = float(p)  # last point per day wins
-    return _clean_value_rows(list(rows.items()))
+        j = r.json()
+    except ValueError as e:
+        raise SourceError(f"cointrader bad json for {symbol}: {e}")
+    if j.get("s") != "ok" or not j.get("t"):
+        raise SourceError(f"cointrader {symbol}: {str(j)[:100]}")
+    rows = []
+    for t, o, h, l, c, v in zip(j["t"], j["o"], j["h"], j["l"], j["c"], j.get("v") or [0] * len(j["t"])):
+        if None in (o, h, l, c):
+            continue
+        rows.append((int(t), float(o), float(h), float(l), float(c), float(v or 0)))
+    rows.sort()
+    return rows
 
 
 # ---------------------------------------------------------------- manual CSV
