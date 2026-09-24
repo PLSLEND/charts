@@ -109,6 +109,16 @@
    "quote_symbol": "INC",
    "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3",
    "price_usd": 0.000374977833079979
+  },
+  "pDAI": {
+   "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
+   "name": "DAI / WPLS",
+   "reserve_usd": 798689.1781,
+   "base_symbol": "DAI",
+   "quote_symbol": "WPLS",
+   "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f",
+   "price_usd": 0.00212902605591111,
+   "side": "base"
   }
  },
  "candidates": {
@@ -998,6 +1008,154 @@
     "pool": "0xa223ae3ee3220597c3d1008b6118685262150e81",
     "reserve_usd": 7,
     "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3"
+   }
+  ],
+  "pDAI": [
+   {
+    "name": "DAI / WPLS",
+    "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
+    "reserve_usd": 908761,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
+    "reserve_usd": 798689,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / DAI",
+    "pool": "0xfc64556faa683e6087f425819c7ca3c558e13ac1",
+    "reserve_usd": 103492,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / ㉣",
+    "pool": "0x5383c25d3d86070311946812d022dc0420eed4cb",
+    "reserve_usd": 1757584,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / PLSX",
+    "pool": "0xb2893cea8080bf43b7b60b589edaab5211d98f23",
+    "reserve_usd": 107741,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0x947b4633e32e0c7f2c76753b43f008480715416d",
+    "reserve_usd": 75823,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0x146e1f1e060e5b5016db0d118d2c5a11a240ae32",
+    "reserve_usd": 87227,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "DAI / ATROPA",
+    "pool": "0xe936b1990b98152be81efafa40de6cb8c89eec0c",
+    "reserve_usd": 364294,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / DOUBT",
+    "pool": "0x07a127c239d82df5c9179e77708e8eff7cd53132",
+    "reserve_usd": 107121,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / USDC",
+    "pool": "0x2db5ef4e8a7dbe195defae2d9b79948096a03274",
+    "reserve_usd": 49279,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "DAI / PLSX",
+    "pool": "0x790c996afe80efe313a9a28ef4221ef5a555b8b2",
+    "reserve_usd": 40226,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "DAI / WPLS 1%",
+    "pool": "0x55b432ad0518a4285ded6bb4d15e9a7182ef7a4d",
+    "reserve_usd": 46793,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   }
+  ],
+  "PLSETH": [
+   {
+    "name": "WPLS / PLSX",
+    "pool": "0x149b2c629e652f2e89e11cd57e5d4d77ee166f9f",
+    "reserve_usd": 901052,
+    "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27"
+   },
+   {
+    "name": "WPLS / DAI 0.25%",
+    "pool": "0xe37a2c1755151ff910ff895a14fad5570730f6e9",
+    "reserve_usd": 44340,
+    "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27"
+   },
+   {
+    "name": "USDC / WPLS",
+    "pool": "0x6753560538eca67617a9ce605178f788be7e524e",
+    "reserve_usd": 868666,
+    "base_token": "0x15d38573d2feeb82e7ad5187ab8c1d52810b1f07"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
+    "reserve_usd": 906179,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "PLSX / WPLS",
+    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
+    "reserve_usd": 2256023,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
+    "reserve_usd": 798671,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "WETH / WPLS",
+    "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
+    "reserve_usd": 910726,
+    "base_token": "0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c"
+   },
+   {
+    "name": "HEX / WPLS",
+    "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
+    "reserve_usd": 836556,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "USDT / WPLS",
+    "pool": "0x322df7921f28f1146cdf62afdac0d6bc0ab80711",
+    "reserve_usd": 644204,
+    "base_token": "0x0cb6f5a34ad42ec934882a05265a7d5f59b51a2f"
+   },
+   {
+    "name": "HEX / WPLS",
+    "pool": "0xf1f4ee610b2babb05c635f726ef8b0c568c8dc65",
+    "reserve_usd": 683236,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "WETH / WPLS",
+    "pool": "0x29d66d5900eb0d629e1e6946195520065a6c5aee",
+    "reserve_usd": 597011,
+    "base_token": "0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c"
+   },
+   {
+    "name": "HEX / WPLS 0.25%",
+    "pool": "0x8c357be2cf2c1de1c4dca8aea0af1529f789976b",
+    "reserve_usd": 344631,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
    }
   ]
  }
