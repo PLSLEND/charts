@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T15:41:41+00:00",
+ "updated": "2026-09-24T15:56:04+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -888,10 +888,10 @@
    "pool_name": "HEX / WETH",
    "base_symbol": "HEX",
    "quote_symbol": "WETH",
-   "deep_history": "",
+   "deep_history": "2109 daily bars before 2025-09-25 from CoinTrader.Pro (CoinMarketCap data, via hexchart.com)",
    "precision": 7,
    "last": "2026-09-24",
-   "n_day": 365,
+   "n_day": 2474,
    "n_4h": 2000,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/eth/pools/0x55d5c232d921b9eaa6b37b5845e439acd04b4dba"

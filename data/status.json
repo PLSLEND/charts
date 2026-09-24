@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T15:41:41+00:00",
+ "updated": "2026-09-24T15:56:04+00:00",
  "series": {
   "GOLD": {
    "ok": true,
@@ -7,87 +7,19 @@
    "last": "2026-09-24",
    "n": 6542,
    "errors": [
-    "stooq:xauusd -> https://stooq.com/q/d/l/ -> ConnectTimeout(MaxRetryError(\"HTTPSConnectionPool(host='stooq.com', port=443): Max retries exceeded with url: /q/d/l/?s=xauusd&i=d (Caused by ConnectTimeoutError(<HTTPSConn"
+    "stooq:xauusd -> stooq: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"no'"
    ],
-   "secs": 106.9
-  },
-  "BTC": {
-   "ok": true,
-   "source": "yahoo:BTC-USD",
-   "last": "2026-09-24",
-   "n": 4391,
-   "errors": [],
-   "secs": 106.9
-  },
-  "ETH": {
-   "ok": true,
-   "source": "yahoo:ETH-USD",
-   "last": "2026-09-24",
-   "n": 3242,
-   "errors": [],
-   "secs": 106.9
-  },
-  "HY_MINUS_US10Y": {
-   "ok": true,
-   "source": "HYOAS_EY - US10Y",
-   "last": "2026-09-23",
-   "n": 787
-  },
-  "SPX_GOLD": {
-   "ok": true,
-   "source": "SPX / GOLD",
-   "last": "2026-09-24",
-   "n": 6561
+   "secs": 1.1
   }
  },
  "crypto": {
-  "PLS": {
-   "ok": true,
-   "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
-   "name": "DAI / WPLS",
-   "n_day": 365,
-   "n_4h": 2000,
-   "secs": 83.0
-  },
-  "PLSX": {
-   "ok": true,
-   "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
-   "name": "PLSX / WPLS",
-   "n_day": 365,
-   "n_4h": 2000,
-   "secs": 60.4
-  },
-  "pHEX": {
-   "ok": true,
-   "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
-   "name": "HEX / WPLS",
-   "n_day": 365,
-   "n_4h": 2000,
-   "secs": 86.9
-  },
   "eHEX": {
    "ok": true,
    "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
    "name": "HEX / WETH",
-   "n_day": 365,
+   "n_day": 2474,
    "n_4h": 2000,
-   "secs": 82.1
-  },
-  "INC": {
-   "ok": true,
-   "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
-   "name": "INC / PLSX",
-   "n_day": 365,
-   "n_4h": 2000,
-   "secs": 65.6
-  },
-  "LOAN": {
-   "ok": true,
-   "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
-   "name": "LOAN / WPLS",
-   "n_day": 365,
-   "n_4h": 2000,
-   "secs": 63.6
+   "secs": 14.5
   }
  }
 }
