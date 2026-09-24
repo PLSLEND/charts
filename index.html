@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PLSLEND Charts</title>
+<meta name="description" content="Free community charts: PulseChain and HEX pairs next to the macro series that move them. Drawing tools, Fibonacci extensions, SuperTrend, RSI, MACD. Data from FRED, ECB, Bundesbank, Yahoo Finance and GeckoTerminal.">
+<meta name="theme-color" content="#0b0a12">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23ff3fd1'/%3E%3Cstop offset='.5' stop-color='%238a4dff'/%3E%3Cstop offset='1' stop-color='%233fa9ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='%230b0a12'/%3E%3Cpath d='M5 22 L12 13 L17 18 L27 7' fill='none' stroke='url(%23g)' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b0a12; --panel:#13111d; --panel2:#1a1727; --line:#262238; --line2:#332e4a;
+  --text:#e8e5f2; --muted:#8f8aa8; --dim:#5e5975;
+  --pink:#ff3fd1; --violet:#8a4dff; --blue:#3fa9ff; --accent:#a86bff;
+  --up:#26d07c; --down:#ff5c7a; --warn:#ffb347;
+  --grad:linear-gradient(90deg,var(--pink),var(--violet),var(--blue));
+  --radius:8px; --sidebar:268px; --topbar:46px; --toolbar:40px;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:13px/1.35 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif}
+button,input,select{font:inherit;color:inherit}
+a{color:var(--blue);text-decoration:none}a:hover{text-decoration:underline}
+#app{display:grid;grid-template-columns:var(--sidebar) 1fr;grid-template-rows:var(--topbar) 1fr;height:100%;min-height:0}
+/* ---------- top bar ---------- */
+#top{grid-column:1/3;display:flex;align-items:center;gap:10px;padding:0 12px;border-bottom:1px solid var(--line);background:var(--panel)}
+#brand{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.3px;white-space:nowrap}
+#brand .mark{width:22px;height:22px;border-radius:6px;background:var(--bg);display:grid;place-items:center;border:1px solid var(--line2)}
+#brand .word{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+#brand small{font-weight:500;color:var(--muted);letter-spacing:0}
+#symhead{display:flex;align-items:baseline;gap:8px;min-width:0;flex:1;overflow:hidden}
+#symhead .id{font-weight:700;font-size:14px;white-space:nowrap}
+#symhead .name{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#symhead .last{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+#symhead .chg{white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:600}
+.chg.up{color:var(--up)}.chg.down{color:var(--down)}
+#toplinks{display:flex;gap:10px;align-items:center;white-space:nowrap;color:var(--muted)}
+#toplinks a{color:var(--muted)}#toplinks a:hover{color:var(--text)}
+#menubtn{display:none}
+/* ---------- sidebar ---------- */
+#side{border-right:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;min-height:0}
+#search{margin:10px;padding:7px 10px;border:1px solid var(--line2);border-radius:var(--radius);background:var(--bg);outline:none;width:calc(100% - 20px)}
+#search:focus{border-color:var(--violet)}
+#list{overflow:auto;flex:1;min-height:0;padding-bottom:10px}
+.grp{padding:9px 12px 4px;font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);position:sticky;top:0;background:var(--panel);z-index:1}
+.sym{display:flex;align-items:center;gap:8px;padding:6px 12px;cursor:pointer;border-left:2px solid transparent}
+.sym:hover{background:var(--panel2)}
+.sym.active{background:var(--panel2);border-left-color:var(--pink)}
+.sym .sid{font-weight:600;min-width:64px;font-variant-numeric:tabular-nums}
+.sym .sname{color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1}
+.sym .del{color:var(--dim);padding:0 4px;border:0;background:none;cursor:pointer}
+.sym .del:hover{color:var(--down)}
+.sym .freqtag{font-size:10px;color:var(--dim);border:1px solid var(--line2);border-radius:4px;padding:0 4px}
+#custom{border-top:1px solid var(--line);padding:10px 12px;display:flex;flex-direction:column;gap:6px}
+#custom .row{display:flex;gap:6px}
+#custom select,#custom input{flex:1;min-width:0;padding:5px 6px;border:1px solid var(--line2);border-radius:6px;background:var(--bg);outline:none}
+#custom .hint{font-size:11px;color:var(--dim)}
+.btn{padding:5px 9px;border:1px solid var(--line2);border-radius:6px;background:var(--panel2);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--violet)}
+.btn.primary{background:linear-gradient(90deg,#c22ea3,#6f3cd6);border-color:transparent;color:#fff;font-weight:600}
+/* ---------- main ---------- */
+#main{display:flex;flex-direction:column;min-width:0;min-height:0}
+#toolbar{display:flex;align-items:center;gap:6px;padding:0 10px;height:var(--toolbar);border-bottom:1px solid var(--line);background:var(--panel);overflow-x:auto;scrollbar-width:none}
+#toolbar::-webkit-scrollbar{display:none}
+.seg{display:flex;border:1px solid var(--line2);border-radius:6px;overflow:hidden;flex:none}
+.seg button{border:0;background:transparent;padding:5px 9px;cursor:pointer;color:var(--muted);border-right:1px solid var(--line2)}
+.seg button:last-child{border-right:0}
+.seg button:hover{color:var(--text);background:var(--panel2)}
+.seg button.on{color:#fff;background:linear-gradient(90deg,#c22ea3,#6f3cd6)}
+.seg button:disabled{color:var(--dim);cursor:not-allowed;background:transparent}
+.tb{border:1px solid var(--line2);background:transparent;border-radius:6px;padding:4px 8px;cursor:pointer;color:var(--muted);display:inline-flex;align-items:center;gap:5px;flex:none}
+.tb:hover{color:var(--text);border-color:var(--violet)}
+.tb.on{color:#fff;border-color:transparent;background:linear-gradient(90deg,#c22ea3,#6f3cd6)}
+.tb svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tb.danger:hover{color:var(--down);border-color:var(--down)}
+.sep{width:1px;height:22px;background:var(--line2);margin:0 3px;flex:none}
+#chartwrap{flex:1;min-height:0;position:relative;background:var(--bg)}
+#chart{position:absolute;inset:0}
+#overlaymsg{position:absolute;left:50%;top:12px;transform:translateX(-50%);background:var(--panel2);border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-size:12px;color:var(--muted);pointer-events:none;opacity:0;transition:opacity .2s;z-index:5;white-space:nowrap}
+#overlaymsg.show{opacity:1}
+#loading{position:absolute;inset:0;display:none;place-items:center;background:rgba(11,10,18,.55);z-index:6;color:var(--muted)}
+#loading.show{display:grid}
+#status{display:flex;align-items:center;gap:10px;padding:5px 12px;border-top:1px solid var(--line);background:var(--panel);color:var(--muted);font-size:12px;min-height:28px;overflow:hidden;white-space:nowrap}
+#status .src{overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+#status .stale{color:var(--warn)}
+#status .disc{color:var(--dim)}
+/* ---------- misc ---------- */
+.kbd{display:inline-block;border:1px solid var(--line2);border-radius:4px;padding:0 4px;font-size:11px;color:var(--muted)}
+#about{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;place-items:center;z-index:20}
+#about.show{display:grid}
+#about .box{background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:20px 22px;max-width:620px;width:calc(100% - 32px);max-height:85vh;overflow:auto;line-height:1.5}
+#about h2{margin:0 0 8px;font-size:16px}#about h3{margin:14px 0 4px;font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+#about ul{margin:4px 0;padding-left:18px}
+@media (max-width:820px){
+  :root{--sidebar:0px}
+  #app{grid-template-columns:1fr}
+  #side{position:fixed;top:var(--topbar);left:0;bottom:0;width:min(300px,85vw);z-index:15;transform:translateX(-100%);transition:transform .2s;border-right:1px solid var(--line2)}
+  #side.open{transform:none}
+  #menubtn{display:inline-flex}
+  #symhead .name{display:none}
+  #toplinks{display:none}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <button class="tb" id="menubtn" title="Symbols"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div id="brand"><span class="mark"><svg width="14" height="14" viewBox="0 0 32 32"><defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff3fd1"/><stop offset=".5" stop-color="#8a4dff"/><stop offset="1" stop-color="#3fa9ff"/></linearGradient></defs><path d="M5 22 L12 13 L17 18 L27 7" fill="none" stroke="url(#bg1)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="word">PLSLEND</span><small>Charts</small></div>
+    <div id="symhead"><span class="id">—</span><span class="name"></span><span class="last"></span><span class="chg"></span></div>
+    <div id="toplinks"><a href="https://plslend.com" target="_blank" rel="noopener">PLSLEND.com</a><a href="#" id="aboutlink">About & data</a></div>
+  </header>
+
+  <aside id="side">
+    <input id="search" placeholder="Search symbols…" autocomplete="off" spellcheck="false">
+    <div id="list"></div>
+    <div id="custom">
+      <div class="hint">Build a ratio / spread</div>
+      <div class="row"><select id="cA"></select><select id="cOp"><option>/</option><option>-</option><option>*</option><option>+</option></select><select id="cB"></select></div>
+      <div class="row"><button class="btn primary" id="cAdd" style="flex:1">Add ratio</button></div>
+      <div class="hint" style="margin-top:4px">Add a PulseX / Uniswap pool</div>
+      <div class="row"><select id="pNet"><option value="pulsechain">PulseChain</option><option value="eth">Ethereum</option></select><input id="pAddr" placeholder="pool address 0x…" spellcheck="false"></div>
+      <div class="row"><button class="btn" id="pAdd" style="flex:1">Add pool</button></div>
+    </div>
+  </aside>
+
+  <main id="main">
+    <div id="toolbar">
+      <div class="seg" id="tfs">
+        <button data-tf="4h">4h</button><button data-tf="D">D</button><button data-tf="W">W</button><button data-tf="M">M</button>
+      </div>
+      <div class="seg" id="ctype">
+        <button data-ct="candle" title="Candles"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M7 3v4M7 17v4M17 5v3M17 15v4"/><rect x="4.5" y="7" width="5" height="10" rx="1"/><rect x="14.5" y="8" width="5" height="7" rx="1"/></svg></button>
+        <button data-ct="area" title="Line"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 17l5-6 4 3 4-6 5 4"/></svg></button>
+      </div>
+      <button class="tb" id="logbtn" title="Logarithmic scale">log</button>
+      <span class="sep"></span>
+      <button class="tb" id="ind-st" title="SuperTrend (ATR 10, factor 2.8)">SuperTrend</button>
+      <button class="tb" id="ind-rsi" title="RSI 14">RSI</button>
+      <button class="tb" id="ind-macd" title="MACD 12 / 26 / 9">MACD</button>
+      <span class="sep"></span>
+      <button class="tb" data-tool="cursor" title="Cursor (Esc)"><svg viewBox="0 0 24 24"><path d="M5 3l14 8-6 2-3 6z"/></svg></button>
+      <button class="tb" data-tool="segment" title="Trend line"><svg viewBox="0 0 24 24"><path d="M5 19L19 5"/><circle cx="5" cy="19" r="1.6"/><circle cx="19" cy="5" r="1.6"/></svg></button>
+      <button class="tb" data-tool="rayLine" title="Ray"><svg viewBox="0 0 24 24"><path d="M5 19L21 3"/><circle cx="5" cy="19" r="1.6"/><circle cx="12" cy="12" r="1.6"/></svg></button>
+      <button class="tb" data-tool="horizontalStraightLine" title="Horizontal line"><svg viewBox="0 0 24 24"><path d="M3 12h18"/><circle cx="12" cy="12" r="1.6"/></svg></button>
+      <button class="tb" data-tool="priceRuler" title="Price range ruler"><svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="1"/><path d="M8 6v3M12 6v3M16 6v3"/></svg></button>
+      <button class="tb" data-tool="fibExtension" title="Trend-based Fibonacci extension (3 points)"><svg viewBox="0 0 24 24"><path d="M4 18l6-9 4 5 6-10"/><path d="M14 20h7M14 16h7M14 12h7" stroke-dasharray="2 2"/></svg></button>
+      <button class="tb" id="magnet" title="Magnet: snap to OHLC"><svg viewBox="0 0 24 24"><path d="M6 3v8a6 6 0 0 0 12 0V3"/><path d="M6 3h4v8a2 2 0 0 0 4 0V3h4"/></svg></button>
+      <span class="sep"></span>
+      <button class="tb danger" id="delsel" title="Delete selected drawing (Del)"><svg viewBox="0 0 24 24"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button>
+      <button class="tb danger" id="delall" title="Delete all drawings on this symbol">clear</button>
+      <span class="sep"></span>
+      <button class="tb" id="exportbtn" title="Download all your drawings as a file"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"/></svg>export</button>
+      <button class="tb" id="importbtn" title="Restore drawings from a file"><svg viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M4 19h16"/></svg>import</button>
+      <input type="file" id="importfile" accept="application/json" style="display:none">
+      <button class="tb" id="shotbtn" title="Save chart as PNG"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2"/><circle cx="12" cy="12.5" r="3.5"/><path d="M9 6l1.5-2h3L15 6"/></svg></button>
+    </div>
+    <div id="chartwrap">
+      <div id="chart"></div>
+      <div id="overlaymsg"></div>
+      <div id="loading">loading…</div>
+    </div>
+    <div id="status"><span class="src"></span><span class="disc">Not financial advice · prices may be delayed</span></div>
+  </main>
+</div>
+
+<div id="about"><div class="box">
+  <h2>PLSLEND Charts</h2>
+  <p>A free, open community chart room: the PulseChain and HEX pairs next to the macro series that move them, with the tools people miss most when a paid platform pulls the ladder up — trend lines, a price-range ruler, trend-based Fibonacci extensions, SuperTrend, RSI and MACD. No account, no tracking, no cookies.</p>
+  <h3>Your drawings</h3>
+  <p>Drawings are saved in <em>this browser only</em> (localStorage, nothing leaves your device). Clearing site data deletes them, so use <b>export</b> now and then; <b>import</b> restores them on any device.</p>
+  <h3>Keyboard</h3>
+  <p><span class="kbd">Esc</span> cancel / cursor · <span class="kbd">Del</span> delete selected drawing · <span class="kbd">Shift +</span> / <span class="kbd">Shift −</span> zoom · <span class="kbd">←</span> <span class="kbd">→</span> scroll</p>
+  <h3>Data</h3>
+  <ul id="aboutsources"></ul>
+  <p>Macro and TradFi series are refreshed twice a day by an automated job; on-chain pairs load live from GeckoTerminal (with a cached copy as fallback). Weekly and monthly bars are built from the native data; timeframes a series cannot support are greyed out.</p>
+  <p class="disc">Everything here is for information only and is not financial advice. Open source: <a href="https://github.com/PLSLEND/charts" target="_blank" rel="noopener">github.com/PLSLEND/charts</a>. Chart engine: <a href="https://klinecharts.com" target="_blank" rel="noopener">KLineChart</a> (Apache-2.0).</p>
+  <p style="text-align:right"><button class="btn" id="aboutclose">Close</button></p>
+</div></div>
+
+<script src="lib/klinecharts.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
