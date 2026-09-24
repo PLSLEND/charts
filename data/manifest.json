@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T14:20:41+00:00",
+ "updated": "2026-09-24T14:36:43+00:00",
  "groups": [
   "PulseChain & HEX",
   "US rates & credit",
@@ -759,7 +759,7 @@
    "tv": "—",
    "precision": 0,
    "source": "computed from USCBBS (FRED (St. Louis Fed)), TGA (FRED (St. Louis Fed)), RRP (FRED (St. Louis Fed))",
-   "source_key": "USCBBS / 1000 - TGA - RRP",
+   "source_key": "USCBBS / 1000 - TGA / 1000 - RRP",
    "source_url": "",
    "first": "2003-02-07",
    "last": "2026-09-23",
