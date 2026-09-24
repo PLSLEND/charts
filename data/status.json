@@ -1,19 +1,19 @@
 {
- "updated": "2026-09-24T15:59:37+00:00",
+ "updated": "2026-09-24T16:04:34+00:00",
  "series": {
   "GOLD": {
    "ok": true,
    "source": "yahoo:GC=F",
    "last": "2026-09-24",
-   "n": 6542,
+   "n": 7030,
    "errors": [],
-   "secs": 7.0
+   "secs": 1.2
   },
   "SPX_GOLD": {
    "ok": true,
    "source": "SPX / GOLD",
    "last": "2026-09-24",
-   "n": 6561
+   "n": 16974
   }
  },
  "crypto": {}

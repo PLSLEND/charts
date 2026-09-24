@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T15:59:37+00:00",
+ "updated": "2026-09-24T16:04:34+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -608,7 +608,7 @@
   },
   {
    "id": "GOLD",
-   "name": "Gold (COMEX front-month; LBMA PM fix before 2000)",
+   "name": "Gold (COMEX front-month daily; World Bank monthly before 2000)",
    "group": "Indices & commodities",
    "freq": "D",
    "kind": "ohlc",
@@ -618,9 +618,9 @@
    "source": "Yahoo Finance",
    "source_key": "GC=F",
    "source_url": "https://finance.yahoo.com/quote/GC=F",
-   "first": "2000-08-30",
+   "first": "1960-01-01",
    "last": "2026-09-24",
-   "n": 6542,
+   "n": 7030,
    "stale": false,
    "file": "series/GOLD.json"
   },
@@ -816,9 +816,9 @@
    "source": "computed from SPX (Yahoo Finance), GOLD (Yahoo Finance)",
    "source_key": "SPX / GOLD",
    "source_url": "",
-   "first": "2000-08-30",
+   "first": "1960-01-01",
    "last": "2026-09-24",
-   "n": 6561,
+   "n": 16974,
    "stale": false,
    "file": "series/SPX_GOLD.json"
   }
