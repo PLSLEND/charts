@@ -39,7 +39,7 @@ SERIES = [
 
     dict(id="USCBBS", name="Fed balance sheet — total assets (WALCL)", group="Central banks & money", freq="W", kind="value", units="USD mn",
          tv="ECONOMICS:USCBBS", sources=[("fred", "WALCL")]),
-    dict(id="TGA", name="US Treasury General Account at the Fed", group="Central banks & money", freq="W", kind="value", units="USD bn",
+    dict(id="TGA", name="US Treasury General Account at the Fed", group="Central banks & money", freq="W", kind="value", units="USD mn",
          tv="FRED:TREASURY", sources=[("fred", "WTREGEN"), ("fred", "TREASURY")]),
     dict(id="RRP", name="Fed overnight reverse repo (RRP)", group="Central banks & money", freq="D", kind="value", units="USD bn",
          tv="—", sources=[("fred", "RRPONTSYD")]),
@@ -147,7 +147,7 @@ RATIOS = [
     dict(id="US10Y_US02Y", name="US 10Y − 2Y (curve)", group="Ratios & spreads",
          expr="US10Y - US02Y", tv="—", units="pp"),
     dict(id="NETLIQ", name="Fed net liquidity (WALCL − TGA − RRP)", group="Ratios & spreads",
-         expr="USCBBS / 1000 - TGA - RRP", tv="—", units="USD bn"),
+         expr="USCBBS / 1000 - TGA / 1000 - RRP", tv="—", units="USD bn"),
     dict(id="SPX_GOLD", name="S&P 500 / Gold", group="Ratios & spreads",
          expr="SPX / GOLD", tv="—"),
 ]

@@ -333,12 +333,19 @@ def main():
             log(f"  {'~~' if stale else 'ok'} {sid:<14} {src}:{key:<40} {len(bars):>6} bars  last {meta['last']}  {round(time.time()-t0,1)}s")
 
         log(f"== constructed series ({len(RATIOS)}) ==")
+        old_manifest_series = {m["id"]: m for m in (load_json(DATA / "manifest.json") or {}).get("series", [])}
         for spec in RATIOS:
             sid = spec["id"]
             if ONLY and sid not in ONLY:
                 continue
             out = SERIES_DIR / f"{sid}.json"
             try:
+                # partial runs: components not fetched this time are taken from the files on disk
+                for cid in [t for t in TOKEN_RE.findall(spec["expr"]) if re.match(r"^[A-Za-z_]", t)]:
+                    if cid not in loaded:
+                        prev = load_json(SERIES_DIR / f"{cid}.json")
+                        if prev and prev.get("bars") and cid in old_manifest_series:
+                            loaded[cid], metas[cid] = prev, old_manifest_series[cid]
                 bars, kind, freq, src = build_ratio(spec, loaded, metas)
                 obj = {"id": sid, "kind": kind, "freq": freq, "source_id": "computed", "source_key": spec["expr"],
                        "updated": NOW.isoformat(timespec="seconds"), "bars": bars}
