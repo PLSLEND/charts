@@ -342,6 +342,14 @@ def main():
                         log(f"       {e[:220]}")
                     status["series"][sid] = {"ok": False, "errors": errors}
                     continue
+            if old and old.get("bars") and not stale and old.get("kind") == spec["kind"]:
+                # keep history the source no longer serves (e.g. FRED's rolling 3-year window on ICE BofA data)
+                merged = {b[0]: b for b in old["bars"]}
+                for b in bars:
+                    merged[b[0]] = b
+                if len(merged) > len(bars):
+                    log(f"     + {sid}: kept {len(merged) - len(bars)} older bars no longer served by the source")
+                bars = [merged[t] for t in sorted(merged)]
             obj = {"id": sid, "kind": spec["kind"], "freq": spec["freq"], "source_id": src, "source_key": key,
                    "updated": NOW.isoformat(timespec="seconds"), "bars": bars}
             dump_json(out, obj)
