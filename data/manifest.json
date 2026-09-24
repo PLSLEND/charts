@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T16:39:58+00:00",
+ "updated": "2026-09-24T16:43:03+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -1055,6 +1055,26 @@
    "n_4h": 2000,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xae8429918fdbf9a5867e3243697637dc56aa76a1"
+  },
+  {
+   "id": "PLSETH",
+   "name": "PLS priced in ETH (WPLS/WETH)",
+   "group": "PulseChain & HEX",
+   "network": "pulsechain",
+   "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
+   "side": "quote",
+   "currency": "token",
+   "units": "ETH",
+   "pool_name": "WETH / WPLS",
+   "base_symbol": "WETH",
+   "quote_symbol": "WPLS",
+   "deep_history": "863 daily bars before 2025-09-25 from PulseX pair day data (PulseChain subgraph, daily closes)",
+   "precision": 10,
+   "last": "2026-09-24",
+   "n_day": 1228,
+   "n_4h": 2000,
+   "source": "GeckoTerminal",
+   "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x42abdfdb63f3282033c766e72cc4810738571609"
   }
  ],
  "attribution": {

@@ -1,12 +1,14 @@
 {
- "updated": "2026-09-24T16:39:58+00:00",
+ "updated": "2026-09-24T16:43:03+00:00",
  "series": {},
  "crypto": {
   "PLSETH": {
-   "ok": false,
-   "errors": [
-    "no pool found for WPLS on pulsechain; candidates: WPLS / PLSX (898504$); WPLS / DAI 0.25% (44257$); USDC / WPLS (867130$); DAI / WPLS (905586$); PLSX / WPLS (2250901$); DAI / WPLS (792556$)"
-   ]
+   "ok": true,
+   "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
+   "name": "WETH / WPLS",
+   "n_day": 1228,
+   "n_4h": 2000,
+   "secs": 93.4
   }
  }
 }

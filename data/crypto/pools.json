@@ -119,6 +119,17 @@
    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f",
    "price_usd": 0.00212902605591111,
    "side": "base"
+  },
+  "PLSETH": {
+   "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
+   "name": "WETH / WPLS",
+   "base_symbol": "WETH",
+   "quote_symbol": "WPLS",
+   "base_token": "0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c",
+   "quote_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27",
+   "reserve_usd": 911015.0144,
+   "price_usd": 2668.21216947582,
+   "side": "quote"
   }
  },
  "candidates": {
