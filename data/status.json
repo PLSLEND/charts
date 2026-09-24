@@ -1,0 +1,440 @@
+{
+ "updated": "2026-09-24T13:44:08+00:00",
+ "series": {
+  "US10Y": {
+   "ok": false,
+   "errors": [
+    "fred:DGS10 -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "US02Y": {
+   "ok": false,
+   "errors": [
+    "fred:DGS2 -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "HYOAS_EY": {
+   "ok": false,
+   "errors": [
+    "fred:BAMLH0A0HYM2EY -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "OBFR": {
+   "ok": false,
+   "errors": [
+    "fred:OBFR -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "TOTBKCR": {
+   "ok": false,
+   "errors": [
+    "fred:TOTBKCR -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "USCBBS": {
+   "ok": false,
+   "errors": [
+    "fred:WALCL -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "TGA": {
+   "ok": false,
+   "errors": [
+    "fred:WTREGEN -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))",
+    "fred:TREASURY -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "RRP": {
+   "ok": false,
+   "errors": [
+    "fred:RRPONTSYD -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "USM1": {
+   "ok": false,
+   "errors": [
+    "fred:M1SL -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "USM2": {
+   "ok": false,
+   "errors": [
+    "fred:M2SL -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "EUCBBS": {
+   "ok": true,
+   "source": "ecb:ILM/W.U2.C.T000000.Z5.Z01",
+   "last": "2026-09-14",
+   "n": 1447,
+   "errors": [
+    "fred:ECBASSETSW -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ],
+   "secs": 168.4
+  },
+  "DECBBS": {
+   "ok": false,
+   "errors": [
+    "bbk:BBK01/OU0304 -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBK01/OU0304 -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, wenn es keine auf die  | https://api.statistiken.bundesba",
+    "bbk:BBK01/OU0308 -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBK01/OU0308 -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, wenn es keine auf die  | https://api.statistiken.bundesba",
+    "bbk:BBK01/OU0301 -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBK01/OU0301 -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, wenn es keine auf die  | https://api.statistiken.bundesba",
+    "ecb:BSI/M.DE.N.R.T00.A.1.Z5.0000.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.DE.N.R.T00.A.1.Z5.0000.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.DE.N.R.T00.A.1.Z5.0000.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No Se",
+    "ecb:BSI/M.DE.N.C.T00.A.1.Z5.0000.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.DE.N.C.T00.A.1.Z5.0000.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.DE.N.C.T00.A.1.Z5.0000.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No Se",
+    "manual:DECBBS -> no manual file DECBBS.csv"
+   ]
+  },
+  "CNCBBS": {
+   "ok": false,
+   "errors": [
+    "manual:CNCBBS -> no manual file CNCBBS.csv",
+    "pboc:total_assets -> http://www.pbc.gov.cn/en/3688247/index.html -> HTTP 404: '<html>\\r\\n<head><title>404 Not Found</title></head>\\r\\n<body>\\r\\n<center><h1>404 Not Found</h1></center>\\r\\n<hr><center>nginx</c'",
+    "dbnomics:IMF/IFS/M.CN.FASAF_XDC -> https://api.db.nomics.world/v22/series/IMF/IFS/M.CN.FASAF_XDC -> HTTP 404: '{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"IFS\",\"dimensions\":{},\"facets\":false,\"format\":\"json\",\"limit\":1000'"
+   ]
+  },
+  "DEM2": {
+   "ok": false,
+   "errors": [
+    "ecb:BSI/M.DE.N.V.M20.X.1.U2.2300.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.DE.N.V.M20.X.1.U2.2300.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.DE.N.V.M20.X.1.U2.2300.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No Se",
+    "ecb:BSI/M.DE.Y.V.M20.X.1.U2.2300.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.DE.Y.V.M20.X.1.U2.2300.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.DE.Y.V.M20.X.1.U2.2300.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No Se",
+    "bbk:BBK01/TXI310 -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBK01/TXI310 -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, wenn es keine auf die  | https://api.statistiken.bundesba",
+    "manual:DEM2 -> no manual file DEM2.csv"
+   ]
+  },
+  "EULPS": {
+   "ok": true,
+   "source": "ecb:BSI/M.U2.Y.U.A20T.A.1.U2.2250.Z01.E",
+   "last": "2026-07-01",
+   "n": 283,
+   "errors": [
+    "ecb:BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No "
+   ],
+   "secs": 112.3
+  },
+  "ITBBS": {
+   "ok": true,
+   "source": "ecb:BSI/M.IT.N.A.T00.A.1.Z5.0000.Z01.E",
+   "last": "2026-07-01",
+   "n": 347,
+   "errors": [],
+   "secs": 112.3
+  },
+  "USCPIM": {
+   "ok": false,
+   "errors": [
+    "fred:MEDCPIM094SFRBCLE -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))",
+    "fred:MEDCPIM158SFRBCLE -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "USIRMM": {
+   "ok": false,
+   "errors": [
+    "fred_pct:CPIAUCSL -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "USCPIYOY": {
+   "ok": false,
+   "errors": [
+    "fred_yoy:CPIAUCSL -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "MSPUS": {
+   "ok": false,
+   "errors": [
+    "fred:MSPUS -> https://fred.stlouisfed.org/graph/fredgraph.csv -> ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=25)\"))"
+   ]
+  },
+  "USBCOI": {
+   "ok": true,
+   "source": "dbnomics:ISM/pmi/pm",
+   "last": "2025-12-01",
+   "n": 68,
+   "errors": [],
+   "secs": 103.9
+  },
+  "EUBCOI": {
+   "ok": false,
+   "errors": [
+    "dbnomics:Eurostat/ei_bsin_m_r2/M.BAL.BS-ICI.SA.EA20 -> https://api.db.nomics.world/v22/series/Eurostat/ei_bsin_m_r2/M.BAL.BS-ICI.SA.EA20 -> HTTP 404: '{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"ei_bsin_m_r2\",\"dimensions\":{},\"facets\":false,\"fo",
+    "dbnomics:Eurostat/ei_bsin_m_r2/M.BAL.BS-ICI.SA.EA19 -> https://api.db.nomics.world/v22/series/Eurostat/ei_bsin_m_r2/M.BAL.BS-ICI.SA.EA19 -> HTTP 404: '{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"ei_bsin_m_r2\",\"dimensions\":{},\"facets\":false,\"fo",
+    "dbnomics:Eurostat/ei_bssi_m_r2/M.BAL.BS-ICI-BAL.SA.EA20 -> https://api.db.nomics.world/v22/series/Eurostat/ei_bssi_m_r2/M.BAL.BS-ICI-BAL.SA.EA20 -> HTTP 404: '{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"ei_bssi_m_r2\",\"dimensions\":{},\"facets\":false",
+    "manual:EUBCOI -> no manual file EUBCOI.csv"
+   ]
+  },
+  "DE02Y": {
+   "ok": true,
+   "source": "ecb:YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_2Y",
+   "last": "2026-09-23",
+   "n": 5637,
+   "errors": [
+    "bbk:BBSSY/D.REN.EUR.A620.000000WT0202.A -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBSSY/D.REN.EUR.A620.000000WT0202.A -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, | https://api.statistiken.bundesba",
+    "bbk:BBK01/WT0202 -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBK01/WT0202 -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, wenn es keine auf die  | https://api.statistiken.bundesba"
+   ],
+   "secs": 82.6
+  },
+  "DE10Y": {
+   "ok": true,
+   "source": "ecb:YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y",
+   "last": "2026-09-23",
+   "n": 5637,
+   "errors": [
+    "bbk:BBSSY/D.REN.EUR.A620.000000WT1010.A -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBSSY/D.REN.EUR.A620.000000WT1010.A -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, | https://api.statistiken.bundesba",
+    "bbk:BBK01/WT1010 -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBK01/WT1010 -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben, wenn es keine auf die  | https://api.statistiken.bundesba"
+   ],
+   "secs": 70.8
+  },
+  "SPX": {
+   "ok": true,
+   "source": "yahoo:^GSPC",
+   "last": "2026-09-24",
+   "n": 169,
+   "errors": [],
+   "secs": 59.4
+  },
+  "NDX": {
+   "ok": true,
+   "source": "yahoo:^NDX",
+   "last": "2026-09-24",
+   "n": 165,
+   "errors": [],
+   "secs": 59.3
+  },
+  "RTY": {
+   "ok": true,
+   "source": "yahoo:^RUT",
+   "last": "2026-09-24",
+   "n": 158,
+   "errors": [],
+   "secs": 59.2
+  },
+  "DAX": {
+   "ok": true,
+   "source": "yahoo:^GDAXI",
+   "last": "2026-09-24",
+   "n": 157,
+   "errors": [],
+   "secs": 59.2
+  },
+  "NKY": {
+   "ok": true,
+   "source": "yahoo:^N225",
+   "last": "2026-09-24",
+   "n": 168,
+   "errors": [],
+   "secs": 59.1
+  },
+  "HSI": {
+   "ok": true,
+   "source": "yahoo:^HSI",
+   "last": "2026-09-24",
+   "n": 161,
+   "errors": [],
+   "secs": 59.0
+  },
+  "USOIL": {
+   "ok": true,
+   "source": "yahoo:CL=F",
+   "last": "2026-09-24",
+   "n": 268,
+   "errors": [],
+   "secs": 58.9
+  },
+  "GSG": {
+   "ok": true,
+   "source": "yahoo:GSG",
+   "last": "2026-09-24",
+   "n": 243,
+   "errors": [],
+   "secs": 58.9
+  },
+  "QQQ": {
+   "ok": true,
+   "source": "yahoo:QQQ",
+   "last": "2026-09-24",
+   "n": 331,
+   "errors": [],
+   "secs": 58.8
+  },
+  "CQQQ": {
+   "ok": true,
+   "source": "yahoo:CQQQ",
+   "last": "2026-09-24",
+   "n": 201,
+   "errors": [],
+   "secs": 58.7
+  },
+  "JPYUSD": {
+   "ok": true,
+   "source": "yahoo:JPYUSD=X",
+   "last": "2026-09-24",
+   "n": 360,
+   "errors": [],
+   "secs": 58.6
+  },
+  "CNYUSD": {
+   "ok": true,
+   "source": "yahoo:CNYUSD=X",
+   "last": "2026-09-24",
+   "n": 297,
+   "errors": [],
+   "secs": 58.6
+  },
+  "EURUSD": {
+   "ok": true,
+   "source": "yahoo:EURUSD=X",
+   "last": "2026-09-24",
+   "n": 275,
+   "errors": [],
+   "secs": 58.1
+  },
+  "DXY": {
+   "ok": true,
+   "source": "yahoo:DX-Y.NYB",
+   "last": "2026-09-24",
+   "n": 168,
+   "errors": [],
+   "secs": 58.1
+  },
+  "GOLD": {
+   "ok": true,
+   "source": "yahoo:GC=F",
+   "last": "2026-09-24",
+   "n": 268,
+   "errors": [],
+   "secs": 58.0
+  },
+  "MSPUS_USCPIM": {
+   "ok": false,
+   "errors": [
+    "component MSPUS missing"
+   ]
+  },
+  "OBFR_USIRMM": {
+   "ok": false,
+   "errors": [
+    "component OBFR missing"
+   ]
+  },
+  "HY_MINUS_US10Y": {
+   "ok": false,
+   "errors": [
+    "component HYOAS_EY missing"
+   ]
+  },
+  "QQQ_CQQQ": {
+   "ok": true,
+   "source": "QQQ / CQQQ",
+   "last": "2026-09-24",
+   "n": 201
+  },
+  "US10Y_US02Y": {
+   "ok": false,
+   "errors": [
+    "component US10Y missing"
+   ]
+  },
+  "NETLIQ": {
+   "ok": false,
+   "errors": [
+    "component USCBBS missing"
+   ]
+  },
+  "SPX_GOLD": {
+   "ok": true,
+   "source": "SPX / GOLD",
+   "last": "2026-09-24",
+   "n": 284
+  }
+ },
+ "crypto": {
+  "PLS": {
+   "ok": true,
+   "pool": "0x149b2c629e652f2e89e11cd57e5d4d77ee166f9f",
+   "name": "WPLS / PLSX",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 11.7
+  },
+  "PLSX": {
+   "ok": true,
+   "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
+   "name": "PLSX / WPLS",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 41.8
+  },
+  "pHEX": {
+   "ok": true,
+   "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
+   "name": "HEX / WPLS",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 61.1
+  },
+  "eHEX": {
+   "ok": true,
+   "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
+   "name": "HEX / WETH",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 47.1
+  },
+  "INC": {
+   "ok": true,
+   "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
+   "name": "INC / PLSX",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 45.0
+  },
+  "LOAN": {
+   "ok": true,
+   "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
+   "name": "LOAN / WPLS",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 49.0
+  },
+  "USDL": {
+   "ok": false,
+   "errors": [
+    "https://api.geckoterminal.com/api/v2/networks/pulsechain/pools/0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e/ohlcv/hour -> HTTP 429: '{\"status\":{\"error_code\":429,\"error_message\":\"You\\'ve exceeded the Rate Limit. Please visit https://www.coingecko.com/en/a'"
+   ]
+  },
+  "EARN": {
+   "ok": true,
+   "pool": "0xed77cbbb80e5a5c3a1fe664419d6f690766b5913",
+   "name": "EARN / PLSX",
+   "n_day": 184,
+   "n_4h": 965,
+   "secs": 11.4
+  },
+  "PXDC": {
+   "ok": true,
+   "pool": "0xd43ab3222ad133f8e112b93185a68051e7cc7e33",
+   "name": "PXDC / DAI 1%",
+   "n_day": 183,
+   "n_4h": 534,
+   "secs": 43.4
+  },
+  "FLEX": {
+   "ok": false,
+   "errors": [
+    "https://api.geckoterminal.com/api/v2/networks/pulsechain/pools/0x476d63ab94b4e86614df0c3d5a27e9e22631d062/ohlcv/hour -> HTTP 401: '{\"errors\":[{\"status\":\"401\",\"title\":\"You can only access data from the past 180 days with Public API. To access data beyo'"
+   ]
+  },
+  "HEXDC": {
+   "ok": true,
+   "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
+   "name": "HEXDC / HEX",
+   "n_day": 184,
+   "n_4h": 2000,
+   "secs": 30.6
+  },
+  "PRINT": {
+   "ok": false,
+   "errors": [
+    "https://api.geckoterminal.com/api/v2/networks/pulsechain/pools/0xf35f8db9b6760799db76796340aacc69dea0c644/ohlcv/hour -> HTTP 401: '{\"errors\":[{\"status\":\"401\",\"title\":\"You can only access data from the past 180 days with Public API. To access data beyo'"
+   ]
+  }
+ }
+}

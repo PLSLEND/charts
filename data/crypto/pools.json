@@ -1,0 +1,1002 @@
+{
+ "resolved": {
+  "PLS": {
+   "pool": "0x149b2c629e652f2e89e11cd57e5d4d77ee166f9f",
+   "name": "WPLS / PLSX",
+   "reserve_usd": 909669.198,
+   "base_symbol": "WPLS",
+   "quote_symbol": "PLSX",
+   "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27",
+   "price_usd": 1.09492608992896e-05
+  },
+  "PLSX": {
+   "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
+   "name": "PLSX / WPLS",
+   "reserve_usd": 2280690.2941,
+   "base_symbol": "PLSX",
+   "quote_symbol": "WPLS",
+   "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab",
+   "price_usd": 8.91644056251491e-06
+  },
+  "pHEX": {
+   "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
+   "name": "HEX / WPLS",
+   "reserve_usd": 845589.8551,
+   "base_symbol": "HEX",
+   "quote_symbol": "WPLS",
+   "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39",
+   "price_usd": 0.00332578276415128
+  },
+  "eHEX": {
+   "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
+   "name": "HEX / WETH",
+   "reserve_usd": 520720.3245,
+   "base_symbol": "HEX",
+   "quote_symbol": "WETH",
+   "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39",
+   "price_usd": 0.00116853372383288
+  },
+  "INC": {
+   "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
+   "name": "INC / PLSX",
+   "reserve_usd": 723059.9752,
+   "base_symbol": "INC",
+   "quote_symbol": "PLSX",
+   "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d",
+   "price_usd": 0.458059345719535
+  },
+  "LOAN": {
+   "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
+   "name": "LOAN / WPLS",
+   "reserve_usd": 70343.4716,
+   "base_symbol": "LOAN",
+   "quote_symbol": "WPLS",
+   "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b",
+   "price_usd": 5.6348650961654e-07
+  },
+  "USDL": {
+   "pool": "0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e",
+   "name": "USDL / DAI 0.05%",
+   "reserve_usd": 299076.3621,
+   "base_symbol": "USDL",
+   "quote_symbol": "DAI",
+   "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162",
+   "price_usd": 1.0081629819014
+  },
+  "EARN": {
+   "pool": "0xed77cbbb80e5a5c3a1fe664419d6f690766b5913",
+   "name": "EARN / PLSX",
+   "reserve_usd": 2955.9153,
+   "base_symbol": "EARN",
+   "quote_symbol": "PLSX",
+   "base_token": "0xb513038bbfdf9d40b676f41606f4f61d4b02c4a2",
+   "price_usd": 0.00156254821136807
+  },
+  "PXDC": {
+   "pool": "0xd43ab3222ad133f8e112b93185a68051e7cc7e33",
+   "name": "PXDC / DAI 1%",
+   "reserve_usd": 8461.0401,
+   "base_symbol": "PXDC",
+   "quote_symbol": "DAI",
+   "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408",
+   "price_usd": 1.01271531195561
+  },
+  "FLEX": {
+   "pool": "0x476d63ab94b4e86614df0c3d5a27e9e22631d062",
+   "name": "FLEX / HEX",
+   "reserve_usd": 3288.8882,
+   "base_symbol": "FLEX",
+   "quote_symbol": "HEX",
+   "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6",
+   "price_usd": 0.0013279091858882
+  },
+  "HEXDC": {
+   "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
+   "name": "HEXDC / HEX",
+   "reserve_usd": 37681.3296,
+   "base_symbol": "HEXDC",
+   "quote_symbol": "HEX",
+   "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00",
+   "price_usd": 1.06610052999368
+  },
+  "PRINT": {
+   "pool": "0xf35f8db9b6760799db76796340aacc69dea0c644",
+   "name": "PRINT / INC",
+   "reserve_usd": 5082.9609,
+   "base_symbol": "PRINT",
+   "quote_symbol": "INC",
+   "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3",
+   "price_usd": 0.000374977833079979
+  }
+ },
+ "candidates": {
+  "PLS": [
+   {
+    "name": "WPLS / PLSX",
+    "pool": "0x149b2c629e652f2e89e11cd57e5d4d77ee166f9f",
+    "reserve_usd": 909669,
+    "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27"
+   },
+   {
+    "name": "WPLS / DAI 0.25%",
+    "pool": "0xe37a2c1755151ff910ff895a14fad5570730f6e9",
+    "reserve_usd": 44254,
+    "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
+    "reserve_usd": 911498,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "USDC / WPLS",
+    "pool": "0x6753560538eca67617a9ce605178f788be7e524e",
+    "reserve_usd": 872120,
+    "base_token": "0x15d38573d2feeb82e7ad5187ab8c1d52810b1f07"
+   },
+   {
+    "name": "PLSX / WPLS",
+    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
+    "reserve_usd": 2280690,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   },
+   {
+    "name": "DAI / WPLS",
+    "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
+    "reserve_usd": 803470,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "WETH / WPLS",
+    "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
+    "reserve_usd": 912818,
+    "base_token": "0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c"
+   },
+   {
+    "name": "HEX / WPLS",
+    "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
+    "reserve_usd": 845590,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "USDT / WPLS",
+    "pool": "0x322df7921f28f1146cdf62afdac0d6bc0ab80711",
+    "reserve_usd": 647454,
+    "base_token": "0x0cb6f5a34ad42ec934882a05265a7d5f59b51a2f"
+   },
+   {
+    "name": "HEX / WPLS",
+    "pool": "0xf1f4ee610b2babb05c635f726ef8b0c568c8dc65",
+    "reserve_usd": 690915,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "WETH / WPLS",
+    "pool": "0x29d66d5900eb0d629e1e6946195520065a6c5aee",
+    "reserve_usd": 595753,
+    "base_token": "0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c"
+   },
+   {
+    "name": "HEX / WPLS 0.25%",
+    "pool": "0x8c357be2cf2c1de1c4dca8aea0af1529f789976b",
+    "reserve_usd": 347159,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   }
+  ],
+  "PLSX": [
+   {
+    "name": "PLSX / WPLS",
+    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
+    "reserve_usd": 2280690,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   },
+   {
+    "name": "PLSX / WPLS 0.25%",
+    "pool": "0x98bb7fe00f82c495229eb302d1ae708ff931728e",
+    "reserve_usd": 250490,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   },
+   {
+    "name": "PLSX / WPLS 1%",
+    "pool": "0x96737676cb25396a9f857272cddc8e3a346d63da",
+    "reserve_usd": 111642,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   },
+   {
+    "name": "PLSX / WPLS",
+    "pool": "0xb89ea01677529a8bbcece3a486404880f9463c45",
+    "reserve_usd": 28795,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   },
+   {
+    "name": "WPLS / PLSX",
+    "pool": "0x149b2c629e652f2e89e11cd57e5d4d77ee166f9f",
+    "reserve_usd": 909669,
+    "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27"
+   },
+   {
+    "name": "INC / PLSX",
+    "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
+    "reserve_usd": 723060,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "HEX / PLSX",
+    "pool": "0x8268de0b539d1c03fa693ca7ee47eaf70c8cd57d",
+    "reserve_usd": 205814,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "PLSXm / PLSX",
+    "pool": "0x2d96cff7301565d083ad462d5d44787ce7ce578b",
+    "reserve_usd": 2378,
+    "base_token": "0x708130c48511942b1488118bbdf5ca68f0b5c6fe"
+   },
+   {
+    "name": "DAI / PLSX",
+    "pool": "0xb2893cea8080bf43b7b60b589edaab5211d98f23",
+    "reserve_usd": 108127,
+    "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305"
+   },
+   {
+    "name": "pTGC / PLSX",
+    "pool": "0xdb08cc9f70725b30204355a39a92ace9266c3819",
+    "reserve_usd": 161334,
+    "base_token": "0x94534eeee131840b1c0f61847c572228bdfdde93"
+   },
+   {
+    "name": "INC / PLSX",
+    "pool": "0xd41e6f7bb349085ac65107bfb3fadd49f1cfde1f",
+    "reserve_usd": 253237,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "PLSX / WPLS",
+    "pool": "0xd36f5d25fdd3a18225f9ac3263735a4c3789c58b",
+    "reserve_usd": 6494,
+    "base_token": "0x95b303987a60c71504d99aa1b13b4da07b0790ab"
+   }
+  ],
+  "pHEX": [
+   {
+    "name": "HEX / WPLS",
+    "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
+    "reserve_usd": 845590,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / WPLS",
+    "pool": "0xf1f4ee610b2babb05c635f726ef8b0c568c8dc65",
+    "reserve_usd": 691111,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / WPLS 0.25%",
+    "pool": "0x8c357be2cf2c1de1c4dca8aea0af1529f789976b",
+    "reserve_usd": 347159,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / HEX",
+    "pool": "0x922723fc4de3122f7dc837e2cd2b82dce9da81d2",
+    "reserve_usd": 497782,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / WPLS",
+    "pool": "0xf0ea3efe42c11c8819948ec2d3179f4084863d3f",
+    "reserve_usd": 338954,
+    "base_token": "0x57fde0a71132198bbec939b98976993d8d89d225"
+   },
+   {
+    "name": "HEXDC / HEX",
+    "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
+    "reserve_usd": 37764,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEX / PLSX",
+    "pool": "0x8268de0b539d1c03fa693ca7ee47eaf70c8cd57d",
+    "reserve_usd": 205814,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / HEX 0.25%",
+    "pool": "0xce743d8b493c81ae0164f619c43068021c5564fb",
+    "reserve_usd": 108052,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / DAI",
+    "pool": "0x6f1747370b1cacb911ad6d4477b718633db328c8",
+    "reserve_usd": 103292,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / pTGC",
+    "pool": "0xdc995338cf3f84b92ec6015bbb19c036f16bf9d5",
+    "reserve_usd": 156744,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / INC / HEX / PLSX / WPLS 0.3%",
+    "pool": "0xce3181167c03ab5a6d84c1a93716521e83a6300b",
+    "reserve_usd": 76556,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / PLSX 0.25%",
+    "pool": "0x5935ab01ba5d841d663802e9a045a5ef94a678b8",
+    "reserve_usd": 49252,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   }
+  ],
+  "eHEX": [
+   {
+    "name": "HEX / WETH",
+    "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
+    "reserve_usd": 520720,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / WETH 0.3%",
+    "pool": "0x9e0905249ceefffb9605e034b534544684a58be6",
+    "reserve_usd": 148716,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / WBTC 1%",
+    "pool": "0x50508bab3879f108ec45ff1417cd8bbbe28a3f58dec357f35af3a824d145fe8e",
+    "reserve_usd": 247410,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / USDC",
+    "pool": "0xf6dcdce0ac3001b2f67f750bc64ea5beb37b5824",
+    "reserve_usd": 91504,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / USDC 1%",
+    "pool": "0x3f3bf41037593aef692932773869027b3db1078c924a0dbc751a0a570b394a3d",
+    "reserve_usd": 60257,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / ETH 0.3%",
+    "pool": "0xe09349c11513a8ea1bfb51d0054c07112d81da9ee0006aa4b829d63520f62b36",
+    "reserve_usd": 45735,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / DRAK 0.3%",
+    "pool": "0x1d5d2539a49154c5659737151f53b21a98b4834f",
+    "reserve_usd": 11236,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / ICSA 1%",
+    "pool": "0x82de4db279ce9b7d8494af416671ea9b6134ad03",
+    "reserve_usd": 8051,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / COM",
+    "pool": "0x8ffdc8c69e1c1afdbd4d37e9df98eba3e3aca92d",
+    "reserve_usd": 13888,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / HDRN 1%",
+    "pool": "0x4a97b4da0d43e1d36952e239cfda8922e8643931",
+    "reserve_usd": 6196,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / USDT",
+    "pool": "0xbbb9bf440d0f686487925fef3b0a0f9aa67753f6",
+    "reserve_usd": 4240,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   },
+   {
+    "name": "HEX / VVV",
+    "pool": "0x746ef017b78f8e4155abd1840ee56e2eabe8bdff",
+    "reserve_usd": 4899,
+    "base_token": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39"
+   }
+  ],
+  "INC": [
+   {
+    "name": "INC / WPLS",
+    "pool": "0xf808bb6265e9ca27002c0a04562bf50d4fe37eaa",
+    "reserve_usd": 717363,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / PLSX",
+    "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
+    "reserve_usd": 723060,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / DOUBT",
+    "pool": "0x762ad850270efc004326c4e670fa7465e2f44904",
+    "reserve_usd": 587194,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / WPLS",
+    "pool": "0x5b9661276708202dd1a0dd2346a3856b00d3c251",
+    "reserve_usd": 215258,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / PLSX",
+    "pool": "0xd41e6f7bb349085ac65107bfb3fadd49f1cfde1f",
+    "reserve_usd": 253275,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / WPLS 0.25%",
+    "pool": "0xfc4745206d437ebb55a9590cbaf09724f068b726",
+    "reserve_usd": 59409,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / UFO",
+    "pool": "0xf7d75a0bbe1ef90cda220dea7450105a956abf19",
+    "reserve_usd": 147886,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / DAI",
+    "pool": "0x4f0e991e170aa644763cb68ecc945bdf957473ee",
+    "reserve_usd": 44362,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / SOLIDX",
+    "pool": "0x89cfffb84016fbf4da34b400e847a61be1a7fe34",
+    "reserve_usd": 44145,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / pTGC",
+    "pool": "0x0d68d64c70e204c1cff6180b5ec656a7840d8131",
+    "reserve_usd": 20069,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / HEX",
+    "pool": "0x2205f1f90b1c237077788bafc675db3c1974634e",
+    "reserve_usd": 15114,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   },
+   {
+    "name": "INC / WPLS 1%",
+    "pool": "0x27b2a4b13d89b8b0c77bd1c936b99fc9c834d64d",
+    "reserve_usd": 13701,
+    "base_token": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d"
+   }
+  ],
+  "LOAN": [
+   {
+    "name": "LOAN / WPLS",
+    "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
+    "reserve_usd": 70343,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "LOAN / WPLS 0.25%",
+    "pool": "0xea584cfa33e0d2aee73be13a938fe29b5e1dd4f2",
+    "reserve_usd": 58389,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "LOAN / WPLS",
+    "pool": "0x26240a7074d714de27882915d3c7303f9af06cc6",
+    "reserve_usd": 76,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "LOAN / HDOG",
+    "pool": "0xc459346967f6171f5071e7a9f47fc152a4096c47",
+    "reserve_usd": 59,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "LOAN / pTGC",
+    "pool": "0xee13760d60871baf202757425e702d9ef243d168",
+    "reserve_usd": 21,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "USDL / LOAN / WPLS 1%",
+    "pool": "0x146779adbbf14e4e23727a2ddc03130f6d0c0cf0",
+    "reserve_usd": 1514,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "X瀈 / 瀈",
+    "pool": "0x072a57c76cf15f2a8647a7e9c0e3db8ba352779e",
+    "reserve_usd": 182,
+    "base_token": "0x07d3143e0ee18a878e712e7d00b14b7ac615626b"
+   },
+   {
+    "name": "DSaL ㉾ / WPLS",
+    "pool": "0x1c0a1108b6d9947bed5792bda378fbd1852ffa6c",
+    "reserve_usd": 277,
+    "base_token": "0x6cefe8c817f359ded0420ad68ba53c248f7bce6c"
+   },
+   {
+    "name": "LOAN / WPLS",
+    "pool": "0xe72c0d716f8fa651df7f0a7d35566af0f39267fa",
+    "reserve_usd": 4,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "LOAN / PLSX",
+    "pool": "0xf3c490a89d96d48ef70a1236aa8ebbfe02cfd3b5",
+    "reserve_usd": 16,
+    "base_token": "0x9159f1d2a9f51998fc9ab03fbd8f265ab14a1b3b"
+   },
+   {
+    "name": "USDL / LOAN",
+    "pool": "0x2e87248097578ae96272426f883790ad7b1297c5",
+    "reserve_usd": 174,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "X瀈 / XBar",
+    "pool": "0x5d57a30495fb22aefefdeb9bc3910801d98cb909",
+    "reserve_usd": 212,
+    "base_token": "0x07d3143e0ee18a878e712e7d00b14b7ac615626b"
+   }
+  ],
+  "USDL": [
+   {
+    "name": "USDL / DAI 0.05%",
+    "pool": "0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e",
+    "reserve_usd": 299076,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / WPLS",
+    "pool": "0x27557d148293d1c8e8f8c5deeab93545b1eb8410",
+    "reserve_usd": 115020,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / uP",
+    "pool": "0x2f703a013f9933b221abdc1c2ea3562e42cee730",
+    "reserve_usd": 13833,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / uP / uPX / WPLS 0.8%",
+    "pool": "0x76a99b7799aecd15f4d2061e7491fcd0cd4d3188",
+    "reserve_usd": 2824,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / LOAN / WPLS 1%",
+    "pool": "0x146779adbbf14e4e23727a2ddc03130f6d0c0cf0",
+    "reserve_usd": 1514,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / PLSXm",
+    "pool": "0xb357bdb3389837869437a9bca2bcb8be2a80d6fc",
+    "reserve_usd": 1766,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / WPLS",
+    "pool": "0x438fc3883d60f7fc482e1f7613553f756aca3eca",
+    "reserve_usd": 862,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / RHN",
+    "pool": "0x584ff6036f9adcb8056ca9ed9ab4ff78f6c58344",
+    "reserve_usd": 333,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / DAI",
+    "pool": "0x2d635d5adb8aa4a7690299c512de0cb2f420e413",
+    "reserve_usd": 182,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDT / USDL / USDC / Oracle and Bridge Stable Pool / PXDC / DAI 0.05%",
+    "pool": "0xb272ae05c5f5ece5a3a599928c06469ebc73fc31",
+    "reserve_usd": 3226,
+    "base_token": "0x0cb6f5a34ad42ec934882a05265a7d5f59b51a2f"
+   },
+   {
+    "name": "USDL / LOAN",
+    "pool": "0x2e87248097578ae96272426f883790ad7b1297c5",
+    "reserve_usd": 174,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   },
+   {
+    "name": "USDL / PONKr",
+    "pool": "0xda83f210a921bb5108637ea76a75094de10d2a17",
+    "reserve_usd": 134,
+    "base_token": "0x0deed1486bc52aa0d3e6f8849cec5add6598a162"
+   }
+  ],
+  "EARN": [
+   {
+    "name": "EARN / PLSX",
+    "pool": "0xed77cbbb80e5a5c3a1fe664419d6f690766b5913",
+    "reserve_usd": 2956,
+    "base_token": "0xb513038bbfdf9d40b676f41606f4f61d4b02c4a2"
+   },
+   {
+    "name": "EARN / PLSX 2%",
+    "pool": "0xbbd7ce2afac69741d902ffb55fa591732e879704",
+    "reserve_usd": 701,
+    "base_token": "0xb513038bbfdf9d40b676f41606f4f61d4b02c4a2"
+   },
+   {
+    "name": "EARN / WPLS",
+    "pool": "0x47a4b212228de716fbb1500eec0ce5f87d4a21d8",
+    "reserve_usd": 15,
+    "base_token": "0xb513038bbfdf9d40b676f41606f4f61d4b02c4a2"
+   },
+   {
+    "name": "EARN / DAI 2%",
+    "pool": "0x74f1af27b51f90ad347f36ec3a64412964eb6f39",
+    "reserve_usd": 3,
+    "base_token": "0xb513038bbfdf9d40b676f41606f4f61d4b02c4a2"
+   },
+   {
+    "name": "FLEX / WPLS / EARN / WATT 0.3%",
+    "pool": "0xbcf4c66e29b6b416f61ba0ae311c3afc94b55506",
+    "reserve_usd": 274,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   },
+   {
+    "name": "EARN / PLSX",
+    "pool": "0xe14d2a4e1cf13aeee4cc5ad9bd77263ea6e8f7a1",
+    "reserve_usd": 3,
+    "base_token": "0xb513038bbfdf9d40b676f41606f4f61d4b02c4a2"
+   },
+   {
+    "name": "EMBER / PAYLOAD",
+    "pool": "0x8170e8651f0652296dbeccced045203ef3d6cac3",
+    "reserve_usd": 3,
+    "base_token": "0x189504b8d34f4702eb0bf2454b83a12947b558e0"
+   },
+   {
+    "name": "COM / EARN",
+    "pool": "0xf543a1fc3253d53ccb1d2f6ae4b2dfa9438f442a",
+    "reserve_usd": 7,
+    "base_token": "0x5a9780bfe63f3ec57f01b087cd65bd656c9034a8"
+   },
+   {
+    "name": "2PHUX / HEXDC / DOME / CDP / FLEX / EARN / HOC / PXDC 1%",
+    "pool": "0x56f1b5a0d192eed87d5878264879c1e8c52802b0",
+    "reserve_usd": 0,
+    "base_token": "0x115f3fa979a936167f9d208a7b7c4d85081e84bd"
+   },
+   {
+    "name": "FLEX / EARN 0.25%",
+    "pool": "0x00dbc8e87790e53f4579332473674990a0a54cfa",
+    "reserve_usd": 0,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   },
+   {
+    "name": "FLEX / EARN 1%",
+    "pool": "0xab419fd62ef9be05892ebaa8bc98e1a015e4a7d7",
+    "reserve_usd": 6,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   },
+   {
+    "name": "FLEX / EARN 2%",
+    "pool": "0xe6ef91d838435a32fee38626baccf8d02defb33f",
+    "reserve_usd": 168,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   }
+  ],
+  "PXDC": [
+   {
+    "name": "PXDC / DAI 1%",
+    "pool": "0xd43ab3222ad133f8e112b93185a68051e7cc7e33",
+    "reserve_usd": 8461,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "PXDC / PLSX",
+    "pool": "0xabb36512813194b12a82a319783dbb455652440a",
+    "reserve_usd": 2337,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "USDT / USDL / USDC / Oracle and Bridge Stable Pool / PXDC / DAI 0.05%",
+    "pool": "0xb272ae05c5f5ece5a3a599928c06469ebc73fc31",
+    "reserve_usd": 3226,
+    "base_token": "0x0cb6f5a34ad42ec934882a05265a7d5f59b51a2f"
+   },
+   {
+    "name": "HEXDC / PAI / PXDC / DAI 0.05%",
+    "pool": "0x47ee410999c74b5998808b5009023c08bf8b0caf",
+    "reserve_usd": 1942,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "PXDC / WPLS",
+    "pool": "0x6b07085e26f2308f0d4b52cdeaa6418c18a513be",
+    "reserve_usd": 28,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "PXDC / PYUSD",
+    "pool": "0xe213235c19d1730064912dcc149f5eab992d969f",
+    "reserve_usd": 39,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "INCD / USDL / HEXDC / RHSTABLE / PXDC / DAI 0.05%",
+    "pool": "0xa0305707793014c9c43edfc09e1314845a5be6ce",
+    "reserve_usd": 8855,
+    "base_token": "0x144cd22aaa2a80fed0bb8b1deaddc51a53df1d50"
+   },
+   {
+    "name": "PXDC / HEX",
+    "pool": "0x85ea69b5502f445895d900a6d88a31fa77101e64",
+    "reserve_usd": 4,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "PXDC / PLSX",
+    "pool": "0x81961a7c9d268959fb547200e57135546a4c65ab",
+    "reserve_usd": 1,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "PXDC / PLSX",
+    "pool": "0x84d9b204eabf838b29f0714cb8f98b4d5abe7400",
+    "reserve_usd": 1,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "PXDC / USDL",
+    "pool": "0x60c25ffa35bbb04c42a59b0746eb22a62735ee2f",
+    "reserve_usd": 0,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   },
+   {
+    "name": "PXDC / USDL 0.3%",
+    "pool": "0x449904abd737646455d5e62f881c1e9f1e6fa320",
+    "reserve_usd": 0,
+    "base_token": "0xeb6b7932da20c6d7b3a899d5887d86dfb09a6408"
+   }
+  ],
+  "FLEX": [
+   {
+    "name": "FLEX / HEX",
+    "pool": "0x476d63ab94b4e86614df0c3d5a27e9e22631d062",
+    "reserve_usd": 3289,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   },
+   {
+    "name": "FLEXMAS / FSS",
+    "pool": "0xd27bdaed4995dd3df55b549cd51f6e4385539473",
+    "reserve_usd": 1746,
+    "base_token": "0x5ed5882164277cec6d5ae6f420721b199c0e5693"
+   },
+   {
+    "name": "Finvesta / FLEXMAS",
+    "pool": "0x1429359825678ebc98370fcf47c82c6481ae675a",
+    "reserve_usd": 22096,
+    "base_token": "0x1c81b4358246d3088ab4361ab755f3d8d4dd62d2"
+   },
+   {
+    "name": "FLEXMAS / PLSPUP",
+    "pool": "0x51c534c37475164b40e6a7b44e7937f9bb0d5c1d",
+    "reserve_usd": 1955,
+    "base_token": "0x5ed5882164277cec6d5ae6f420721b199c0e5693"
+   },
+   {
+    "name": "FLEXMAS / FSS 1%",
+    "pool": "0x295add7581c40e5312db09bb9630c59ce1da6cbc",
+    "reserve_usd": 2532,
+    "base_token": "0x5ed5882164277cec6d5ae6f420721b199c0e5693"
+   },
+   {
+    "name": "FLEX / WPLS / EARN / WATT 0.3%",
+    "pool": "0xbcf4c66e29b6b416f61ba0ae311c3afc94b55506",
+    "reserve_usd": 274,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   },
+   {
+    "name": "FLEXMAS / WPLS",
+    "pool": "0xf09561aa4c5821928d0446e493a663040c941100",
+    "reserve_usd": 149,
+    "base_token": "0x5ed5882164277cec6d5ae6f420721b199c0e5693"
+   },
+   {
+    "name": "FLEX / DAI 2%",
+    "pool": "0x3286d9433a8fb020de16f0f379993b86e6bd5797",
+    "reserve_usd": 46,
+    "base_token": "0x9c6fa17d92898b684676993828143596894aa2a6"
+   },
+   {
+    "name": "FLEXMAS / PRVX",
+    "pool": "0x8ab75190a28778200f592aad1e6afd9cbeda0360",
+    "reserve_usd": 90,
+    "base_token": "0x5ed5882164277cec6d5ae6f420721b199c0e5693"
+   },
+   {
+    "name": "FLEXBOOST / BEAST",
+    "pool": "0x2e61d1bd7651e97889df2a5f0d8475d74dd1c5fb",
+    "reserve_usd": 638,
+    "base_token": "0x406a63a837ac947ec0c2f0e6673e8ef481ca7807"
+   },
+   {
+    "name": "FLEXBOOST / FLEXMAS",
+    "pool": "0x7a5e9cc6b6a84e57f402709dc1c3067be953a470",
+    "reserve_usd": 4,
+    "base_token": "0x406a63a837ac947ec0c2f0e6673e8ef481ca7807"
+   },
+   {
+    "name": "FLEX / WPLS",
+    "pool": "0x55530206b3d3ba04fd52b6f0feb106aa080c2036",
+    "reserve_usd": 83,
+    "base_token": "0xaf8111b03acc0fe6676d1f5c7b4701febc23e7a6"
+   }
+  ],
+  "HEXDC": [
+   {
+    "name": "HEXDC / HEX",
+    "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
+    "reserve_usd": 37681,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / DAI 1%",
+    "pool": "0x29b27fae7781d70f9ac214016476725599abb065",
+    "reserve_usd": 10664,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / PAI / PXDC / DAI 0.05%",
+    "pool": "0x47ee410999c74b5998808b5009023c08bf8b0caf",
+    "reserve_usd": 1942,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / ILL",
+    "pool": "0x71a6bb20b27edf133abaf5462ce1ed16595e23b4",
+    "reserve_usd": 2754,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / DAI",
+    "pool": "0xd7068e90dcd6d824422591a4316f03b9faff1204",
+    "reserve_usd": 354,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / DAI 0.25%",
+    "pool": "0xeaa9887543522f71ffefe8f553d21e22f360734f",
+    "reserve_usd": 126,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / HONEY",
+    "pool": "0xfc815253f42389f015ee098513e917fb37f643db",
+    "reserve_usd": 17,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / TSFHEX",
+    "pool": "0x7388e912baa833cd91eed4042536c4c7311974e8",
+    "reserve_usd": 10,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "INCD / USDL / HEXDC / RHSTABLE / PXDC / DAI 0.05%",
+    "pool": "0xa0305707793014c9c43edfc09e1314845a5be6ce",
+    "reserve_usd": 8855,
+    "base_token": "0x144cd22aaa2a80fed0bb8b1deaddc51a53df1d50"
+   },
+   {
+    "name": "HEXDC / PXDC",
+    "pool": "0x65c68fac64de495863b0968e320d2a0909c624f7",
+    "reserve_usd": 3,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / Burn",
+    "pool": "0x6648245ca3a69945bf5bbb29cce75c83bdce876d",
+    "reserve_usd": 1,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   },
+   {
+    "name": "HEXDC / PLP",
+    "pool": "0x6c284c3280270b483ad4120121c60dd415f340b9",
+    "reserve_usd": 2,
+    "base_token": "0x1fe0319440a672526916c232eaee4808254bdb00"
+   }
+  ],
+  "PRINT": [
+   {
+    "name": "PRINT / INC",
+    "pool": "0xf35f8db9b6760799db76796340aacc69dea0c644",
+    "reserve_usd": 5083,
+    "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3"
+   },
+   {
+    "name": "DAI / 🖨️",
+    "pool": "0xf13ca5c98d9aae6294edb9e7299b0bbe1e71265d",
+    "reserve_usd": 11803,
+    "base_token": "0x6b175474e89094c44da98b954eedeac495271d0f"
+   },
+   {
+    "name": "🖨️ / HEX 1%",
+    "pool": "0x044816c7497186aa962a936cb31b9e6e6ab2c0ef",
+    "reserve_usd": 8108,
+    "base_token": "0x770cfa2fb975e7bcaedde234d92c3858c517adca"
+   },
+   {
+    "name": "PRINT / WPLS",
+    "pool": "0xc97b54e4450007cdbed2af9231fb32b8a3ae7c2d",
+    "reserve_usd": 218,
+    "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3"
+   },
+   {
+    "name": "ZKP / WPLS",
+    "pool": "0x43523d67458e0a54ca10f080ba7919ec59d4599c",
+    "reserve_usd": 9790,
+    "base_token": "0x90f055196778e541018482213ca50648cea1a050"
+   },
+   {
+    "name": "WBTC / 🖨️ 1%",
+    "pool": "0xf1c94babfc265d67b96e5cf36afccbffb47b621a",
+    "reserve_usd": 9408,
+    "base_token": "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+   },
+   {
+    "name": "🖨️ / HEX",
+    "pool": "0x848d6f787cc4b6cfa0bdc20808993ee36a5e8122",
+    "reserve_usd": 942,
+    "base_token": "0x770cfa2fb975e7bcaedde234d92c3858c517adca"
+   },
+   {
+    "name": "sPRINT / PRINT",
+    "pool": "0x608fb2786d740898fe831269934102af88f62b4c",
+    "reserve_usd": 3088,
+    "base_token": "0x46c862f82ddabb0d7aff34074894f74bd3efaf48"
+   },
+   {
+    "name": "🖨️ / BFF",
+    "pool": "0xe149a1fa12a351e70c2815af4088c636e0c8ac94",
+    "reserve_usd": 649,
+    "base_token": "0x770cfa2fb975e7bcaedde234d92c3858c517adca"
+   },
+   {
+    "name": "🖨️ / WPLS",
+    "pool": "0xcc9504195f1225a220a5310aaa97a9c11d777cda",
+    "reserve_usd": 273,
+    "base_token": "0x770cfa2fb975e7bcaedde234d92c3858c517adca"
+   },
+   {
+    "name": "PRINT / HEX 1%",
+    "pool": "0x85901ebfddc776d3ec2e898087dd06251eea89d2",
+    "reserve_usd": 1257,
+    "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3"
+   },
+   {
+    "name": "PRINT / WPLS 1%",
+    "pool": "0xa223ae3ee3220597c3d1008b6118685262150e81",
+    "reserve_usd": 7,
+    "base_token": "0x6c203a555824ec90a215f37916cf8db58ebe2fa3"
+   }
+  ]
+ }
+}
