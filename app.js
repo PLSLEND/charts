@@ -386,36 +386,46 @@
     cacheSet(k, data);
     return data;
   }
-  async function gtOhlcv(network, pool, tf) {
+  async function gtOhlcv(network, pool, tf, pages, before) {
+    // GeckoTerminal public API: ~6 months per daily page, 1000 bars per 4h page; 401 = end of the free window
     const path = tf === '4h' ? 'hour?aggregate=4' : 'day?aggregate=1';
-    const pages = tf === '4h' ? 3 : 2;
-    let before = null; const rows = [];
+    const rows = [];
     for (let p = 0; p < pages; p++) {
       const url = `${GT}/networks/${network}/pools/${pool}/ohlcv/${path}&limit=1000&currency=usd&token=base${before ? '&before_timestamp=' + before : ''}`;
       const r = await fetch(url, { headers: { Accept: 'application/json;version=20230302' } });
+      if (r.status === 401) break;
+      if (r.status === 429) { await new Promise((res) => setTimeout(res, 2500)); p--; continue; }
       if (!r.ok) throw new Error('GeckoTerminal ' + r.status);
       const list = (((await r.json()).data || {}).attributes || {}).ohlcv_list || [];
-      if (!list.length) break;
+      if (list.length < 2) break;
       rows.push(...list);
       before = Math.min(...list.map((x) => x[0])) - 1;
-      if (list.length < 1000) break;
     }
     const seen = new Set(); const out = [];
     for (const [t, o, h, l, c, v] of rows.sort((a, b) => a[0] - b[0])) { if (!seen.has(t) && o != null) { seen.add(t); out.push({ timestamp: t * 1000, open: +o, high: +h, low: +l, close: +c, volume: +v || 0 }); } }
     return out;
   }
+  function mergeBars(base, fresh) {
+    if (!base.length) return fresh;
+    if (!fresh.length) return base;
+    const m = new Map(base.map((b) => [b.timestamp, b]));
+    for (const b of fresh) m.set(b.timestamp, b);
+    return Array.from(m.values()).sort((a, b) => a.timestamp - b.timestamp);
+  }
   async function loadCrypto(s, tf) {
     const want = tf === '4h' ? '4h' : 'day';
     const k = `crypto:${s.id}:${want}`;
     const c = cacheGet(k); if (c) return c;
-    let data, live = true;
-    try { data = await gtOhlcv(s.network, s.pool, want); if (!data.length) throw new Error('empty'); }
-    catch (e) {
-      live = false;
-      if (s.userPool) throw e;
-      data = barsToKline((await fetchJSON(`${DATA}crypto/${s.id}_${want}.json?v=${encodeURIComponent(st.manifest.updated || '')}`)).bars);
+    // 1) cached history from the data job (instant, deep), 2) live newest page from GeckoTerminal merged on top
+    let cached = [];
+    if (!s.userPool) {
+      try { cached = barsToKline((await fetchJSON(`${DATA}crypto/${s.id}_${want}.json?v=${encodeURIComponent(st.manifest.updated || '')}`)).bars); } catch (e) { cached = []; }
     }
-    s.live = live;
+    let live = [];
+    try { live = await gtOhlcv(s.network, s.pool, want, cached.length ? 1 : (want === '4h' ? 3 : 8)); } catch (e) { live = []; }
+    s.live = live.length > 0;
+    const data = mergeBars(cached, live);
+    if (!data.length) throw new Error('no candles from GeckoTerminal' + (s.userPool ? '' : ' or cache'));
     cacheSet(k, data);
     return data;
   }

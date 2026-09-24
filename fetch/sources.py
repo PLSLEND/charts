@@ -7,6 +7,7 @@ Raise SourceError on any failure so the caller can try the next candidate.
 import csv
 import io
 import json
+import os
 import re
 import time
 from datetime import date, datetime, timezone
@@ -22,14 +23,14 @@ class SourceError(Exception):
     pass
 
 
-def _get(url, headers=None, params=None, retries=1, sleep=2.0):
+def _get(url, headers=None, params=None, retries=1, sleep=2.0, timeout=None):
     h = {"User-Agent": UA, "Accept": "*/*"}
     if headers:
         h.update(headers)
     last = None
     for i in range(retries + 1):
         try:
-            r = requests.get(url, headers=h, params=params, timeout=TIMEOUT)
+            r = requests.get(url, headers=h, params=params, timeout=timeout or TIMEOUT)
             if r.status_code == 200 and r.content:
                 return r
             last = f"HTTP {r.status_code}: {r.text[:120]!r}"
@@ -98,9 +99,26 @@ def _clean_value_rows(rows):
 
 
 # ---------------------------------------------------------------- FRED
+FRED_API_KEY = os.environ.get("FRED_API_KEY", "").strip()
+
+
 def fred(key):
-    r = _get("https://fred.stlouisfed.org/graph/fredgraph.csv", params={"id": key})
+    """FRED series. Uses the official API when FRED_API_KEY is set (reliable from cloud runners),
+    otherwise the public fredgraph.csv endpoint, which throttles datacenter IPs."""
     rows = []
+    if FRED_API_KEY:
+        r = _get("https://api.stlouisfed.org/fred/series/observations",
+                 params={"series_id": key, "api_key": FRED_API_KEY, "file_type": "json", "observation_start": "1900-01-01"},
+                 headers={"Accept": "application/json"}, retries=1)
+        try:
+            for o in r.json().get("observations", []):
+                d = norm_period(o.get("date", ""))
+                if d:
+                    rows.append((d, _num(o.get("value"))))
+        except ValueError as e:
+            raise SourceError(f"fred api bad json for {key}: {e}")
+        return _clean_value_rows(rows)
+    r = _get("https://fred.stlouisfed.org/graph/fredgraph.csv", params={"id": key}, retries=0, timeout=60)
     for rec in csv.reader(io.StringIO(r.text)):
         if len(rec) < 2:
             continue
@@ -140,7 +158,8 @@ def fred_yoy(key):
 # ---------------------------------------------------------------- Yahoo Finance
 def yahoo(symbol, inverse=False):
     url = f"https://query2.finance.yahoo.com/v8/finance/chart/{requests.utils.quote(symbol)}"
-    r = _get(url, params={"range": "max", "interval": "1d", "includePrePost": "false", "events": "div,splits"},
+    r = _get(url, params={"period1": "-2208988800", "period2": str(int(time.time()) + 86400), "interval": "1d",
+                          "includePrePost": "false", "events": "div,splits"},
              headers={"Accept": "application/json"})
     try:
         res = r.json()["chart"]["result"][0]
@@ -272,15 +291,16 @@ def dbnomics(key):
 
 
 def dbnomics_search(query, limit=12):
-    """Return a list of (series_id, name, last_period) for a free-text search (used for probing)."""
-    r = _get("https://api.db.nomics.world/v22/search", params={"q": query, "limit": str(limit)},
-             headers={"Accept": "application/json"})
+    """Series-level search (provider/dataset/series, name, last period) for probing."""
+    r = _get("https://api.db.nomics.world/v22/series", params={"q": query, "limit": str(limit), "observations": "0"},
+             headers={"Accept": "application/json"}, retries=0)
     out = []
     try:
-        for doc in r.json()["results"]["docs"]:
-            out.append((f"{doc['provider_code']}/{doc['dataset_code']}", doc.get("dataset_name") or doc.get("name", ""), doc.get("nb_series", "")))
-    except Exception:  # noqa: BLE001
-        pass
+        for doc in r.json()["series"]["docs"]:
+            out.append((f"{doc['provider_code']}/{doc['dataset_code']}/{doc['series_code']}",
+                        (doc.get("series_name") or "")[:90], doc.get("indexed_at", "")[:10]))
+    except Exception as e:  # noqa: BLE001
+        out.append(("search-error", str(e)[:120], ""))
     return out
 
 
@@ -340,14 +360,35 @@ GT = "https://api.geckoterminal.com/api/v2"
 _gt_last = [0.0]
 
 
+class GTHistoryLimit(SourceError):
+    """Public API refuses data older than its free window (HTTP 401)."""
+
+
 def _gt_get(path, params=None):
-    # free tier: 30 req/min -> keep >= 2.2 s between calls
-    wait = 2.2 - (time.time() - _gt_last[0])
-    if wait > 0:
-        time.sleep(wait)
-    r = _get(f"{GT}{path}", params=params, headers={"Accept": "application/json;version=20230302"}, retries=2, sleep=5)
-    _gt_last[0] = time.time()
-    return r.json()
+    # free tier: 30 req/min -> keep >= 2.6 s between calls; back off on 429
+    for attempt in range(4):
+        wait = 2.6 - (time.time() - _gt_last[0])
+        if wait > 0:
+            time.sleep(wait)
+        h = {"User-Agent": UA, "Accept": "application/json;version=20230302"}
+        try:
+            r = requests.get(f"{GT}{path}", headers=h, params=params, timeout=TIMEOUT)
+        except requests.RequestException as e:
+            _gt_last[0] = time.time()
+            if attempt == 3:
+                raise SourceError(f"{path} -> {e!r}")
+            time.sleep(5)
+            continue
+        _gt_last[0] = time.time()
+        if r.status_code == 200:
+            return r.json()
+        if r.status_code == 429:
+            time.sleep(20 * (attempt + 1))
+            continue
+        if r.status_code == 401:
+            raise GTHistoryLimit(f"{path} -> 401 (beyond the public API history window)")
+        raise SourceError(f"{path} -> HTTP {r.status_code}: {r.text[:120]!r}")
+    raise SourceError(f"{path} -> rate limited (429) repeatedly")
 
 
 def gt_search_pool(network, symbol, quotes, token=None):
@@ -369,7 +410,7 @@ def gt_search_pool(network, symbol, quotes, token=None):
             continue
         if token and base_addr and base_addr != token.lower():
             continue
-        score = reserve * (2.0 if quote_sym.upper() in [q.upper() for q in quotes] else 1.0)
+        score = reserve * (3.0 if quote_sym.upper() in [q.upper() for q in quotes] else 1.0)
         if best is None or score > best[0]:
             best = (score, dict(pool=a.get("address"), name=name, reserve_usd=reserve,
                                 base_symbol=base_sym, quote_symbol=quote_sym, base_token=base_addr,
@@ -393,16 +434,17 @@ def gt_ohlcv(network, pool, timeframe="day", aggregate=1, limit=1000, before=Non
 
 
 def gt_ohlcv_history(network, pool, timeframe, aggregate, pages=1, token="base"):
+    """Page backwards until the API returns nothing, refuses (401 = free window exhausted) or `pages` is hit."""
     allrows, before = [], None
     for _ in range(pages):
-        rows = gt_ohlcv(network, pool, timeframe, aggregate, before=before, token=token)
-        if not rows:
+        try:
+            rows = gt_ohlcv(network, pool, timeframe, aggregate, before=before, token=token)
+        except GTHistoryLimit:
+            break
+        if len(rows) < 2:
             break
         allrows = rows + allrows
         before = rows[0][0] - 1
-        if len(rows) < 1000:
-            break
-    # dedupe on timestamp
     seen, out = set(), []
     for r in allrows:
         if r[0] not in seen:

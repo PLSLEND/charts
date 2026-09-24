@@ -33,6 +33,8 @@ jobs:
           python-version: '3.12'
       - run: pip install -r fetch/requirements.txt
       - name: Fetch
+        env:
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: |
           ARGS="${{ github.event.inputs.only }}"
           if [ "${{ github.event.inputs.no_crypto }}" = "true" ]; then ARGS="$ARGS --no-crypto"; fi

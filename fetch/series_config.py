@@ -154,7 +154,7 @@ RATIOS = [
 # (symbol + preferred quote tokens); the highest-liquidity matching pool wins.
 CRYPTO = [
     dict(id="PLS", name="PulseChain — PLS (WPLS/DAI)", network="pulsechain", search="WPLS", quotes=["DAI", "USDC", "USDT", "WETH", "pDAI"],
-         token="0xa1077a294dde1b09bb078844df40758a5d0f9a27"),
+         token="0xa1077a294dde1b09bb078844df40758a5d0f9a27", pool="0xe56043671df55de5cdf8459710433c10324de0ae"),
     dict(id="PLSX", name="PulseX — PLSX", network="pulsechain", search="PLSX", quotes=["WPLS", "DAI", "USDC"],
          token="0x95b303987a60c71504d99aa1b13b4da07b0790ab"),
     dict(id="pHEX", name="HEX on PulseChain (pHEX)", network="pulsechain", search="HEX", quotes=["WPLS", "DAI", "USDC"],

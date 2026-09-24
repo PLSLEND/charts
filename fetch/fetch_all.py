@@ -122,6 +122,7 @@ def rows_to_bars(rows, kind):
 def fetch_one(spec):
     """Try each candidate source; return (bars, source_name, key, error_list)."""
     errors = []
+    best = None
     for src, key in spec["sources"]:
         try:
             if src == "fred":
@@ -157,9 +158,17 @@ def fetch_one(spec):
             bars = rows_to_bars(rows, kind)
             if len(bars) < 5:
                 raise S.SourceError(f"{src}:{key} returned only {len(bars)} bars")
+            if kind == "ohlc" and len(bars) < 2500:
+                # a short history (e.g. Yahoo throttled to a few months): remember it, try the next source
+                if best is None or len(bars) > len(best[0]):
+                    best = (bars, src, key)
+                errors.append(f"{src}:{key} -> only {len(bars)} bars, trying next source")
+                continue
             return bars, src, key, errors
         except Exception as e:  # noqa: BLE001
             errors.append(f"{src}:{key} -> {str(e)[:200]}")
+    if best is not None:
+        return best[0], best[1], best[2], errors
     return None, None, None, errors
 
 
@@ -294,8 +303,12 @@ def main():
                 if old and old.get("bars"):
                     bars, src, key, stale = old["bars"], old.get("source_id", "?"), old.get("source_key", "?"), True
                     log(f"  !! {sid}: all sources failed, keeping previous data ({len(bars)} bars)")
+                    for e in errors:
+                        log(f"       {e[:220]}")
                 else:
                     log(f"  XX {sid}: all sources failed, no data")
+                    for e in errors:
+                        log(f"       {e[:220]}")
                     status["series"][sid] = {"ok": False, "errors": errors}
                     continue
             obj = {"id": sid, "kind": spec["kind"], "freq": spec["freq"], "source_id": src, "source_key": key,
@@ -355,7 +368,7 @@ def main():
                         raise S.SourceError(f"no pool found for {spec['search']} on {spec['network']}; candidates: "
                                             + "; ".join(f"{n} ({round(r)}$)" for n, a, r, b in cands[:6]))
                     pools["resolved"][cid] = res
-                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=2)
+                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=8)
                 h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=2)
                 for tf, rows in (("day", day), ("4h", h4)):
                     bars = [[t * 1000, sig(o), sig(h), sig(l), sig(c), sig(v, 6)] for t, o, h, l, c, v in rows]

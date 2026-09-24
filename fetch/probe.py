@@ -8,14 +8,24 @@ sys.path.insert(0, str(Path(__file__).parent))
 import sources as S  # noqa: E402
 
 SEARCHES = [
-    "Bundesbank total assets balance sheet",
-    "Germany central bank total assets",
-    "Germany M2 money supply national contribution",
-    "China monetary authority total assets",
-    "People's Bank of China balance sheet",
+    "Bundesbank total assets",
+    "Deutsche Bundesbank balance sheet assets monthly",
+    "Germany monetary aggregate M2 national contribution",
+    "loans to euro area private sector adjusted MFI",
     "euro area industrial confidence indicator",
-    "ISM manufacturing PMI",
-    "Germany 2 year government bond yield daily",
+    "China monetary authority total assets",
+    "PBoC balance sheet",
+    "10-year treasury constant maturity",
+    "Federal Reserve total assets H.4.1",
+    "bank credit all commercial banks",
+    "M1 money stock",
+    "consumer price index all urban consumers all items",
+    "median sales price of houses sold",
+    "ICE BofA US high yield effective yield",
+    "overnight bank funding rate",
+    "treasury general account",
+    "median CPI Cleveland",
+    "overnight reverse repurchase agreements",
 ]
 
 CANDIDATES = [
