@@ -1,11 +1,11 @@
 {
- "updated": "2026-09-24T16:36:55+00:00",
+ "updated": "2026-09-24T16:39:58+00:00",
  "series": {},
  "crypto": {
   "PLSETH": {
    "ok": false,
    "errors": [
-    "no pool found for WPLS on pulsechain; candidates: WPLS / PLSX (898468$); WPLS / DAI 0.25% (44498$); USDC / WPLS (867229$); DAI / WPLS (905746$); PLSX / WPLS (2247452$); DAI / WPLS (793099$)"
+    "no pool found for WPLS on pulsechain; candidates: WPLS / PLSX (898504$); WPLS / DAI 0.25% (44257$); USDC / WPLS (867130$); DAI / WPLS (905586$); PLSX / WPLS (2250901$); DAI / WPLS (792556$)"
    ]
   }
  }
