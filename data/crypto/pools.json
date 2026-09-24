@@ -1,13 +1,15 @@
 {
  "resolved": {
   "PLS": {
-   "pool": "0x149b2c629e652f2e89e11cd57e5d4d77ee166f9f",
-   "name": "WPLS / PLSX",
-   "reserve_usd": 909669.198,
-   "base_symbol": "WPLS",
-   "quote_symbol": "PLSX",
-   "base_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27",
-   "price_usd": 1.09492608992896e-05
+   "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
+   "name": "DAI / WPLS",
+   "base_symbol": "DAI",
+   "quote_symbol": "WPLS",
+   "base_token": "0xefd766ccb38eaf1dfd701853bfce31359239f305",
+   "quote_token": "0xa1077a294dde1b09bb078844df40758a5d0f9a27",
+   "reserve_usd": 908984.7253,
+   "price_usd": 1.00333545713033,
+   "side": "quote"
   },
   "PLSX": {
    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
