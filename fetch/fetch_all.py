@@ -15,6 +15,7 @@ Never exits non-zero for a data problem; the workflow should commit whatever suc
 """
 import json
 import math
+from concurrent.futures import ThreadPoolExecutor
 import re
 import statistics
 import sys
@@ -279,14 +280,15 @@ def main():
 
     if not SKIP_MACRO:
         log(f"== macro / TradFi series ({len(SERIES)}) ==")
-        for spec in SERIES:
+        todo = [spec for spec in SERIES if not ONLY or spec["id"] in ONLY]
+        t_all = time.time()
+        with ThreadPoolExecutor(max_workers=6) as pool:
+            results = list(pool.map(lambda sp: (sp, time.time(), fetch_one(sp)), todo))
+        log(f"   fetched in {round(time.time() - t_all)}s")
+        for spec, t0, (bars, src, key, errors) in results:
             sid = spec["id"]
-            if ONLY and sid not in ONLY:
-                continue
             out = SERIES_DIR / f"{sid}.json"
             old = load_json(out)
-            t0 = time.time()
-            bars, src, key, errors = fetch_one(spec)
             stale = False
             if bars is None:
                 if old and old.get("bars"):

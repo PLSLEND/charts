@@ -15,14 +15,14 @@ import requests
 
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
       "(KHTML, like Gecko) Chrome/124.0 Safari/537.36")
-TIMEOUT = 40
+TIMEOUT = 25
 
 
 class SourceError(Exception):
     pass
 
 
-def _get(url, headers=None, params=None, retries=2, sleep=2.0):
+def _get(url, headers=None, params=None, retries=1, sleep=2.0):
     h = {"User-Agent": UA, "Accept": "*/*"}
     if headers:
         h.update(headers)
@@ -239,19 +239,15 @@ def bbk(key):
     """Bundesbank statistics REST API. key = FLOW/SERIES_KEY (e.g. BBSSY/D.REN.EUR.A620.000000WT0202.A)."""
     flow, _, series = key.partition("/")
     errors = []
-    # a) SDMX 2.1 data endpoint, CSV via Accept header
     for url, headers, params in (
         (f"https://api.statistiken.bundesbank.de/rest/data/{flow}/{series}",
          {"Accept": "application/vnd.sdmx.data+csv;version=1.0.0"}, {"detail": "dataonly"}),
-        (f"https://api.statistiken.bundesbank.de/rest/data/{flow}/{series}",
-         {"Accept": "text/csv"}, {"format": "csv", "lang": "en"}),
         (f"https://api.statistiken.bundesbank.de/rest/download/{flow}/{series}",
          {"Accept": "text/csv"}, {"format": "csv", "lang": "en"}),
     ):
         try:
-            r = _get(url, headers=headers, params=params, retries=1)
-            rows = _parse_sdmx_csv(r.text)
-            return _clean_value_rows(rows)
+            r = _get(url, headers=headers, params=params, retries=0)
+            return _clean_value_rows(_parse_sdmx_csv(r.text))
         except SourceError as e:
             errors.append(str(e)[:160])
     raise SourceError("bbk: " + " | ".join(errors))
@@ -308,18 +304,18 @@ def pboc(_key):
     """Best-effort scrape of the PBoC English site 'Balance Sheet of Monetary Authority'.
     Site structure changes every year; if it breaks, put data/manual/CNCBBS.csv in place."""
     base = "http://www.pbc.gov.cn"
-    idx = _get(f"{base}/en/3688247/3688975/index.html", retries=1)
+    idx = _get(f"{base}/en/3688247/3688975/index.html", retries=0)
     links = re.findall(r'href="([^"]+)"[^>]*>([^<]*Balance Sheet of Monetary Authority[^<]*)<', idx.text, flags=re.I)
     if not links:
         # try the "Statistics" landing page which lists yearly data sets
-        idx = _get(f"{base}/en/3688247/index.html", retries=1)
+        idx = _get(f"{base}/en/3688247/index.html", retries=0)
         links = re.findall(r'href="([^"]+)"[^>]*>([^<]*Monetary Authority[^<]*)<', idx.text, flags=re.I)
     if not links:
         raise SourceError("pboc: no 'Balance Sheet of Monetary Authority' link found")
     href = links[0][0]
     if href.startswith("/"):
         href = base + href
-    page = _get(href, retries=1)
+    page = _get(href, retries=0)
     # find the html table with 'Total Assets' row; header cells hold months like 2025.01
     months = re.findall(r"(20\d{2})[.\-/年](\d{1,2})", page.text)
     row = re.search(r"Total\s*Assets.*?</tr>", page.text, flags=re.I | re.S)
