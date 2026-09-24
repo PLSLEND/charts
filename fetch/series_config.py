@@ -50,21 +50,21 @@ SERIES = [
     dict(id="EUCBBS", name="ECB balance sheet — total assets", group="Central banks & money", freq="W", kind="value", units="EUR mn",
          tv="ECONOMICS:EUCBBS", sources=[("fred", "ECBASSETSW"), ("ecb", "ILM/W.U2.C.T000000.Z5.Z01")]),
     dict(id="DECBBS", name="Bundesbank balance sheet — total assets", group="Central banks & money", freq="M", kind="value", units="EUR bn",
-         tv="ECONOMICS:DECBBS", sources=[
-             ("bbk", "BBK01/OU0304"), ("bbk", "BBK01/OU0308"), ("bbk", "BBK01/OU0301"),
-             ("ecb", "BSI/M.DE.N.R.T00.A.1.Z5.0000.Z01.E"), ("ecb", "BSI/M.DE.N.C.T00.A.1.Z5.0000.Z01.E"),
-             ("manual", "DECBBS")]),
+         tv="ECONOMICS:DECBBS", sources=[("manual", "DECBBS")]),
     dict(id="CNCBBS", name="PBoC balance sheet — total assets", group="Central banks & money", freq="M", kind="value", units="CNY 100mn",
-         tv="ECONOMICS:CNCBBS", sources=[("manual", "CNCBBS"), ("pboc", "total_assets"),
-                                          ("dbnomics", "IMF/IFS/M.CN.FASAF_XDC")]),
+         tv="ECONOMICS:CNCBBS", sources=[("manual", "CNCBBS"), ("pboc", "total_assets")]),
     dict(id="DEM2", name="Germany money supply M2 (national contribution)", group="Central banks & money", freq="M", kind="value", units="EUR mn",
          tv="ECONOMICS:DEM2", sources=[
-             ("ecb", "BSI/M.DE.N.V.M20.X.1.U2.2300.Z01.E"), ("ecb", "BSI/M.DE.Y.V.M20.X.1.U2.2300.Z01.E"),
-             ("bbk", "BBK01/TXI310"), ("manual", "DEM2")]),
+             ("bbk", "BBBS2/M.DB.Y.V.M20.X.1.U2.2300.Z01.E"), ("bbk", "BBBS2/M.DB.N.V.M20.X.1.U2.2300.Z01.E"),
+             ("bbk", "BBBS2/M.DB.Y.V.M20.X.1.U6.2300.Z01.E"), ("bbk", "BBBS2/M.DB.N.V.M20.X.1.U6.2300.Z01.E"),
+             ("dbnomics", "BUBA/BBBS2/M.DB.Y.V.M20.X.1.U2.2300.Z01.E"), ("dbnomics", "BUBA/BBBS2/M.DB.N.V.M20.X.1.U2.2300.Z01.E"),
+             ("manual", "DEM2")]),
     dict(id="EULPS", name="Euro area loans to the private sector (MFIs, adjusted)", group="Central banks & money", freq="M", kind="value", units="EUR mn",
          tv="ECONOMICS:EULPS", sources=[
-             ("ecb", "BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E"), ("ecb", "BSI/M.U2.Y.U.A20T.A.1.U2.2250.Z01.E"),
-             ("ecb", "BSI/M.U2.N.U.A20T.A.1.U2.2200.Z01.E"), ("manual", "EULPS")]),
+             ("ecb", "BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E"), ("ecb", "BSI/M.U2.N.U.A20T.A.1.U2.2200.Z01.E"),
+             ("ecb", "BSI/M.U2.Y.U.A20.A.1.U2.2200.Z01.E"), ("ecb", "BSI/M.U2.N.U.A20.A.1.U2.2200.Z01.E"),
+             ("ecb", "BSI/M.U2.Y.U.A20T.A.1.U2.2250.Z01.E", "Euro area MFI loans to households (adjusted)"),
+             ("manual", "EULPS")]),
     dict(id="ITBBS", name="Italy banks (MFIs) balance sheet — total assets", group="Central banks & money", freq="M", kind="value", units="EUR mn",
          tv="ECONOMICS:ITBBS", sources=[
              ("ecb", "BSI/M.IT.N.A.T00.A.1.Z5.0000.Z01.E"), ("ecb", "BSI/M.IT.N.A.T00.A.1.Z5.0000.Z01.E?startPeriod=1999-01"),
@@ -83,20 +83,22 @@ SERIES = [
          tv="ECONOMICS:USBCOI", sources=[("dbnomics", "ISM/pmi/pm"), ("manual", "USBCOI")]),
     dict(id="EUBCOI", name="Euro area industrial confidence (EC survey)", group="Inflation & activity", freq="M", kind="value", units="balance",
          tv="ECONOMICS:EUBCOI", sources=[
-             ("dbnomics", "Eurostat/ei_bsin_m_r2/M.BAL.BS-ICI.SA.EA20"),
-             ("dbnomics", "Eurostat/ei_bsin_m_r2/M.BAL.BS-ICI.SA.EA19"),
-             ("dbnomics", "Eurostat/ei_bssi_m_r2/M.BAL.BS-ICI-BAL.SA.EA20"),
+             ("dbnomics", "Eurostat/ei_bsin_m_r2/M.BS-ICI.SA.BAL.EA20"),
+             ("dbnomics", "Eurostat/ei_bsin_m_r2/M.BS-ICI.NSA.BAL.EA20"),
+             ("dbnomics", "Eurostat/ei_bsin_m_r2/M.BS-ICI.SA.BAL.EA19"),
              ("manual", "EUBCOI")]),
 
     # ---------------- Europe rates ----------------
     dict(id="DE02Y", name="Germany 2Y government bond yield", group="Europe rates", freq="D", kind="value", units="%",
          tv="TVC:DE02Y", sources=[
-             ("bbk", "BBSSY/D.REN.EUR.A620.000000WT0202.A"), ("bbk", "BBK01/WT0202"),
-             ("ecb", "YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_2Y"), ("manual", "DE02Y")]),
+             ("bbk", "BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A"),
+             ("dbnomics", "BUBA/BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A"),
+             ("ecb", "YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_2Y", "Euro area AAA 2Y spot yield (ECB curve)"), ("manual", "DE02Y")]),
     dict(id="DE10Y", name="Germany 10Y government bond yield", group="Europe rates", freq="D", kind="value", units="%",
          tv="—", sources=[
-             ("bbk", "BBSSY/D.REN.EUR.A620.000000WT1010.A"), ("bbk", "BBK01/WT1010"),
-             ("ecb", "YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y")]),
+             ("bbk", "BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A"),
+             ("dbnomics", "BUBA/BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A"),
+             ("ecb", "YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_10Y", "Euro area AAA 10Y spot yield (ECB curve)")]),
 
     # ---------------- Equity indices, commodities, FX (OHLC) ----------------
     dict(id="SPX", name="S&P 500", group="Indices & commodities", freq="D", kind="ohlc", units="index",

@@ -123,7 +123,10 @@ def fetch_one(spec):
     """Try each candidate source; return (bars, source_name, key, error_list)."""
     errors = []
     best = None
-    for src, key in spec["sources"]:
+    for cand in spec["sources"]:
+        src, key = cand[0], cand[1]
+        if len(cand) > 2:
+            key = key  # name override handled by the caller via name_for()
         try:
             if src == "fred":
                 rows = S.fred(key)
@@ -172,12 +175,20 @@ def fetch_one(spec):
     return None, None, None, errors
 
 
+def name_for(spec, src, key):
+    """Display name, overridden when the winning source candidate carries its own label."""
+    for cand in spec.get("sources", []):
+        if len(cand) > 2 and cand[0] == src and cand[1] == key:
+            return cand[2]
+    return spec["name"]
+
+
 def series_meta(spec, bars, src, key, stale, group=None):
     last = datetime.fromtimestamp(bars[-1][0] / 1000, timezone.utc).date().isoformat() if bars else None
     first = datetime.fromtimestamp(bars[0][0] / 1000, timezone.utc).date().isoformat() if bars else None
     closes = [b[4] if len(b) > 2 else b[1] for b in bars]
     return dict(
-        id=spec["id"], name=spec["name"], group=group or spec["group"], freq=spec["freq"], kind=spec["kind"],
+        id=spec["id"], name=name_for(spec, src, key), group=group or spec["group"], freq=spec["freq"], kind=spec["kind"],
         units=spec.get("units", ""), tv=spec.get("tv", ""), precision=auto_precision(closes),
         source=SOURCE_LABEL.get(src, src or "?"), source_key=key or "",
         source_url=(SOURCE_URL.get(src, "") or "").format(k=key or ""),
