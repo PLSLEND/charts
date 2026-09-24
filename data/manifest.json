@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-24T15:56:04+00:00",
+ "updated": "2026-09-24T15:59:37+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -608,7 +608,7 @@
   },
   {
    "id": "GOLD",
-   "name": "Gold (front-month future)",
+   "name": "Gold (COMEX front-month; LBMA PM fix before 2000)",
    "group": "Indices & commodities",
    "freq": "D",
    "kind": "ohlc",

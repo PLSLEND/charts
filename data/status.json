@@ -1,25 +1,20 @@
 {
- "updated": "2026-09-24T15:56:04+00:00",
+ "updated": "2026-09-24T15:59:37+00:00",
  "series": {
   "GOLD": {
    "ok": true,
    "source": "yahoo:GC=F",
    "last": "2026-09-24",
    "n": 6542,
-   "errors": [
-    "stooq:xauusd -> stooq: '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta name=\"robots\" content=\"no'"
-   ],
-   "secs": 1.1
+   "errors": [],
+   "secs": 7.0
+  },
+  "SPX_GOLD": {
+   "ok": true,
+   "source": "SPX / GOLD",
+   "last": "2026-09-24",
+   "n": 6561
   }
  },
- "crypto": {
-  "eHEX": {
-   "ok": true,
-   "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
-   "name": "HEX / WETH",
-   "n_day": 2474,
-   "n_4h": 2000,
-   "secs": 14.5
-  }
- }
+ "crypto": {}
 }
