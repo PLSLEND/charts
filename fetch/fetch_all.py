@@ -412,7 +412,7 @@ def main():
                     res = info
                     pools["resolved"][cid] = res
                 if not res or not res.get("pool"):
-                    res, cands = S.gt_search_pool(spec["network"], spec["search"], spec.get("quotes", []), spec.get("token"))
+                    res, cands = S.gt_search_pool(spec["network"], spec["search"], spec.get("quotes", []), spec.get("token"), spec.get("quote_sym"))
                     pools["candidates"][cid] = [dict(name=n, pool=a, reserve_usd=round(r), base_token=b) for n, a, r, b in cands][:12]
                     if not res:
                         raise S.SourceError(f"no pool found for {spec['search']} on {spec['network']}; candidates: "
@@ -420,8 +420,9 @@ def main():
                     res["side"] = "base"
                     pools["resolved"][cid] = res
                 side = res.get("side", "base")
-                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=8, token=side)
-                h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=2, token=side)
+                currency = spec.get("currency", "usd")
+                day = S.gt_ohlcv_history(spec["network"], res["pool"], "day", 1, pages=8, token=side, currency=currency)
+                h4 = S.gt_ohlcv_history(spec["network"], res["pool"], "hour", 4, pages=2, token=side, currency=currency)
                 # deeper daily history (before GeckoTerminal's window) from an alternative feed, when configured
                 deep_note = ""
                 if spec.get("deep") and day:
@@ -429,13 +430,15 @@ def main():
                     try:
                         first = day[0][0]
                         if dsrc == "cointrader":
-                            drows = S.cointrader_history(dkey)
+                            drows, dlabel = S.cointrader_history(dkey), "CoinTrader.Pro (CoinMarketCap data, via hexchart.com)"
+                        elif dsrc == "pulsex":
+                            drows, dlabel = S.pulsex_history(**dkey), "PulseX pair day data (PulseChain subgraph, daily closes)"
                         else:
                             raise S.SourceError(f"unknown deep source {dsrc}")
                         deep = [r for r in drows if r[0] < first]
                         if deep:
                             day = deep + day
-                            deep_note = f"{len(deep)} daily bars before {datetime.fromtimestamp(first, timezone.utc).date().isoformat()} from CoinTrader.Pro (CoinMarketCap data, via hexchart.com)"
+                            deep_note = f"{len(deep)} daily bars before {datetime.fromtimestamp(first, timezone.utc).date().isoformat()} from {dlabel}"
                             log(f"     + {cid}: {deep_note}")
                     except Exception as e:  # noqa: BLE001
                         log(f"     ~ {cid}: deep history unavailable: {str(e)[:120]}")
@@ -446,7 +449,8 @@ def main():
                 closes = [r[4] for r in day] or [1]
                 last = datetime.fromtimestamp(day[-1][0], timezone.utc).date().isoformat() if day else None
                 crypto_manifest.append(dict(
-                    id=cid, name=spec["name"], group="PulseChain & HEX", network=spec["network"], pool=res["pool"], side=side,
+                    id=cid, name=spec["name"], group="PulseChain & HEX", network=spec["network"], pool=res["pool"], side=side, currency=currency,
+                    units=spec.get("units", "USD"),
                     pool_name=res.get("name", ""), base_symbol=res.get("base_symbol", ""), quote_symbol=res.get("quote_symbol", ""),
                     deep_history=deep_note,
                     precision=auto_precision(closes), last=last, n_day=len(day), n_4h=len(h4),

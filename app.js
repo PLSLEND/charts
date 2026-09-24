@@ -11,12 +11,12 @@
   const DAY = 86400000;
 
   const C = {
-    up: '#f4f2fa', down: '#3fa9ff', trendUp: '#a86bff', trendDown: '#ff3fd1', pink: '#ff3fd1', violet: '#8a4dff', blue: '#3fa9ff', accent: '#a86bff',
+    up: '#f4f2fa', down: '#3fa9ff', trendUp: '#26d07c', trendDown: '#ff5c7a', pink: '#ff3fd1', violet: '#8a4dff', blue: '#3fa9ff', accent: '#a86bff',
     text: '#e8e5f2', muted: '#8f8aa8', dim: '#5e5975', grid: '#1c1929', line: '#262238', panel: '#13111d', bg: '#0b0a12', warn: '#ffb347',
   };
   const FIB_LEVELS = [
-    [0, '#8f8aa8'], [0.382, '#ffb347'], [0.5, '#f4f2fa'], [0.618, '#2ec4b6'], [1, '#8f8aa8'],
-    [1.382, '#3fa9ff'], [1.618, '#8a4dff'], [2, '#a86bff'], [2.618, '#ff8ac2'], [3.618, '#ff3fd1'], [4.236, '#ffb347'],
+    [0, '#8f8aa8'], [0.382, '#ffb347'], [0.5, '#26d07c'], [0.618, '#2ec4b6'], [1, '#8f8aa8'],
+    [1.382, '#3fa9ff'], [1.618, '#8a4dff'], [2, '#a86bff'], [2.618, '#ff5c7a'], [3.618, '#ff3fd1'], [4.236, '#ff8ac2'],
   ];
   const TF_PERIOD = { '4h': { type: 'hour', span: 4 }, D: { type: 'day', span: 1 }, W: { type: 'week', span: 1 }, M: { type: 'month', span: 1 } };
   const FREQ_TFS = { '4h': ['4h', 'D', 'W', 'M'], D: ['D', 'W', 'M'], W: ['W', 'M'], M: ['M'], Q: ['M'] };
@@ -25,7 +25,7 @@
   // ------------------------------------------------------------------ state
   const st = {
     manifest: null, symbols: new Map(), current: null, tf: 'D', native: null, // native: KLineData[] at the series' own frequency
-    chartType: null, log: false, ind: { st: true, rsi: false, macd: false }, stp: [10, 2.8], magnet: false, tool: 'cursor',
+    chartType: null, log: false, fibLog: false, ind: { st: true, rsi: false, macd: false }, stp: [10, 2.8], magnet: false, tool: 'cursor',
     drawingId: null, selectedId: null, suppress: false, cache: new Map(), custom: [], pools: [],
   };
   const pref = (k, d) => { try { const v = localStorage.getItem(LS + k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
@@ -91,7 +91,7 @@
     },
     indicator: {
       lines: [{ color: C.accent, size: 1.5 }, { color: C.blue, size: 1 }, { color: C.pink, size: 1 }, { color: C.warn, size: 1 }, { color: C.up, size: 1 }],
-      bars: [{ upColor: 'rgba(244,242,250,0.7)', downColor: 'rgba(63,169,255,0.7)', noChangeColor: C.muted }],
+      bars: [{ upColor: 'rgba(38,208,124,0.7)', downColor: 'rgba(255,92,122,0.7)', noChangeColor: C.muted }],
       tooltip: { title: { color: C.muted }, legend: { color: C.text } },
       lastValueMark: { show: false },
     },
@@ -173,7 +173,7 @@
         styles: ({ data }) => {
           const p = data.prev && data.prev.hist, c = data.current && data.current.hist;
           const rising = p === undefined || p === null || c >= p;
-          const color = c >= 0 ? (rising ? 'rgba(244,242,250,0.85)' : 'rgba(244,242,250,0.4)') : (rising ? 'rgba(63,169,255,0.45)' : 'rgba(63,169,255,0.9)');
+          const color = c >= 0 ? (rising ? 'rgba(38,208,124,0.85)' : 'rgba(38,208,124,0.4)') : (rising ? 'rgba(255,92,122,0.4)' : 'rgba(255,92,122,0.85)');
           return { style: 'fill', color, borderColor: color };
         },
       },
@@ -215,7 +215,7 @@
       const x = Math.min(c0.x, c1.x), y = Math.min(c0.y, c1.y), w = Math.abs(c1.x - c0.x), h = Math.abs(c1.y - c0.y);
       const tx = x + w / 2, ty = up ? y - 6 : y + h + 6, bl = up ? 'bottom' : 'top', dir = up ? -1 : 1;
       return [
-        { type: 'rect', attrs: { x, y, width: w, height: h }, styles: { style: 'stroke_fill', color: up ? 'rgba(168,107,255,0.12)' : 'rgba(255,63,209,0.12)', borderColor: col, borderSize: 1 } },
+        { type: 'rect', attrs: { x, y, width: w, height: h }, styles: { style: 'stroke_fill', color: up ? 'rgba(38,208,124,0.10)' : 'rgba(255,92,122,0.10)', borderColor: col, borderSize: 1 } },
         { type: 'text', ignoreEvent: true, attrs: { x: tx, y: ty, text: `${dv >= 0 ? '+' : ''}${fmtNum(dv, prec)}  (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)`, align: 'center', baseline: bl }, styles: textStyle(col) },
         { type: 'text', ignoreEvent: true, attrs: { x: tx, y: ty + dir * 22, text: `${bars} bars · ${days} days`, align: 'center', baseline: bl }, styles: textStyle('rgba(19,17,29,0.9)') },
       ];
@@ -243,7 +243,32 @@
       return figs;
     },
   });
-  const PERSISTED = new Set(['segment', 'rayLine', 'horizontalStraightLine', 'priceRuler', 'fibExtension']);
+  const RETRACE_LEVELS = [
+    [0, '#8f8aa8'], [0.236, '#ff5c7a'], [0.382, '#ffb347'], [0.5, '#26d07c'], [0.618, '#2ec4b6'], [0.786, '#3fa9ff'], [1, '#8f8aa8'],
+    [1.272, '#a86bff'], [1.618, '#8a4dff'], [2, '#ff3fd1'], [2.618, '#ff8ac2'], [3.618, '#ffb347'], [4.236, '#ff5c7a'],
+  ];
+  kc.registerOverlay({
+    name: 'fibRetracement', totalStep: 3, needDefaultPointFigure: true, needDefaultXAxisFigure: false, needDefaultYAxisFigure: true,
+    createPointFigures: ({ chart, overlay, coordinates, bounding, yAxis }) => {
+      const pts = overlay.points, figs = [];
+      if (coordinates.length < 2 || pts[0].value === undefined || pts[1].value === undefined) return figs;
+      figs.push({ type: 'line', attrs: { coordinates: [coordinates[0], coordinates[1]] }, styles: { style: 'dashed', color: 'rgba(143,138,168,0.6)', size: 1 } });
+      const a = pts[0].value, b = pts[1].value;
+      const useLog = st.fibLog && a > 0 && b > 0;
+      const prec = (chart.getSymbol() || {}).pricePrecision ?? 2;
+      const x0 = Math.min(coordinates[0].x, coordinates[1].x);
+      for (const [lv, color] of RETRACE_LEVELS) {
+        // level 0 sits on the second point (the end of the move), level 1 on the first — TradingView convention
+        const v = useLog ? Math.exp(Math.log(b) + (Math.log(a) - Math.log(b)) * lv) : b + (a - b) * lv;
+        const y = yAxis ? yAxis.convertToPixel(v) : coordinates[1].y;
+        if (!isFinite(y) || y < -50 || y > bounding.height + 50) continue;
+        figs.push({ type: 'line', attrs: { coordinates: [{ x: x0, y }, { x: bounding.width, y }] }, styles: { color, size: 1 } });
+        figs.push({ type: 'text', ignoreEvent: true, attrs: { x: x0 + 4, y: y - 2, text: `${lv} (${fmtNum(v, prec)})`, baseline: 'bottom' }, styles: { color, backgroundColor: 'transparent', borderSize: 0, size: 11, paddingLeft: 0, paddingRight: 0, paddingTop: 0, paddingBottom: 0 } });
+      }
+      return figs;
+    },
+  });
+  const PERSISTED = new Set(['segment', 'rayLine', 'horizontalStraightLine', 'priceRuler', 'fibRetracement', 'fibExtension']);
 
   // ------------------------------------------------------------------ log axis (the built-in one mislabels prices < 1)
   const LOG_FLOOR = 1e-12;
@@ -379,7 +404,7 @@
     if (tool !== 'cursor' && st.native) {
       const id = chart.createOverlay({ name: tool, paneId: 'candle_pane', mode: st.magnet ? 'weak_magnet' : 'normal', ...overlayEvents() });
       st.drawingId = Array.isArray(id) ? id[0] : id;
-      toast({ segment: 'Trend line: click start, then end', rayLine: 'Ray: click start, then direction', horizontalStraightLine: 'Horizontal line: click a level', priceRuler: 'Ruler: click start, then end', fibExtension: 'Fib extension: click A, B, then C' }[tool] || '', 3000);
+      toast({ segment: 'Trend line: click start, then end', rayLine: 'Ray: click start, then direction', horizontalStraightLine: 'Horizontal line: click a level', priceRuler: 'Ruler: click start, then end', fibRetracement: 'Fib retracement: click the swing start, then the swing end', fibExtension: 'Fib extension: click A, B, then C' }[tool] || '', 3000);
     }
   }
   function deleteSelected() {
@@ -432,12 +457,12 @@
     cacheSet(k, data);
     return data;
   }
-  async function gtOhlcv(network, pool, tf, pages, before, side) {
+  async function gtOhlcv(network, pool, tf, pages, before, side, currency) {
     // GeckoTerminal public API: ~6 months per daily page, 1000 bars per 4h page; 401 = end of the free window
     const path = tf === '4h' ? 'hour?aggregate=4' : 'day?aggregate=1';
     const rows = [];
     for (let p = 0; p < pages; p++) {
-      const url = `${GT}/networks/${network}/pools/${pool}/ohlcv/${path}&limit=1000&currency=usd&token=${side || 'base'}${before ? '&before_timestamp=' + before : ''}`;
+      const url = `${GT}/networks/${network}/pools/${pool}/ohlcv/${path}&limit=1000&currency=${currency || 'usd'}&token=${side || 'base'}${before ? '&before_timestamp=' + before : ''}`;
       const r = await fetch(url, { headers: { Accept: 'application/json;version=20230302' } });
       if (r.status === 401) break;
       if (r.status === 429) { await new Promise((res) => setTimeout(res, 2500)); p--; continue; }
@@ -468,7 +493,7 @@
       try { cached = barsToKline((await fetchJSON(`${DATA}crypto/${s.id}_${want}.json?v=${encodeURIComponent(st.manifest.updated || '')}`)).bars); } catch (e) { cached = []; }
     }
     let live = [];
-    try { live = await gtOhlcv(s.network, s.pool, want, cached.length ? 1 : (want === '4h' ? 3 : 8), null, s.side); } catch (e) { live = []; }
+    try { live = await gtOhlcv(s.network, s.pool, want, cached.length ? 1 : (want === '4h' ? 3 : 8), null, s.side, s.currency); } catch (e) { live = []; }
     s.live = live.length > 0;
     const data = mergeBars(cached, live);
     if (!data.length) throw new Error('no candles from GeckoTerminal' + (s.userPool ? '' : ' or cache'));
@@ -544,7 +569,7 @@
     $('#symhead .name').textContent = s.name || '';
     const last = data[data.length - 1], prev = data[data.length - 2];
     if (last) {
-      const units = s.units && s.units !== 'index' ? ' ' + s.units : '';
+      const units = s.units && s.units !== 'index' && s.units !== 'USD' ? ' ' + s.units : '';
       $('#symhead .last').textContent = `${fmtNum(last.close, s.precision)}${units} · ${fmtDate(last.timestamp, st.tf)}`;
       const ch = prev ? last.close - prev.close : 0, pct = prev && prev.close ? (ch / Math.abs(prev.close)) * 100 : 0;
       const el = $('#symhead .chg'); el.textContent = prev ? `${ch >= 0 ? '+' : ''}${fmtNum(ch, s.precision)} (${pct >= 0 ? '+' : ''}${pct.toFixed(2)}%)` : '';
@@ -639,6 +664,11 @@
     const len = Math.max(2, Math.round(+$('#stLen').value || 10)), mult = Math.max(0.1, +$('#stMult').value || 2.8);
     st.stp = [len, +mult.toFixed(2)]; setPref('stp', st.stp); applyPanes();
   });
+  $('#fiblog').addEventListener('click', () => {
+    st.fibLog = !st.fibLog; setPref('fibLog', st.fibLog); $('#fiblog').classList.toggle('on', st.fibLog);
+    for (const o of chart.getOverlays({ name: 'fibRetracement' })) chart.overrideOverlay({ id: o.id });
+    toast(st.fibLog ? 'Fib levels: logarithmic spacing' : 'Fib levels: linear spacing');
+  });
   $('#magnet').addEventListener('click', () => { st.magnet = !st.magnet; $('#magnet').classList.toggle('on', st.magnet); setPref('magnet', st.magnet); });
   $('#delsel').addEventListener('click', deleteSelected);
   $('#delall').addEventListener('click', deleteAll);
@@ -668,7 +698,8 @@
   // ------------------------------------------------------------------ boot
   (async function boot() {
     st.chartType = pref('chartType', null); st.log = pref('log', false); st.ind = { ...st.ind, ...pref('ind', {}) }; st.magnet = pref('magnet', false);
-    st.custom = pref('custom', []); st.pools = pref('pools', []); st.stp = pref('stp', [10, 2.8]);
+    st.custom = pref('custom', []); st.pools = pref('pools', []); st.stp = pref('stp', [10, 2.8]); st.fibLog = pref('fibLog', false);
+    $('#fiblog').classList.toggle('on', st.fibLog);
     $('#magnet').classList.toggle('on', st.magnet);
     setTool('cursor');
     loading(true);

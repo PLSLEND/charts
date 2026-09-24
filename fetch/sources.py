@@ -360,6 +360,96 @@ def worldbank_pinksheet(commodity):
     return _clean_value_rows(out)
 
 
+# ---------------------------------------------------------------- PulseX subgraph (daily pair reserves since launch, May 2023)
+PULSEX_SUBGRAPHS = [
+    "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsex",
+    "https://graph.pulsechain.com/subgraphs/name/pulsechain/pulsexv2",
+]
+PLS_TOKENS = {
+    "WPLS": "0xa1077a294dde1b09bb078844df40758a5d0f9a27",
+    "DAI": "0xefd766ccb38eaf1dfd701853bfce31359239f305",     # DAI bridged from Ethereum
+    "PDAI": "0x6b175474e89094c44da98b954eedeac495271d0f",    # pDAI (forked copy)
+    "WETH": "0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c",    # WETH bridged from Ethereum
+    "PLSX": "0x95b303987a60c71504d99aa1b13b4da07b0790ab",
+    "PHEX": "0x2b591e99afe9f32eaa6214f7b7629768c40eeb39",
+    "INC": "0x2fa878ab3f87cc1c9737fc071108f904c0b0c95d",
+}
+_pls_usd_cache = {}
+
+
+def _graphql(url, query, variables=None):
+    r = requests.post(url, json={"query": query, "variables": variables or {}}, headers={"User-Agent": UA}, timeout=TIMEOUT)
+    if r.status_code != 200:
+        raise SourceError(f"{url} -> HTTP {r.status_code}: {r.text[:120]!r}")
+    js = r.json()
+    if js.get("errors"):
+        raise SourceError(f"{url} -> {str(js['errors'])[:200]}")
+    return js.get("data") or {}
+
+
+def pulsex_pair(token, quote):
+    """Most liquid PulseX v1/v2 pair between two tokens -> (subgraph_url, pair_id, token_is_token0)."""
+    token, quote = token.lower(), quote.lower()
+    q = """query($a:[String!],$b:[String!]){ pairs(where:{token0_in:$a, token1_in:$b}, orderBy: reserveUSD, orderDirection: desc, first: 5)
+             { id reserveUSD token0 { id symbol } token1 { id symbol } } }"""
+    best = None
+    for url in PULSEX_SUBGRAPHS:
+        try:
+            data = _graphql(url, q, {"a": [token, quote], "b": [token, quote]})
+        except SourceError:
+            continue
+        for p in data.get("pairs", []):
+            ids = {p["token0"]["id"].lower(), p["token1"]["id"].lower()}
+            if ids != {token, quote}:
+                continue
+            rusd = float(p.get("reserveUSD") or 0)
+            if best is None or rusd > best[0]:
+                best = (rusd, url, p["id"], p["token0"]["id"].lower() == token)
+    if best is None:
+        raise SourceError(f"pulsex: no pair for {token}/{quote}")
+    return best[1], best[2], best[3]
+
+
+def pulsex_daily(token, quote):
+    """Daily closes of `token` priced in `quote` from pair day data -> [(unix_day, price, volume_usd), ...]."""
+    url, pair_id, token_is_0 = pulsex_pair(token, quote)
+    q = """query($p:String!,$skip:Int!){ pairDayDatas(where:{pairAddress:$p}, orderBy: date, orderDirection: asc, first: 1000, skip: $skip)
+             { date reserve0 reserve1 dailyVolumeUSD } }"""
+    rows, skip = [], 0
+    while True:
+        data = _graphql(url, q, {"p": pair_id, "skip": skip})
+        chunk = data.get("pairDayDatas", [])
+        for d in chunk:
+            r0, r1 = float(d.get("reserve0") or 0), float(d.get("reserve1") or 0)
+            if r0 <= 0 or r1 <= 0:
+                continue
+            price = (r1 / r0) if token_is_0 else (r0 / r1)
+            rows.append((int(d["date"]), price, float(d.get("dailyVolumeUSD") or 0)))
+        if len(chunk) < 1000:
+            break
+        skip += 1000
+        if skip > 5000:
+            break
+    if len(rows) < 5:
+        raise SourceError(f"pulsex: only {len(rows)} day rows for {token}/{quote}")
+    return rows
+
+
+def pulsex_history(token, quote="WPLS", in_usd=True):
+    """OHLCV-shaped daily rows (flat candles) for `token`; WPLS-quoted prices are converted to USD via the WPLS/DAI pair."""
+    tok = PLS_TOKENS.get(token.upper(), token)
+    quo = PLS_TOKENS.get(quote.upper(), quote)
+    rows = pulsex_daily(tok, quo)
+    if in_usd and quo != PLS_TOKENS["DAI"] and quo != PLS_TOKENS["PDAI"]:
+        if not _pls_usd_cache:
+            for d, p, _v in pulsex_daily(PLS_TOKENS["WPLS"], PLS_TOKENS["DAI"]):
+                _pls_usd_cache[d] = p
+        if quo != PLS_TOKENS["WPLS"]:
+            raise SourceError("pulsex: USD conversion only supported for WPLS-quoted pairs")
+        rows = [(d, p * _pls_usd_cache[d], v) for d, p, v in rows if d in _pls_usd_cache]
+    return [(d, p, p, p, p, v) for d, p, v in rows]
+
+
 # ---------------------------------------------------------------- manual CSV
 def manual(key, manual_dir):
     p = manual_dir / f"{key}.csv"
@@ -463,9 +553,10 @@ def gt_pool_info(network, pool):
                 reserve_usd=float(a.get("reserve_in_usd") or 0), price_usd=_num(a.get("base_token_price_usd")))
 
 
-def gt_search_pool(network, symbol, quotes, token=None):
+def gt_search_pool(network, symbol, quotes, token=None, quote_sym=None):
     """Find the most liquid pool whose base token symbol matches (and token address, if given)."""
     js = _gt_get("/search/pools", params={"query": symbol, "network": network, "page": "1"})
+    quote_sym_req = quote_sym
     best, cands = None, []
     for p in js.get("data", []):
         a = p.get("attributes", {})
@@ -482,6 +573,8 @@ def gt_search_pool(network, symbol, quotes, token=None):
             continue
         if token and base_addr and base_addr != token.lower():
             continue
+        if quote_sym and quote_sym.upper() != (quote_sym_req or quote_sym).upper():
+            continue
         score = reserve * (3.0 if quote_sym.upper() in [q.upper() for q in quotes] else 1.0)
         if best is None or score > best[0]:
             best = (score, dict(pool=a.get("address"), name=name, reserve_usd=reserve,
@@ -490,8 +583,8 @@ def gt_search_pool(network, symbol, quotes, token=None):
     return (best[1] if best else None), cands
 
 
-def gt_ohlcv(network, pool, timeframe="day", aggregate=1, limit=1000, before=None, token="base"):
-    params = {"aggregate": str(aggregate), "limit": str(limit), "currency": "usd", "token": token}
+def gt_ohlcv(network, pool, timeframe="day", aggregate=1, limit=1000, before=None, token="base", currency="usd"):
+    params = {"aggregate": str(aggregate), "limit": str(limit), "currency": currency, "token": token}
     if before:
         params["before_timestamp"] = str(int(before))
     js = _gt_get(f"/networks/{network}/pools/{pool}/ohlcv/{timeframe}", params=params)
@@ -505,12 +598,12 @@ def gt_ohlcv(network, pool, timeframe="day", aggregate=1, limit=1000, before=Non
     return rows
 
 
-def gt_ohlcv_history(network, pool, timeframe, aggregate, pages=1, token="base"):
+def gt_ohlcv_history(network, pool, timeframe, aggregate, pages=1, token="base", currency="usd"):
     """Page backwards until the API returns nothing, refuses (401 = free window exhausted) or `pages` is hit."""
     allrows, before = [], None
     for _ in range(pages):
         try:
-            rows = gt_ohlcv(network, pool, timeframe, aggregate, before=before, token=token)
+            rows = gt_ohlcv(network, pool, timeframe, aggregate, before=before, token=token, currency=currency)
         except GTHistoryLimit:
             break
         if len(rows) < 2:
