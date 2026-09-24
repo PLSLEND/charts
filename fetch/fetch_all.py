@@ -161,6 +161,8 @@ def fetch_one(spec):
             bars = rows_to_bars(rows, kind)
             if len(bars) < 5:
                 raise S.SourceError(f"{src}:{key} returned only {len(bars)} bars")
+            if spec.get("deep"):
+                bars = prepend_deep(spec, bars)
             if kind == "ohlc" and len(bars) < 2500:
                 # a short history (e.g. Yahoo throttled to a few months): remember it, try the next source
                 if best is None or len(bars) > len(best[0]):
@@ -181,6 +183,24 @@ def name_for(spec, src, key):
         if len(cand) > 2 and cand[0] == src and cand[1] == key:
             return cand[2]
     return spec["name"]
+
+
+def prepend_deep(spec, bars):
+    """Extend a series backwards with an older feed (spec['deep'] = (source, key)) for dates before its first bar."""
+    dsrc, dkey = spec["deep"]
+    try:
+        fn = {"fred": S.fred, "stooq": S.stooq, "yahoo": S.yahoo, "ecb": S.ecb, "dbnomics": S.dbnomics}[dsrc]
+        rows = fn(dkey)
+        first = bars[0][0]
+        if len(rows[0]) == 2 and spec["kind"] == "ohlc":
+            rows = [(d, v, v, v, v, 0.0) for d, v in rows]
+        deep = [b for b in rows_to_bars(rows, spec["kind"]) if b[0] < first]
+        if deep:
+            log(f"     + {spec['id']}: {len(deep)} earlier bars from {dsrc}:{dkey}")
+            return deep + bars
+    except Exception as e:  # noqa: BLE001
+        log(f"     ~ {spec['id']}: deep history {dsrc}:{dkey} unavailable: {str(e)[:120]}")
+    return bars
 
 
 def series_meta(spec, bars, src, key, stale, group=None):
