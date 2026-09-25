@@ -414,7 +414,7 @@
     });
     $$('#ctype button').forEach((b) => b.classList.toggle('on', b.dataset.ct === ct));
     chart.overrideYAxis({ paneId: 'candle_pane', name: st.log && canLog() ? 'logsafe' : 'pricesafe' });
-    $('#logbtn').disabled = !canLog(); $('#logbtn').title = canLog() ? 'Logarithmic price scale' : 'Log scale needs all-positive values';
+    $('#logbtn').classList.toggle('dim', !canLog()); $('#logbtn').title = canLog() ? 'Logarithmic price scale' : 'Log scale needs all-positive values — this series crosses zero';
     $('#logbtn').classList.toggle('on', st.log);
     // indicators
     const have = (n) => chart.getIndicators({ name: n }).length > 0;
@@ -724,7 +724,7 @@
   // ------------------------------------------------------------------ wiring
   $('#tfs').addEventListener('click', (e) => { const b = e.target.closest('button'); if (b && !b.disabled) setTf(b.dataset.tf); });
   $('#ctype').addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; st.chartType = b.dataset.ct; setPref('chartType', st.chartType); applyPanes(); });
-  $('#logbtn').addEventListener('click', () => { st.log = !st.log; setPref('log', st.log); applyPanes(); });
+  $('#logbtn').addEventListener('click', () => { if (!canLog()) { toast('Log scale needs all-positive values — this series crosses zero (spreads can be negative)', 3500); return; } st.log = !st.log; setPref('log', st.log); applyPanes(); });
   for (const [btn, key] of [['#ind-st', 'st'], ['#ind-rsi', 'rsi'], ['#ind-macd', 'macd']]) $(btn).addEventListener('click', () => { st.ind[key] = !st.ind[key]; setPref('ind', st.ind); applyPanes(); });
   $$('#toolbar [data-tool]').forEach((b) => b.addEventListener('click', () => setTool(b.dataset.tool === st.tool && b.dataset.tool !== 'cursor' ? 'cursor' : b.dataset.tool)));
   for (const id of ['#stLen', '#stMult']) $(id).addEventListener('change', () => {

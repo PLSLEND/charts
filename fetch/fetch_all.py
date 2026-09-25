@@ -186,6 +186,41 @@ def name_for(spec, src, key):
     return spec["name"]
 
 
+CLEAN_TOL = {"FX": 0.06, "Indices & commodities": 0.25, "Crypto majors": 0.5}
+
+
+def clean_ohlc(bars, tol):
+    """Drop bad days and clip bad wicks from an OHLC series (Yahoo's FX history has junk ticks).
+    A bar's open/close is compared with the median close of the 10 surrounding bars: if open or close
+    deviate more than `tol` the bar is dropped; if only high/low do, they are clipped to the body."""
+    if not bars or len(bars[0]) < 5 or not tol:
+        return bars
+    closes = [b[4] for b in bars]
+    out, dropped, clipped = [], 0, 0
+    for i, b in enumerate(bars):
+        window = closes[max(0, i - 5):i] + closes[i + 1:i + 6]
+        if len(window) < 4:
+            out.append(b)
+            continue
+        ref = statistics.median(window)
+        if ref <= 0:
+            out.append(b)
+            continue
+        t, o, h, l, c, v = b[:6]
+        if abs(o / ref - 1) > tol or abs(c / ref - 1) > tol:
+            dropped += 1
+            continue
+        hi, lo = max(o, c), min(o, c)
+        if h > hi * (1 + tol) or l < lo * (1 - tol) or l <= 0:
+            out.append([t, o, hi, lo, c, v])
+            clipped += 1
+        else:
+            out.append(b)
+    if dropped or clipped:
+        log(f"     ~ cleaned: {dropped} bad bars dropped, {clipped} wicks clipped")
+    return out
+
+
 def prepend_deep(spec, bars):
     """Extend a series backwards with an older feed (spec['deep'] = (source, key)) for dates before its first bar."""
     dsrc, dkey = spec["deep"]
@@ -354,6 +389,8 @@ def main():
                 if len(merged) > len(bars):
                     log(f"     + {sid}: kept {len(merged) - len(bars)} older bars no longer served by the source")
                 bars = [merged[t] for t in sorted(merged)]
+            if spec["kind"] == "ohlc" and spec["group"] in CLEAN_TOL:
+                bars = clean_ohlc(bars, CLEAN_TOL[spec["group"]])
             obj = {"id": sid, "kind": spec["kind"], "freq": spec["freq"], "source_id": src, "source_key": key,
                    "updated": NOW.isoformat(timespec="seconds"), "bars": bars}
             dump_json(out, obj)
