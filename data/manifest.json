@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-25T12:58:38+00:00",
+ "updated": "2026-09-25T14:56:22+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -439,8 +439,8 @@
    "source_key": "^GSPC",
    "source_url": "https://finance.yahoo.com/quote/^GSPC",
    "first": "1927-12-30",
-   "last": "2026-09-24",
-   "n": 24800,
+   "last": "2026-09-25",
+   "n": 24801,
    "stale": false,
    "file": "series/SPX.json"
   },
@@ -457,8 +457,8 @@
    "source_key": "^NDX",
    "source_url": "https://finance.yahoo.com/quote/^NDX",
    "first": "1985-10-01",
-   "last": "2026-09-24",
-   "n": 10325,
+   "last": "2026-09-25",
+   "n": 10326,
    "stale": false,
    "file": "series/NDX.json"
   },
@@ -475,8 +475,8 @@
    "source_key": "^RUT",
    "source_url": "https://finance.yahoo.com/quote/^RUT",
    "first": "1987-09-10",
-   "last": "2026-09-24",
-   "n": 9834,
+   "last": "2026-09-25",
+   "n": 9835,
    "stale": false,
    "file": "series/RTY.json"
   },
@@ -565,8 +565,8 @@
    "source_key": "GSG",
    "source_url": "https://finance.yahoo.com/quote/GSG",
    "first": "2006-07-21",
-   "last": "2026-09-24",
-   "n": 5076,
+   "last": "2026-09-25",
+   "n": 5077,
    "stale": false,
    "file": "series/GSG.json"
   },
@@ -583,8 +583,8 @@
    "source_key": "QQQ",
    "source_url": "https://finance.yahoo.com/quote/QQQ",
    "first": "1999-03-10",
-   "last": "2026-09-24",
-   "n": 6929,
+   "last": "2026-09-25",
+   "n": 6930,
    "stale": false,
    "file": "series/QQQ.json"
   },
@@ -601,8 +601,8 @@
    "source_key": "CQQQ",
    "source_url": "https://finance.yahoo.com/quote/CQQQ",
    "first": "2010-01-22",
-   "last": "2026-09-24",
-   "n": 4194,
+   "last": "2026-09-25",
+   "n": 4195,
    "stale": false,
    "file": "series/CQQQ.json"
   },
@@ -763,8 +763,8 @@
    "source_key": "QQQ / CQQQ",
    "source_url": "",
    "first": "2010-01-22",
-   "last": "2026-09-24",
-   "n": 4194,
+   "last": "2026-09-25",
+   "n": 4195,
    "stale": false,
    "file": "series/QQQ_CQQQ.json"
   },
@@ -1100,7 +1100,7 @@
    "precision": 7,
    "last": "2026-09-25",
    "n_day": 366,
-   "n_4h": 1003,
+   "n_4h": 1004,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xf35f8db9b6760799db76796340aacc69dea0c644"
   }
