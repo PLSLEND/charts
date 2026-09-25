@@ -1,210 +1,13 @@
 {
- "updated": "2026-09-25T22:27:45+00:00",
+ "updated": "2026-09-25T22:53:39+00:00",
  "series": {
-  "US10Y": {
-   "ok": true,
-   "source": "fred:DGS10",
-   "last": "2026-09-24",
-   "n": 16168,
-   "errors": [],
-   "secs": 36.4
-  },
-  "US02Y": {
-   "ok": true,
-   "source": "fred:DGS2",
-   "last": "2026-09-24",
-   "n": 12576,
-   "errors": [],
-   "secs": 36.5
-  },
-  "HYOAS_EY": {
-   "ok": true,
-   "source": "fred:BAMLH0A0HYM2EY",
-   "last": "2026-09-24",
-   "n": 788,
-   "errors": [],
-   "secs": 36.5
-  },
-  "OBFR": {
-   "ok": true,
-   "source": "fred:OBFR",
-   "last": "2026-09-24",
-   "n": 2656,
-   "errors": [],
-   "secs": 36.5
-  },
-  "TOTBKCR": {
-   "ok": true,
-   "source": "fred:TOTBKCR",
-   "last": "2026-09-16",
-   "n": 2803,
-   "errors": [],
-   "secs": 36.5
-  },
-  "USCBBS": {
-   "ok": true,
-   "source": "fred:WALCL",
-   "last": "2026-09-23",
-   "n": 1241,
-   "errors": [],
-   "secs": 36.5
-  },
-  "TGA": {
-   "ok": true,
-   "source": "fred:WTREGEN",
-   "last": "2026-09-23",
-   "n": 1241,
-   "errors": [],
-   "secs": 35.7
-  },
-  "RRP": {
-   "ok": true,
-   "source": "fred:RRPONTSYD",
-   "last": "2026-09-25",
-   "n": 3334,
-   "errors": [],
-   "secs": 35.5
-  },
-  "USM1": {
-   "ok": true,
-   "source": "fred:M1SL",
-   "last": "2026-08-01",
-   "n": 812,
-   "errors": [],
-   "secs": 35.5
-  },
-  "USM2": {
-   "ok": true,
-   "source": "fred:M2SL",
-   "last": "2026-08-01",
-   "n": 812,
-   "errors": [],
-   "secs": 35.4
-  },
-  "EUCBBS": {
-   "ok": true,
-   "source": "fred:ECBASSETSW",
-   "last": "2026-09-18",
-   "n": 1447,
-   "errors": [],
-   "secs": 35.4
-  },
-  "DECBBS": {
-   "ok": false,
-   "errors": [
-    "manual:DECBBS -> no manual file DECBBS.csv"
-   ]
-  },
-  "CNCBBS": {
-   "ok": false,
-   "errors": [
-    "manual:CNCBBS -> no manual file CNCBBS.csv",
-    "pboc:total_assets -> http://www.pbc.gov.cn/en/3688247/index.html -> HTTP 404: '<html>\\r\\n<head><title>404 Not Found</title></head>\\r\\n<body>\\r\\n<center><h1>404 Not Found</h1></center>\\r\\n<hr><center>nginx</c'"
-   ]
-  },
-  "DEM2": {
-   "ok": false,
-   "errors": [
-    "bbk:BBBS2/M.DB.Y.V.M20.X.1.U2.2300.Z01.E -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBBS2/M.DB.Y.V.M20.X.1.U2.2300.Z01.E -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben | https://api.statistiken.bundesba",
-    "bbk:BBBS2/M.DB.N.V.M20.X.1.U2.2300.Z01.E -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBBS2/M.DB.N.V.M20.X.1.U2.2300.Z01.E -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben | https://api.statistiken.bundesba",
-    "bbk:BBBS2/M.DB.Y.V.M20.X.1.U6.2300.Z01.E -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBBS2/M.DB.Y.V.M20.X.1.U6.2300.Z01.E -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben | https://api.statistiken.bundesba",
-    "bbk:BBBS2/M.DB.N.V.M20.X.1.U6.2300.Z01.E -> bbk: https://api.statistiken.bundesbank.de/rest/data/BBBS2/M.DB.N.V.M20.X.1.U6.2300.Z01.E -> HTTP 404: '{\"status\":404,\"title\":\"Der HTTP-Status 404 wird zurückgegeben | https://api.statistiken.bundesba",
-    "dbnomics:BUBA/BBBS2/M.DB.Y.V.M20.X.1.U2.2300.Z01.E -> https://api.db.nomics.world/v22/series/BUBA/BBBS2/M.DB.Y.V.M20.X.1.U2.2300.Z01.E -> HTTP 404: '{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"BBBS2\",\"dimensions\":{},\"facets\":false,\"format\":\"j",
-    "dbnomics:BUBA/BBBS2/M.DB.N.V.M20.X.1.U2.2300.Z01.E -> https://api.db.nomics.world/v22/series/BUBA/BBBS2/M.DB.N.V.M20.X.1.U2.2300.Z01.E -> HTTP 404: '{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"BBBS2\",\"dimensions\":{},\"facets\":false,\"format\":\"j",
-    "manual:DEM2 -> no manual file DEM2.csv"
-   ]
-  },
-  "EULPS": {
-   "ok": true,
-   "source": "ecb:BSI/M.U2.N.U.A20.A.1.U2.2200.Z01.E",
-   "last": "2026-08-01",
-   "n": 524,
-   "errors": [
-    "ecb:BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.U2.Y.U.A20T.A.1.U2.2200.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No ",
-    "ecb:BSI/M.U2.N.U.A20T.A.1.U2.2200.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.U2.N.U.A20T.A.1.U2.2200.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.U2.N.U.A20T.A.1.U2.2200.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No ",
-    "ecb:BSI/M.U2.Y.U.A20.A.1.U2.2200.Z01.E -> https://data-api.ecb.europa.eu/service/data/BSI/M.U2.Y.U.A20.A.1.U2.2200.Z01.E -> HTTP 404: '{\"type\":\"/service/data/BSI/M.U2.Y.U.A20.A.1.U2.2200.Z01.E\",\"title\":\"Not Found\",\"status\":404,\"detail\":\"No Se"
-   ],
-   "secs": 35.2
-  },
-  "ITBBS": {
-   "ok": true,
-   "source": "ecb:BSI/M.IT.N.A.T00.A.1.Z5.0000.Z01.E",
-   "last": "2026-08-01",
-   "n": 348,
-   "errors": [],
-   "secs": 35.2
-  },
-  "USCPIM": {
-   "ok": true,
-   "source": "fred:MEDCPIM094SFRBCLE",
-   "last": "2026-08-01",
-   "n": 525,
-   "errors": [],
-   "secs": 35.2
-  },
-  "USIRMM": {
-   "ok": true,
-   "source": "fred_pct:CPIAUCSL",
-   "last": "2026-08-01",
-   "n": 954,
-   "errors": [],
-   "secs": 35.1
-  },
-  "USCPIYOY": {
-   "ok": true,
-   "source": "fred_yoy:CPIAUCSL",
-   "last": "2026-08-01",
-   "n": 943,
-   "errors": [],
-   "secs": 34.9
-  },
-  "MSPUS": {
-   "ok": true,
-   "source": "fred:MSPUS",
-   "last": "2026-04-01",
-   "n": 254,
-   "errors": [],
-   "secs": 34.5
-  },
-  "USBCOI": {
-   "ok": true,
-   "source": "dbnomics:ISM/pmi/pm",
-   "last": "2025-12-01",
-   "n": 68,
-   "errors": [],
-   "secs": 34.1
-  },
-  "EUBCOI": {
-   "ok": true,
-   "source": "dbnomics:Eurostat/ei_bsin_m_r2/M.BS-ICI.SA.BAL.EA20",
-   "last": "2025-12-01",
-   "n": 552,
-   "errors": [],
-   "secs": 34.0
-  },
-  "DE02Y": {
-   "ok": true,
-   "source": "bbk:BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A",
-   "last": "2026-09-25",
-   "n": 7396,
-   "errors": [],
-   "secs": 33.7
-  },
-  "DE10Y": {
-   "ok": true,
-   "source": "bbk:BBSIS/D.I.ZAR.ZI.EUR.S1311.B.A604.R10XX.R.A.A._Z._Z.A",
-   "last": "2026-09-25",
-   "n": 7396,
-   "errors": [],
-   "secs": 33.3
-  },
   "SPX": {
    "ok": true,
    "source": "yahoo:^GSPC",
    "last": "2026-09-25",
    "n": 24801,
    "errors": [],
-   "secs": 33.1
+   "secs": 2.5
   },
   "NDX": {
    "ok": true,
@@ -212,7 +15,7 @@
    "last": "2026-09-25",
    "n": 10326,
    "errors": [],
-   "secs": 33.1
+   "secs": 2.5
   },
   "RTY": {
    "ok": true,
@@ -220,7 +23,7 @@
    "last": "2026-09-25",
    "n": 9835,
    "errors": [],
-   "secs": 32.9
+   "secs": 2.6
   },
   "DAX": {
    "ok": true,
@@ -228,7 +31,7 @@
    "last": "2026-09-25",
    "n": 9797,
    "errors": [],
-   "secs": 32.6
+   "secs": 2.6
   },
   "NKY": {
    "ok": true,
@@ -236,7 +39,7 @@
    "last": "2026-09-25",
    "n": 15173,
    "errors": [],
-   "secs": 32.6
+   "secs": 2.7
   },
   "HSI": {
    "ok": true,
@@ -244,7 +47,7 @@
    "last": "2026-09-25",
    "n": 9807,
    "errors": [],
-   "secs": 32.5
+   "secs": 2.7
   },
   "USOIL": {
    "ok": true,
@@ -252,7 +55,7 @@
    "last": "2026-09-25",
    "n": 6546,
    "errors": [],
-   "secs": 32.4
+   "secs": 2.3
   },
   "GSG": {
    "ok": true,
@@ -260,7 +63,7 @@
    "last": "2026-09-25",
    "n": 5077,
    "errors": [],
-   "secs": 32.3
+   "secs": 2.4
   },
   "QQQ": {
    "ok": true,
@@ -268,7 +71,7 @@
    "last": "2026-09-25",
    "n": 6930,
    "errors": [],
-   "secs": 32.2
+   "secs": 2.3
   },
   "CQQQ": {
    "ok": true,
@@ -276,7 +79,7 @@
    "last": "2026-09-25",
    "n": 4195,
    "errors": [],
-   "secs": 32.2
+   "secs": 2.1
   },
   "JPYUSD": {
    "ok": true,
@@ -284,7 +87,7 @@
    "last": "2026-09-25",
    "n": 7753,
    "errors": [],
-   "secs": 32.2
+   "secs": 2.1
   },
   "CNYUSD": {
    "ok": true,
@@ -292,7 +95,7 @@
    "last": "2026-09-25",
    "n": 6321,
    "errors": [],
-   "secs": 32.1
+   "secs": 2.1
   },
   "EURUSD": {
    "ok": true,
@@ -300,7 +103,7 @@
    "last": "2026-09-25",
    "n": 5918,
    "errors": [],
-   "secs": 32.0
+   "secs": 2.0
   },
   "DXY": {
    "ok": true,
@@ -308,7 +111,7 @@
    "last": "2026-09-25",
    "n": 14151,
    "errors": [],
-   "secs": 32.0
+   "secs": 2.1
   },
   "GOLD": {
    "ok": true,
@@ -316,7 +119,7 @@
    "last": "2026-09-25",
    "n": 7029,
    "errors": [],
-   "secs": 32.0
+   "secs": 2.1
   },
   "BTC": {
    "ok": true,
@@ -324,7 +127,7 @@
    "last": "2026-09-25",
    "n": 4392,
    "errors": [],
-   "secs": 31.9
+   "secs": 1.8
   },
   "ETH": {
    "ok": true,
@@ -332,7 +135,7 @@
    "last": "2026-09-25",
    "n": 3243,
    "errors": [],
-   "secs": 31.7
+   "secs": 1.8
   },
   "MSPUS_USCPIM": {
    "ok": true,
@@ -384,7 +187,7 @@
    "name": "DAI / WPLS",
    "n_day": 1229,
    "n_4h": 2007,
-   "secs": 25.7
+   "secs": 3.6
   },
   "PLSX": {
    "ok": true,
@@ -392,7 +195,7 @@
    "name": "PLSX / WPLS",
    "n_day": 1229,
    "n_4h": 2007,
-   "secs": 81.6
+   "secs": 5.9
   },
   "pHEX": {
    "ok": true,
@@ -400,7 +203,7 @@
    "name": "HEX / WPLS",
    "n_day": 1213,
    "n_4h": 2007,
-   "secs": 68.3
+   "secs": 5.9
   },
   "eHEX": {
    "ok": true,
@@ -408,7 +211,7 @@
    "name": "HEX / WETH",
    "n_day": 2475,
    "n_4h": 2008,
-   "secs": 59.5
+   "secs": 5.8
   },
   "INC": {
    "ok": true,
@@ -416,7 +219,7 @@
    "name": "INC / PLSX",
    "n_day": 1229,
    "n_4h": 2006,
-   "secs": 80.7
+   "secs": 6.1
   },
   "pDAI": {
    "ok": true,
@@ -424,7 +227,7 @@
    "name": "DAI / WPLS",
    "n_day": 1213,
    "n_4h": 2007,
-   "secs": 70.4
+   "secs": 25.8
   },
   "PLSETH": {
    "ok": true,
@@ -432,7 +235,7 @@
    "name": "WETH / WPLS",
    "n_day": 1229,
    "n_4h": 2007,
-   "secs": 68.6
+   "secs": 28.6
   },
   "LOAN": {
    "ok": true,
@@ -440,7 +243,7 @@
    "name": "LOAN / WPLS",
    "n_day": 366,
    "n_4h": 2008,
-   "secs": 55.7
+   "secs": 12.2
   },
   "USDL": {
    "ok": true,
@@ -448,7 +251,7 @@
    "name": "USDL / DAI 0.05%",
    "n_day": 184,
    "n_4h": 1007,
-   "secs": 36.5
+   "secs": 12.6
   },
   "EARN": {
    "ok": true,
@@ -456,7 +259,7 @@
    "name": "EARN / PLSX",
    "n_day": 365,
    "n_4h": 972,
-   "secs": 56.7
+   "secs": 9.6
   },
   "PXDC": {
    "ok": true,
@@ -464,7 +267,7 @@
    "name": "PXDC / DAI 1%",
    "n_day": 184,
    "n_4h": 541,
-   "secs": 54.4
+   "secs": 8.9
   },
   "FLEX": {
    "ok": true,
@@ -472,7 +275,7 @@
    "name": "FLEX / HEX",
    "n_day": 366,
    "n_4h": 1007,
-   "secs": 59.3
+   "secs": 25.8
   },
   "HEXDC": {
    "ok": true,
@@ -480,15 +283,15 @@
    "name": "HEXDC / HEX",
    "n_day": 366,
    "n_4h": 2008,
-   "secs": 58.1
+   "secs": 28.0
   },
   "PRINT": {
    "ok": true,
    "pool": "0xf35f8db9b6760799db76796340aacc69dea0c644",
    "name": "PRINT / INC",
    "n_day": 366,
-   "n_4h": 1004,
-   "secs": 59.0
+   "n_4h": 1005,
+   "secs": 7.4
   }
  }
 }
