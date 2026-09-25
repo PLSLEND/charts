@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-25T00:56:17+00:00",
+ "updated": "2026-09-25T02:54:19+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -529,8 +529,8 @@
    "source_key": "^HSI",
    "source_url": "https://finance.yahoo.com/quote/^HSI",
    "first": "1986-12-31",
-   "last": "2026-09-24",
-   "n": 9805,
+   "last": "2026-09-25",
+   "n": 9806,
    "stale": false,
    "file": "series/HSI.json"
   },
@@ -655,8 +655,8 @@
    "source_key": "CNYUSD=X",
    "source_url": "https://finance.yahoo.com/quote/CNYUSD=X",
    "first": "2001-06-25",
-   "last": "2026-09-24",
-   "n": 6322,
+   "last": "2026-09-25",
+   "n": 6323,
    "stale": false,
    "file": "series/CNYUSD.json"
   },
@@ -978,9 +978,9 @@
    "quote_symbol": "WPLS",
    "deep_history": "",
    "precision": 10,
-   "last": "2026-09-24",
-   "n_day": 365,
-   "n_4h": 2002,
+   "last": "2026-09-25",
+   "n_day": 366,
+   "n_4h": 2003,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x6d69654390c70d9e8814b04c69a542632dc93161"
   },
