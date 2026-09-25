@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-25T18:55:31+00:00",
+ "updated": "2026-09-25T20:54:44+00:00",
  "series": {
   "SPX": {
    "ok": true,
@@ -7,7 +7,7 @@
    "last": "2026-09-25",
    "n": 24801,
    "errors": [],
-   "secs": 2.4
+   "secs": 2.6
   },
   "NDX": {
    "ok": true,
@@ -15,7 +15,7 @@
    "last": "2026-09-25",
    "n": 10326,
    "errors": [],
-   "secs": 2.5
+   "secs": 2.6
   },
   "RTY": {
    "ok": true,
@@ -23,7 +23,7 @@
    "last": "2026-09-25",
    "n": 9835,
    "errors": [],
-   "secs": 2.5
+   "secs": 2.7
   },
   "DAX": {
    "ok": true,
@@ -31,7 +31,7 @@
    "last": "2026-09-25",
    "n": 9797,
    "errors": [],
-   "secs": 2.6
+   "secs": 2.7
   },
   "NKY": {
    "ok": true,
@@ -39,7 +39,7 @@
    "last": "2026-09-25",
    "n": 15173,
    "errors": [],
-   "secs": 2.7
+   "secs": 2.8
   },
   "HSI": {
    "ok": true,
@@ -47,7 +47,7 @@
    "last": "2026-09-25",
    "n": 9807,
    "errors": [],
-   "secs": 2.7
+   "secs": 2.8
   },
   "USOIL": {
    "ok": true,
@@ -63,7 +63,7 @@
    "last": "2026-09-25",
    "n": 5077,
    "errors": [],
-   "secs": 2.3
+   "secs": 2.4
   },
   "QQQ": {
    "ok": true,
@@ -95,7 +95,7 @@
    "last": "2026-09-25",
    "n": 6321,
    "errors": [],
-   "secs": 2.1
+   "secs": 2.2
   },
   "EURUSD": {
    "ok": true,
@@ -103,7 +103,7 @@
    "last": "2026-09-25",
    "n": 5918,
    "errors": [],
-   "secs": 2.0
+   "secs": 2.1
   },
   "DXY": {
    "ok": true,
@@ -135,7 +135,7 @@
    "last": "2026-09-25",
    "n": 3243,
    "errors": [],
-   "secs": 1.7
+   "secs": 1.5
   },
   "MSPUS_USCPIM": {
    "ok": true,
@@ -186,64 +186,64 @@
    "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
    "name": "DAI / WPLS",
    "n_day": 1229,
-   "n_4h": 2006,
-   "secs": 4.9
+   "n_4h": 2007,
+   "secs": 6.8
   },
   "PLSX": {
    "ok": true,
    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
    "name": "PLSX / WPLS",
    "n_day": 1229,
-   "n_4h": 2006,
-   "secs": 6.7
+   "n_4h": 2007,
+   "secs": 11.4
   },
   "pHEX": {
    "ok": true,
    "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
    "name": "HEX / WPLS",
    "n_day": 1213,
-   "n_4h": 2006,
-   "secs": 29.8
+   "n_4h": 2007,
+   "secs": 13.7
   },
   "eHEX": {
    "ok": true,
    "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
    "name": "HEX / WETH",
    "n_day": 2475,
-   "n_4h": 2007,
-   "secs": 26.9
+   "n_4h": 2008,
+   "secs": 30.2
   },
   "INC": {
    "ok": true,
    "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
    "name": "INC / PLSX",
    "n_day": 1229,
-   "n_4h": 2005,
-   "secs": 6.0
+   "n_4h": 2006,
+   "secs": 33.2
   },
   "pDAI": {
    "ok": true,
    "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
    "name": "DAI / WPLS",
    "n_day": 1213,
-   "n_4h": 2006,
-   "secs": 28.6
+   "n_4h": 2007,
+   "secs": 29.4
   },
   "PLSETH": {
    "ok": true,
    "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
    "name": "WETH / WPLS",
    "n_day": 1229,
-   "n_4h": 2006,
-   "secs": 28.1
+   "n_4h": 2007,
+   "secs": 27.5
   },
   "LOAN": {
    "ok": true,
    "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
    "name": "LOAN / WPLS",
    "n_day": 366,
-   "n_4h": 2007,
-   "secs": 27.5
+   "n_4h": 2008,
+   "secs": 7.7
   },
   "USDL": {
    "ok": true,
@@ -251,15 +251,15 @@
    "name": "USDL / DAI 0.05%",
    "n_day": 184,
    "n_4h": 1007,
-   "secs": 27.9
+   "secs": 27.1
   },
   "EARN": {
    "ok": true,
    "pool": "0xed77cbbb80e5a5c3a1fe664419d6f690766b5913",
    "name": "EARN / PLSX",
    "n_day": 365,
-   "n_4h": 971,
-   "secs": 27.1
+   "n_4h": 972,
+   "secs": 26.9
   },
   "PXDC": {
    "ok": true,
@@ -267,23 +267,23 @@
    "name": "PXDC / DAI 1%",
    "n_day": 184,
    "n_4h": 540,
-   "secs": 29.0
+   "secs": 36.0
   },
   "FLEX": {
    "ok": true,
    "pool": "0x476d63ab94b4e86614df0c3d5a27e9e22631d062",
    "name": "FLEX / HEX",
    "n_day": 366,
-   "n_4h": 1006,
-   "secs": 8.9
+   "n_4h": 1007,
+   "secs": 9.1
   },
   "HEXDC": {
    "ok": true,
    "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
    "name": "HEXDC / HEX",
    "n_day": 366,
-   "n_4h": 2007,
-   "secs": 37.3
+   "n_4h": 2008,
+   "secs": 28.7
   },
   "PRINT": {
    "ok": true,
@@ -291,7 +291,7 @@
    "name": "PRINT / INC",
    "n_day": 366,
    "n_4h": 1004,
-   "secs": 38.6
+   "secs": 28.3
   }
  }
 }
