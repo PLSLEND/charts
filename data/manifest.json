@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-25T10:54:38+00:00",
+ "updated": "2026-09-25T12:58:38+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -440,7 +440,7 @@
    "source_url": "https://finance.yahoo.com/quote/^GSPC",
    "first": "1927-12-30",
    "last": "2026-09-24",
-   "n": 24799,
+   "n": 24800,
    "stale": false,
    "file": "series/SPX.json"
   },
@@ -458,7 +458,7 @@
    "source_url": "https://finance.yahoo.com/quote/^NDX",
    "first": "1985-10-01",
    "last": "2026-09-24",
-   "n": 10324,
+   "n": 10325,
    "stale": false,
    "file": "series/NDX.json"
   },
@@ -476,7 +476,7 @@
    "source_url": "https://finance.yahoo.com/quote/^RUT",
    "first": "1987-09-10",
    "last": "2026-09-24",
-   "n": 9833,
+   "n": 9834,
    "stale": false,
    "file": "series/RTY.json"
   },
@@ -494,7 +494,7 @@
    "source_url": "https://finance.yahoo.com/quote/^GDAXI",
    "first": "1987-12-30",
    "last": "2026-09-25",
-   "n": 9796,
+   "n": 9797,
    "stale": false,
    "file": "series/DAX.json"
   },
@@ -530,7 +530,7 @@
    "source_url": "https://finance.yahoo.com/quote/^HSI",
    "first": "1986-12-31",
    "last": "2026-09-25",
-   "n": 9806,
+   "n": 9807,
    "stale": false,
    "file": "series/HSI.json"
   },
@@ -566,7 +566,7 @@
    "source_url": "https://finance.yahoo.com/quote/GSG",
    "first": "2006-07-21",
    "last": "2026-09-24",
-   "n": 5075,
+   "n": 5076,
    "stale": false,
    "file": "series/GSG.json"
   },
@@ -602,7 +602,7 @@
    "source_url": "https://finance.yahoo.com/quote/CQQQ",
    "first": "2010-01-22",
    "last": "2026-09-24",
-   "n": 4193,
+   "n": 4194,
    "stale": false,
    "file": "series/CQQQ.json"
   },
@@ -692,7 +692,7 @@
    "source_url": "https://finance.yahoo.com/quote/DX-Y.NYB",
    "first": "1971-01-04",
    "last": "2026-09-25",
-   "n": 14150,
+   "n": 14151,
    "stale": false,
    "file": "series/DXY.json"
   },
@@ -840,7 +840,7 @@
    "precision": 10,
    "last": "2026-09-25",
    "n_day": 1229,
-   "n_4h": 2004,
+   "n_4h": 2005,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xe56043671df55de5cdf8459710433c10324de0ae"
   },
@@ -860,7 +860,7 @@
    "precision": 10,
    "last": "2026-09-25",
    "n_day": 1229,
-   "n_4h": 2004,
+   "n_4h": 2005,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9"
   },
@@ -880,7 +880,7 @@
    "precision": 7,
    "last": "2026-09-25",
    "n_day": 1213,
-   "n_4h": 2004,
+   "n_4h": 2005,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x19bb45a7270177e303dee6eaa6f5ad700812ba98"
   },
@@ -900,7 +900,7 @@
    "precision": 7,
    "last": "2026-09-25",
    "n_day": 2475,
-   "n_4h": 2005,
+   "n_4h": 2006,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/eth/pools/0x55d5c232d921b9eaa6b37b5845e439acd04b4dba"
   },
@@ -920,7 +920,7 @@
    "precision": 4,
    "last": "2026-09-25",
    "n_day": 1229,
-   "n_4h": 2003,
+   "n_4h": 2004,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea"
   },
@@ -940,7 +940,7 @@
    "precision": 7,
    "last": "2026-09-25",
    "n_day": 1213,
-   "n_4h": 2004,
+   "n_4h": 2005,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xae8429918fdbf9a5867e3243697637dc56aa76a1"
   },
@@ -960,7 +960,7 @@
    "precision": 10,
    "last": "2026-09-25",
    "n_day": 1229,
-   "n_4h": 2004,
+   "n_4h": 2005,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x42abdfdb63f3282033c766e72cc4810738571609"
   },
@@ -980,7 +980,7 @@
    "precision": 10,
    "last": "2026-09-25",
    "n_day": 366,
-   "n_4h": 2005,
+   "n_4h": 2006,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x6d69654390c70d9e8814b04c69a542632dc93161"
   },
@@ -1000,7 +1000,7 @@
    "precision": 3,
    "last": "2026-09-25",
    "n_day": 184,
-   "n_4h": 1005,
+   "n_4h": 1006,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e"
   },
@@ -1040,7 +1040,7 @@
    "precision": 3,
    "last": "2026-09-25",
    "n_day": 184,
-   "n_4h": 537,
+   "n_4h": 539,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xd43ab3222ad133f8e112b93185a68051e7cc7e33"
   },
@@ -1080,7 +1080,7 @@
    "precision": 3,
    "last": "2026-09-25",
    "n_day": 366,
-   "n_4h": 2005,
+   "n_4h": 2006,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x9756f095dfa27d4c2eae0937a7b8a6603d99affb"
   },

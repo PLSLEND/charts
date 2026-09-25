@@ -1,37 +1,37 @@
 {
- "updated": "2026-09-25T10:54:38+00:00",
+ "updated": "2026-09-25T12:58:38+00:00",
  "series": {
   "SPX": {
    "ok": true,
    "source": "yahoo:^GSPC",
    "last": "2026-09-24",
-   "n": 24799,
+   "n": 24800,
    "errors": [],
-   "secs": 1.8
+   "secs": 1.9
   },
   "NDX": {
    "ok": true,
    "source": "yahoo:^NDX",
    "last": "2026-09-24",
-   "n": 10324,
+   "n": 10325,
    "errors": [],
-   "secs": 1.9
+   "secs": 2.0
   },
   "RTY": {
    "ok": true,
    "source": "yahoo:^RUT",
    "last": "2026-09-24",
-   "n": 9833,
+   "n": 9834,
    "errors": [],
-   "secs": 1.9
+   "secs": 2.0
   },
   "DAX": {
    "ok": true,
    "source": "yahoo:^GDAXI",
    "last": "2026-09-25",
-   "n": 9796,
+   "n": 9797,
    "errors": [],
-   "secs": 1.9
+   "secs": 2.0
   },
   "NKY": {
    "ok": true,
@@ -39,13 +39,13 @@
    "last": "2026-09-25",
    "n": 15173,
    "errors": [],
-   "secs": 1.9
+   "secs": 2.0
   },
   "HSI": {
    "ok": true,
    "source": "yahoo:^HSI",
    "last": "2026-09-25",
-   "n": 9806,
+   "n": 9807,
    "errors": [],
    "secs": 2.0
   },
@@ -55,15 +55,15 @@
    "last": "2026-09-25",
    "n": 6551,
    "errors": [],
-   "secs": 1.7
+   "secs": 1.5
   },
   "GSG": {
    "ok": true,
    "source": "yahoo:GSG",
    "last": "2026-09-24",
-   "n": 5075,
+   "n": 5076,
    "errors": [],
-   "secs": 1.6
+   "secs": 1.5
   },
   "QQQ": {
    "ok": true,
@@ -77,7 +77,7 @@
    "ok": true,
    "source": "yahoo:CQQQ",
    "last": "2026-09-24",
-   "n": 4193,
+   "n": 4194,
    "errors": [],
    "secs": 1.4
   },
@@ -95,7 +95,7 @@
    "last": "2026-09-25",
    "n": 6323,
    "errors": [],
-   "secs": 1.3
+   "secs": 1.2
   },
   "EURUSD": {
    "ok": true,
@@ -109,7 +109,7 @@
    "ok": true,
    "source": "yahoo:DX-Y.NYB",
    "last": "2026-09-25",
-   "n": 14150,
+   "n": 14151,
    "errors": [],
    "secs": 1.2
   },
@@ -127,7 +127,7 @@
    "last": "2026-09-25",
    "n": 4392,
    "errors": [],
-   "secs": 1.2
+   "secs": 1.1
   },
   "ETH": {
    "ok": true,
@@ -186,72 +186,72 @@
    "pool": "0xe56043671df55de5cdf8459710433c10324de0ae",
    "name": "DAI / WPLS",
    "n_day": 1229,
-   "n_4h": 2004,
-   "secs": 4.4
+   "n_4h": 2005,
+   "secs": 6.6
   },
   "PLSX": {
    "ok": true,
    "pool": "0x1b45b9148791d3a104184cd5dfe5ce57193a3ee9",
    "name": "PLSX / WPLS",
    "n_day": 1229,
-   "n_4h": 2004,
-   "secs": 10.2
+   "n_4h": 2005,
+   "secs": 8.4
   },
   "pHEX": {
    "ok": true,
    "pool": "0x19bb45a7270177e303dee6eaa6f5ad700812ba98",
    "name": "HEX / WPLS",
    "n_day": 1213,
-   "n_4h": 2004,
-   "secs": 11.7
+   "n_4h": 2005,
+   "secs": 7.4
   },
   "eHEX": {
    "ok": true,
    "pool": "0x55d5c232d921b9eaa6b37b5845e439acd04b4dba",
    "name": "HEX / WETH",
    "n_day": 2475,
-   "n_4h": 2005,
-   "secs": 9.4
+   "n_4h": 2006,
+   "secs": 28.8
   },
   "INC": {
    "ok": true,
    "pool": "0x7dbeca4c74d01cd8782d4ef5c05c0769723fb0ea",
    "name": "INC / PLSX",
    "n_day": 1229,
-   "n_4h": 2003,
-   "secs": 9.1
+   "n_4h": 2004,
+   "secs": 30.4
   },
   "pDAI": {
    "ok": true,
    "pool": "0xae8429918fdbf9a5867e3243697637dc56aa76a1",
    "name": "DAI / WPLS",
    "n_day": 1213,
-   "n_4h": 2004,
-   "secs": 8.4
+   "n_4h": 2005,
+   "secs": 34.5
   },
   "PLSETH": {
    "ok": true,
    "pool": "0x42abdfdb63f3282033c766e72cc4810738571609",
    "name": "WETH / WPLS",
    "n_day": 1229,
-   "n_4h": 2004,
-   "secs": 25.9
+   "n_4h": 2005,
+   "secs": 15.5
   },
   "LOAN": {
    "ok": true,
    "pool": "0x6d69654390c70d9e8814b04c69a542632dc93161",
    "name": "LOAN / WPLS",
    "n_day": 366,
-   "n_4h": 2005,
-   "secs": 9.6
+   "n_4h": 2006,
+   "secs": 19.4
   },
   "USDL": {
    "ok": true,
    "pool": "0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e",
    "name": "USDL / DAI 0.05%",
    "n_day": 184,
-   "n_4h": 1005,
-   "secs": 27.0
+   "n_4h": 1006,
+   "secs": 22.2
   },
   "EARN": {
    "ok": true,
@@ -259,15 +259,15 @@
    "name": "EARN / PLSX",
    "n_day": 365,
    "n_4h": 970,
-   "secs": 7.9
+   "secs": 40.6
   },
   "PXDC": {
    "ok": true,
    "pool": "0xd43ab3222ad133f8e112b93185a68051e7cc7e33",
    "name": "PXDC / DAI 1%",
    "n_day": 184,
-   "n_4h": 537,
-   "secs": 8.7
+   "n_4h": 539,
+   "secs": 21.5
   },
   "FLEX": {
    "ok": true,
@@ -275,15 +275,15 @@
    "name": "FLEX / HEX",
    "n_day": 366,
    "n_4h": 1005,
-   "secs": 27.8
+   "secs": 17.0
   },
   "HEXDC": {
    "ok": true,
    "pool": "0x9756f095dfa27d4c2eae0937a7b8a6603d99affb",
    "name": "HEXDC / HEX",
    "n_day": 366,
-   "n_4h": 2005,
-   "secs": 7.2
+   "n_4h": 2006,
+   "secs": 37.7
   },
   "PRINT": {
    "ok": true,
@@ -291,7 +291,7 @@
    "name": "PRINT / INC",
    "n_day": 366,
    "n_4h": 1003,
-   "secs": 31.6
+   "secs": 14.2
   }
  }
 }
