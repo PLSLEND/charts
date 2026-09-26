@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-26T08:54:05+00:00",
+ "updated": "2026-09-26T10:52:36+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -980,7 +980,7 @@
    "precision": 10,
    "last": "2026-09-26",
    "n_day": 367,
-   "n_4h": 2010,
+   "n_4h": 2011,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0x6d69654390c70d9e8814b04c69a542632dc93161"
   },
