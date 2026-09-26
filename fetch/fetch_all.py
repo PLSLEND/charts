@@ -391,6 +391,23 @@ def main():
                 bars = [merged[t] for t in sorted(merged)]
             if spec["kind"] == "ohlc" and spec["group"] in CLEAN_TOL:
                 bars = clean_ohlc(bars, CLEAN_TOL[spec["group"]])
+            if spec.get("overlay"):
+                # hand-maintained points win over the feed (e.g. PMI months a scraper misses)
+                try:
+                    ov = rows_to_bars(S.manual(spec["overlay"][1], MANUAL_DIR), spec["kind"])
+                    merged = {b[0]: b for b in bars}
+                    for b in ov:
+                        merged[b[0]] = b
+                    bars = [merged[t] for t in sorted(merged)]
+                    log(f"     + {sid}: {len(ov)} manual points applied")
+                except S.SourceError:
+                    pass
+            if spec.get("valid") and spec["kind"] == "value":
+                lo_v, hi_v = spec["valid"]
+                n0 = len(bars)
+                bars = [b for b in bars if lo_v <= b[1] <= hi_v]
+                if len(bars) != n0:
+                    log(f"     ~ {sid}: dropped {n0 - len(bars)} readings outside {lo_v}-{hi_v}")
             obj = {"id": sid, "kind": spec["kind"], "freq": spec["freq"], "source_id": src, "source_key": key,
                    "updated": NOW.isoformat(timespec="seconds"), "bars": bars}
             dump_json(out, obj)

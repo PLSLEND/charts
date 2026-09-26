@@ -80,7 +80,10 @@ SERIES = [
     dict(id="MSPUS", name="US median house sales price", group="Inflation & activity", freq="Q", kind="value", units="USD",
          tv="FRED:MSPUS", sources=[("fred", "MSPUS")]),
     dict(id="USBCOI", name="US ISM Manufacturing PMI", group="Inflation & activity", freq="M", kind="value", units="index",
-         tv="ECONOMICS:USBCOI", sources=[("dbnomics", "ISM/pmi/pm"), ("manual", "USBCOI")]),
+         tv="ECONOMICS:USBCOI", sources=[("dbnomics", "ISM/pmi/pm"), ("manual", "USBCOI")],
+         deep=("fred", "NAPM"),            # ISM PMI 1948-2016 (FRED's discontinued copy) spliced in before the DBnomics data
+         overlay=("manual", "USBCOI"),     # data/manual/USBCOI.csv (date,value) wins over the feed — for months the feed lacks
+         valid=(25, 80)),                  # DBnomics's ISM scrape occasionally emits junk (e.g. 10.3); drop impossible readings
     dict(id="EUBCOI", name="Euro area industrial confidence (EC survey)", group="Inflation & activity", freq="M", kind="value", units="balance",
          tv="ECONOMICS:EUBCOI", sources=[
              ("dbnomics", "Eurostat/ei_bsin_m_r2/M.BS-ICI.SA.BAL.EA20"),
