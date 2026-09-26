@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-26T12:55:30+00:00",
+ "updated": "2026-09-26T14:53:09+00:00",
  "groups": [
   "PulseChain & HEX",
   "Crypto majors",
@@ -998,9 +998,9 @@
    "quote_symbol": "DAI",
    "deep_history": "",
    "precision": 3,
-   "last": "2026-09-25",
-   "n_day": 184,
-   "n_4h": 1007,
+   "last": "2026-09-26",
+   "n_day": 185,
+   "n_4h": 1008,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xc2e13c31fa3b87bb5b59f98f1d2e6b4ed3ed855e"
   },
@@ -1038,9 +1038,9 @@
    "quote_symbol": "DAI",
    "deep_history": "",
    "precision": 3,
-   "last": "2026-09-25",
-   "n_day": 184,
-   "n_4h": 541,
+   "last": "2026-09-26",
+   "n_day": 185,
+   "n_4h": 542,
    "source": "GeckoTerminal",
    "source_url": "https://www.geckoterminal.com/pulsechain/pools/0xd43ab3222ad133f8e112b93185a68051e7cc7e33"
   },
