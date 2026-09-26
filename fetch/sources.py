@@ -450,6 +450,37 @@ def pulsex_history(token, quote="WPLS", in_usd=True):
     return [(d, p, p, p, p, v) for d, p, v in rows]
 
 
+# ---------------------------------------------------------------- ISM press releases (headline PMI of the last few months)
+MONTHS = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"]
+
+
+def ism_release_pmi():
+    """Best-effort: read the headline Manufacturing PMI from ISM's public monthly release pages (last 4 months)."""
+    today = datetime.now(timezone.utc).date()
+    rows = []
+    for back in range(0, 4):
+        m = (today.month - 1 - back) % 12
+        y = today.year - ((today.month - 1 - back) // 12 < 0)
+        url = f"https://www.ismworld.org/supply-management-news-and-reports/reports/ism-report-on-business/pmi/{MONTHS[m]}/"
+        try:
+            r = _get(url, headers={"Accept": "text/html"}, retries=0, timeout=30)
+        except SourceError:
+            continue
+        txt = re.sub(r"<[^>]+>", " ", r.text)
+        mm = re.search(r"Manufacturing PMI[^0-9]{0,40}?registered\s+([0-9]{2}(?:\.[0-9])?)\s*percent\s+in\s+([A-Za-z]+)", txt)
+        if not mm:
+            continue
+        val, mon = float(mm.group(1)), mm.group(2).lower()
+        if mon not in MONTHS:
+            continue
+        mi = MONTHS.index(mon)
+        yr = today.year if mi + 1 <= today.month else today.year - 1
+        rows.append((f"{yr}-{mi + 1:02d}-01", val))
+    if not rows:
+        raise SourceError("ism: no headline PMI found on the release pages")
+    return _clean_value_rows(rows)
+
+
 # ---------------------------------------------------------------- manual CSV
 def manual(key, manual_dir):
     p = manual_dir / f"{key}.csv"

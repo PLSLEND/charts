@@ -391,17 +391,18 @@ def main():
                 bars = [merged[t] for t in sorted(merged)]
             if spec["kind"] == "ohlc" and spec["group"] in CLEAN_TOL:
                 bars = clean_ohlc(bars, CLEAN_TOL[spec["group"]])
-            if spec.get("overlay"):
-                # hand-maintained points win over the feed (e.g. PMI months a scraper misses)
+            for osrc, okey in spec.get("overlays", []):
+                # later, more trusted points win over the feed (press-release scrape, then hand-maintained CSV)
                 try:
-                    ov = rows_to_bars(S.manual(spec["overlay"][1], MANUAL_DIR), spec["kind"])
+                    rows = S.manual(okey, MANUAL_DIR) if osrc == "manual" else S.ism_release_pmi() if osrc == "ism_release" else []
+                    ov = rows_to_bars(rows, spec["kind"])
                     merged = {b[0]: b for b in bars}
                     for b in ov:
                         merged[b[0]] = b
                     bars = [merged[t] for t in sorted(merged)]
-                    log(f"     + {sid}: {len(ov)} manual points applied")
-                except S.SourceError:
-                    pass
+                    log(f"     + {sid}: {len(ov)} points from {osrc} applied")
+                except S.SourceError as e:
+                    log(f"     ~ {sid}: overlay {osrc} skipped: {str(e)[:100]}")
             if spec.get("valid") and spec["kind"] == "value":
                 lo_v, hi_v = spec["valid"]
                 n0 = len(bars)
